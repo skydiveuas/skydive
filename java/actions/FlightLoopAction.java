@@ -109,7 +109,7 @@ public class FlightLoopAction extends CommHandlerAction {
                     System.out.println("Via route allowed, waiting for RouteContainer");
                     state = FlightLoopState.WAITING_FOR_ROUTE;
 
-                } else if (event.matchSignalData(new SignalData(SignalData.Command.FLIGHT_LOOP, SignalData.Parameter.VIA_ROUTE_ALLOWED))) {
+                } else if (event.matchSignalData(new SignalData(SignalData.Command.FLIGHT_LOOP, SignalData.Parameter.VIA_ROUTE_NOT_ALLOWED))) {
                     System.out.println("Via NOT route allowed, proceeding");
                     System.out.println("Flight loop initialization successful");
                     state = FlightLoopState.FLYING;

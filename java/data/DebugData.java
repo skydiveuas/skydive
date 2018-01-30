@@ -64,7 +64,6 @@ public class DebugData {
         this.latitude = buffer.getFloat();
         this.longitude = buffer.getFloat();
         this.relativeAltitude = buffer.getFloat();
-        this.relativeAltitude = buffer.getFloat();
         this.absoluteAltitude = buffer.getFloat();
         this.verticalVelocity = buffer.getFloat();
         this.velocity = buffer.getFloat();
