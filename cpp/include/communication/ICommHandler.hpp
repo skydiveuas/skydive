@@ -33,34 +33,34 @@ protected:
     typedef SignalData::Parameter Parameter;
 
 public:
-	static const unsigned DEFAULT_TIMEOUT = 1000;
-	static const unsigned MAX_RETRANSMISSION = 3;
+    static const unsigned DEFAULT_TIMEOUT = 1000;
+    static const unsigned MAX_RETRANSMISSION = 3;
 
     ICommHandler(void);
-	virtual ~ICommHandler(void);
+    virtual ~ICommHandler(void);
 
-	// initializer - sets communication interface as operative and resets all helper variables
-	void initialize(ICommInterface* _commHandle);
+    // initializer - sets communication interface as operative and resets all helper variables
+    void initialize(ICommInterface* _commHandle);
 
     // resets all buufer in dispather ans used interface
     void reset(void);
 
-	const ICommInterface* getCommHandle(void) const;
+    const ICommInterface* getCommHandle(void) const;
 
-	// receiving handler, iteratate through data from commHandle,
-	// if data is received returns its preamble type and stops processing received data
-	// else return EMPTY type
-	IMessage::PreambleType proceedReceiving(void);
+    // receiving handler, iteratate through data from commHandle,
+    // if data is received returns its preamble type and stops processing received data
+    // else return EMPTY type
+    IMessage::PreambleType proceedReceiving(void);
 
     // sending methods
-	bool send(const unsigned char* data, const unsigned dataSize);
-	bool send(const IMessage& message);
-	bool send(const ISignalPayloadMessage& message);
+    bool send(const unsigned char* data, const unsigned dataSize);
+    bool send(const IMessage& message);
+    bool send(const ISignalPayloadMessage& message);
 
     // methods for receiving specific data from processor buffer
-	// when these methods will be called without check for data reception result can be invalid
-	SignalData getSignalData(void) const;
-	SignalData::Command getCommand(void) const;
+    // when these methods will be called without check for data reception result can be invalid
+    SignalData getSignalData(void) const;
+    SignalData::Command getCommand(void) const;
     SignalData::Parameter getParameter(void) const;
 
     DebugData getDebugData(void) const;
@@ -68,15 +68,15 @@ public:
     SensorsData getSensorsData(void) const;
     AutopilotData getAutopilotData(void) const;
 
-	void getSignalDataObject(ISignalPayloadMessage& data);
+    void getSignalDataObject(ISignalPayloadMessage& data);
 
-	unsigned getSentMessages(void) const;
-	unsigned getReceivedMessage(void) const;
-	unsigned getReceptionFailes(void) const;
+    unsigned getSentMessages(void) const;
+    unsigned getReceivedMessage(void) const;
+    unsigned getReceptionFailes(void) const;
 
-	void clearCounters(void);
+    void clearCounters(void);
 
-	// commands interface
+    // commands interface
     bool sendCommand(const SignalData& command);
     bool waitForCommand(const SignalData& command, const unsigned timeout = DEFAULT_TIMEOUT);
     bool waitForAnyCommand(SignalData& command, const unsigned timeout = DEFAULT_TIMEOUT);
@@ -89,10 +89,10 @@ public:
     bool readCommandAndRespond(const SignalData& command, const SignalData& response);
 
     // signal payload data interfaces
-	bool sendDataProcedure(const ISignalPayloadMessage& data);
-	bool receiveDataProcedure(ISignalPayloadMessage& data);
+    bool sendDataProcedure(const ISignalPayloadMessage& data);
+    bool receiveDataProcedure(ISignalPayloadMessage& data);
 
-	virtual void holdThread(const unsigned miliseconds) = 0;
+    virtual void holdThread(const unsigned miliseconds) = 0;
 
 protected:
     virtual void resetTimer(void) = 0;
@@ -101,10 +101,10 @@ protected:
 private:
     bool sendSignalData(const ISignalPayloadMessage* const data);
 
-	ICommInterface* commInterface;
-	CommDispatcher commDispatcher;
+    ICommInterface* commInterface;
+    CommDispatcher commDispatcher;
 
-	unsigned sentMessages;
+    unsigned sentMessages;
 
     unsigned char* buildingTempBuffer;
 

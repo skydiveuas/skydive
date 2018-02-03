@@ -21,22 +21,22 @@
 class GpsData
 {
 public:
-	double lat, lon; // polozenie
-	float alt; // wysokosc
-	float speed, course; // predkosc
-	float HDOP; // dokladnosc
-	bool fix;
+    double lat, lon; // polozenie
+    float alt; // wysokosc
+    float speed, course; // predkosc
+    float HDOP; // dokladnosc
+    bool fix;
 
-	GpsData(void);
-	GpsData(const unsigned char* tab);
+    GpsData(void);
+    GpsData(const unsigned char* tab);
 
-	void serialize(unsigned char* tab) const;
+    void serialize(unsigned char* tab) const;
 
 #ifdef __SKYDIVE_USE_STL__
 
-	void print(void) const;
-	static GpsData parseFromString(const std::string& line);
-	friend std::ostream& operator << (std::ostream& stream, const GpsData& gD);
+    void print(void) const;
+    static GpsData parseFromString(const std::string& line);
+    friend std::ostream& operator << (std::ostream& stream, const GpsData& gD);
 
 #endif // __SKYDIVE_USE_STL__
 

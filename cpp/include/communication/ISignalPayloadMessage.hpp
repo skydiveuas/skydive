@@ -16,7 +16,7 @@
 class ISignalPayloadMessage : public IMessage
 {
 public:
-	// IMessage override
+    // IMessage override
     PreambleType getPreambleType(void) const;
 
     /**
@@ -27,17 +27,17 @@ public:
     /**
      * getDataSize
      */
-	virtual unsigned getDataSize(void) const = 0;
+    virtual unsigned getDataSize(void) const = 0;
 
     /**
      * getSignalDataType
      */
-	virtual SignalData::Command getSignalDataType(void) const = 0;
+    virtual SignalData::Command getSignalDataType(void) const = 0;
 
     /**
      * getSignalDataCommand
      */
-	virtual SignalData::Command getSignalDataCommand(void) const = 0;
+    virtual SignalData::Command getSignalDataCommand(void) const = 0;
 
     /**
      * getUploadAction
@@ -52,7 +52,7 @@ public:
     /**
      * isValid
      */
-	virtual bool isValid(void) const = 0;
+    virtual bool isValid(void) const = 0;
 
     /**
      * clone

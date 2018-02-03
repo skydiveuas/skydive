@@ -4,7 +4,7 @@
 
 IMessage::PreambleType ISignalPayloadMessage::getPreambleType(void) const
 {
-	return IMessage::SIGNAL;
+    return IMessage::SIGNAL;
 }
 
 bool ISignalPayloadMessage::isSignalPayloadMessage(void) const
@@ -57,7 +57,7 @@ ISignalPayloadMessage::MessagesBuilder::~MessagesBuilder(void)
 
 unsigned ISignalPayloadMessage::MessagesBuilder::getMessagesCount(void) const
 {
-	return messagesCount;
+    return messagesCount;
 }
 
 bool ISignalPayloadMessage::MessagesBuilder::hasNext(void) const
@@ -92,19 +92,19 @@ void ISignalPayloadMessage::MessagesBuilder::getNext(unsigned char* message)
         const unsigned sent = (messagesCount - 1) * IMessage::SIGNAL_DATA_PAYLOAD_SIZE;
         const unsigned left = data->getDataSize() - sent;
         memcpy(message + IMessage::PREAMBLE_SIZE + IMessage::SIGNAL_CONSTRAINT_SIZE,
-            buffer + counter * IMessage::SIGNAL_DATA_PAYLOAD_SIZE,
-            left);
+               buffer + counter * IMessage::SIGNAL_DATA_PAYLOAD_SIZE,
+               left);
     }
     else
     {
         memcpy(message + IMessage::PREAMBLE_SIZE + IMessage::SIGNAL_CONSTRAINT_SIZE,
-            buffer + counter * IMessage::SIGNAL_DATA_PAYLOAD_SIZE,
-            IMessage::SIGNAL_DATA_PAYLOAD_SIZE);
+               buffer + counter * IMessage::SIGNAL_DATA_PAYLOAD_SIZE,
+               IMessage::SIGNAL_DATA_PAYLOAD_SIZE);
     }
 
     // CRC
     const unsigned short crcValue = IMessage::computeCrc16(message + IMessage::PREAMBLE_SIZE,
-        SignalData::SIGNAL_CONSTRAINT_SIZE + SignalData::SIGNAL_DATA_PAYLOAD_SIZE);
+                                                           SignalData::SIGNAL_CONSTRAINT_SIZE + SignalData::SIGNAL_DATA_PAYLOAD_SIZE);
     message[IMessage::SIGNAL_DATA_MESSAGE_SIZE - 2] = (unsigned char)(crcValue & 0xff);
     message[IMessage::SIGNAL_DATA_MESSAGE_SIZE - 1] = (unsigned char)((crcValue >> 8) & 0xff);
 

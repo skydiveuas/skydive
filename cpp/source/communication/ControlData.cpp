@@ -13,23 +13,23 @@
 
 ControlData::ControlData(void)
 {
-	euler = Vect3Dd();
-	throttle = 0.0f;
+    euler = Vect3Dd();
+    throttle = 0.0f;
 }
 
 ControlData::ControlData(const unsigned char* src)
 {
-	memcpy((unsigned char*)this + 4, src, getDataSize());
+    memcpy((unsigned char*)this + 4, src, getDataSize());
 }
 
 IMessage::PreambleType ControlData::getPreambleType(void) const
 {
-	return IMessage::CONTROL;
+    return IMessage::CONTROL;
 }
 
 void ControlData::serialize(unsigned char* dst) const
 {
-	memcpy(dst, (unsigned char*)this + 4, getDataSize());
+    memcpy(dst, (unsigned char*)this + 4, getDataSize());
 }
 
 IMessage::MessageType ControlData::getMessageType(void) const
@@ -39,17 +39,17 @@ IMessage::MessageType ControlData::getMessageType(void) const
 
 unsigned ControlData::getDataSize(void) const
 {
-	return sizeof(ControlData) - 4;
+    return sizeof(ControlData) - 4;
 }
 
 void ControlData::setEuler(const Vect3Df& _euler)
 {
-	euler = _euler;
+    euler = _euler;
 }
 
 void ControlData::setThrottle(const float _throttle)
 {
-	throttle = _throttle;
+    throttle = _throttle;
 }
 
 void ControlData::setControllerCommand(const ControllerCommand& _controllerCommand)
@@ -64,12 +64,12 @@ void ControlData::setSolverMode(const SolverMode& _solverMode)
 
 const Vect3Df& ControlData::getEuler(void) const
 {
-	return euler;
+    return euler;
 }
 
 float ControlData::getThrottle(void) const
 {
-	return throttle;
+    return throttle;
 }
 
 ControlData::ControllerCommand ControlData::getControllerCommand(void) const
@@ -84,46 +84,46 @@ ControlData::SolverMode ControlData::getSolverMode(void) const
 
 void ControlData::setRoll(const float roll)
 {
-	euler.x = roll;
+    euler.x = roll;
 }
 
 void ControlData::setPitch(const float pitch)
 {
-	euler.y = pitch;
+    euler.y = pitch;
 }
 
 void ControlData::setYaw(const float yaw)
 {
-	euler.z = yaw;
+    euler.z = yaw;
 }
 
 #ifdef __SKYDIVE_USE_STL__
 
 std::string ControlData::getControllerCommandString(const ControllerCommand& controllerCommand)
 {
-	switch (controllerCommand)
-	{
-	case MANUAL:
-		return std::string("Manual");
-	case AUTOLANDING:
-		return std::string("Autolanding");
+    switch (controllerCommand)
+    {
+    case MANUAL:
+        return std::string("Manual");
+    case AUTOLANDING:
+        return std::string("Autolanding");
     case AUTOLANDING_AP:
         return std::string("Autolanding AP");
-	case HOLD_ALTITUDE:
-		return std::string("Hold: altitude");
-	case HOLD_POSITION:
-		return std::string("Hold: position");
-	case BACK_TO_BASE:
-		return std::string("Back to base");
-	case VIA_ROUTE:
-		return std::string("Fly via route");
-	case STOP:
-		return std::string("STOP");
-	case ERROR_JOYSTICK:
-		return std::string("ERROR Joystick");
-	default:
-		return std::string("ERROR");
-	}
+    case HOLD_ALTITUDE:
+        return std::string("Hold: altitude");
+    case HOLD_POSITION:
+        return std::string("Hold: position");
+    case BACK_TO_BASE:
+        return std::string("Back to base");
+    case VIA_ROUTE:
+        return std::string("Fly via route");
+    case STOP:
+        return std::string("STOP");
+    case ERROR_JOYSTICK:
+        return std::string("ERROR Joystick");
+    default:
+        return std::string("ERROR");
+    }
 }
 
 ControlData::ControllerCommand ControlData::getCommandFromString(const std::string& str)
@@ -172,19 +172,19 @@ ControlData::ControllerCommand ControlData::getCommandFromString(const std::stri
 
 std::string ControlData::getSolverModeString(const SolverMode& solverMode)
 {
-	switch (solverMode)
-	{
-	case STABLILIZATION:
-		return std::string("Stabilization");
-	case ANGLE_NO_YAW:
-		return std::string("Angle no yaw");
-	case ANGLE:
-		return std::string("Angle");
-	case HEADLESS:
-		return std::string("Headless");
-	default:
-		return std::string("Error");
-	}
+    switch (solverMode)
+    {
+    case STABLILIZATION:
+        return std::string("Stabilization");
+    case ANGLE_NO_YAW:
+        return std::string("Angle no yaw");
+    case ANGLE:
+        return std::string("Angle");
+    case HEADLESS:
+        return std::string("Headless");
+    default:
+        return std::string("Error");
+    }
 }
 
 ControlData::SolverMode ControlData::getSolverModeFromString(const std::string& str)
@@ -218,12 +218,12 @@ ControlData ControlData::parseFromString(const std::string& line)
     float time;
     int solverMode;
     if (!(iss
-        >> time
-        >> controlData.euler.x >> controlData.euler.y >> controlData.euler.z
-        >> controlData.throttle
-        >> controlData.controllerCommand
-        >> solverMode
-        ))
+          >> time
+          >> controlData.euler.x >> controlData.euler.y >> controlData.euler.z
+          >> controlData.throttle
+          >> controlData.controllerCommand
+          >> solverMode
+          ))
     {
         __RL_EXCEPTION__("Error while parsing data.");
     }
@@ -233,11 +233,11 @@ ControlData ControlData::parseFromString(const std::string& line)
 
 std::ostream& operator << (std::ostream& stream, const ControlData& controlData)
 {
-	stream << controlData.euler.x << " " << controlData.euler.y << " " << controlData.euler.z << " ";
-	stream << controlData.throttle << " ";
-	stream << controlData.controllerCommand << " ";
-	stream << (int)controlData.solverMode << " ";
-	return stream;
+    stream << controlData.euler.x << " " << controlData.euler.y << " " << controlData.euler.z << " ";
+    stream << controlData.throttle << " ";
+    stream << controlData.controllerCommand << " ";
+    stream << (int)controlData.solverMode << " ";
+    return stream;
 }
 
 #endif //__SKYDIVE_USE_STL__

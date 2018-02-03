@@ -14,16 +14,16 @@
 class Waypoint
 {
 public:
-	Location location;
-	float velocity;
+    Location location;
+    float velocity;
 
-	Waypoint(void);
-	Waypoint(const unsigned char* src);
-	Waypoint(const Location& _location, const float _velocity);
+    Waypoint(void);
+    Waypoint(const unsigned char* src);
+    Waypoint(const Location& _location, const float _velocity);
 
-	void serialize(unsigned char* dst) const;
+    void serialize(unsigned char* dst) const;
 
-	static unsigned getDataSize(void);
+    static unsigned getDataSize(void);
 };
 
 #endif // __WAYPOINT__

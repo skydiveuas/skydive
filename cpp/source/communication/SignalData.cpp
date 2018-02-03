@@ -12,17 +12,17 @@ SignalData::SignalData(void)
 
 SignalData::SignalData(const unsigned char* src)
 {
-	command = parseCommand(src);
+    command = parseCommand(src);
     parameter = parseParameter(src + IMessage::SIGNAL_COMMAND_SIZE);
 }
 
 SignalData::SignalData(const Command& _command, const Parameter& _parameter) :
-command(_command), parameter(_parameter)
+    command(_command), parameter(_parameter)
 {
 }
 
 SignalData::SignalData(const Command& _command, const int _parameterValue) :
-	command(_command), parameter(_parameterValue)
+    command(_command), parameter(_parameterValue)
 {
 }
 
@@ -38,29 +38,29 @@ SignalData::Parameter SignalData::getParameter(void) const
 
 int SignalData::getParameterValue() const
 {
-	return parameter;
+    return parameter;
 }
 
 bool SignalData::operator ==(const SignalData& right) const
 {
-	return getCommand() == right.getCommand()
-		&& getParameter() == right.getParameter();
+    return getCommand() == right.getCommand()
+            && getParameter() == right.getParameter();
 }
 
 unsigned SignalData::getPayloadSize(void) const
 {
-	return IMessage::getPayloadSizeByType(getPreambleType());
+    return IMessage::getPayloadSizeByType(getPreambleType());
 }
 
 IMessage::PreambleType SignalData::getPreambleType(void) const
 {
-	return IMessage::SIGNAL;
+    return IMessage::SIGNAL;
 }
 
 void SignalData::serialize(unsigned char* dst) const
 {
-	memcpy(dst, &command, IMessage::SIGNAL_COMMAND_SIZE);
-	memcpy(dst + IMessage::SIGNAL_COMMAND_SIZE, &parameter, IMessage::SIGNAL_COMMAND_SIZE);
+    memcpy(dst, &command, IMessage::SIGNAL_COMMAND_SIZE);
+    memcpy(dst + IMessage::SIGNAL_COMMAND_SIZE, &parameter, IMessage::SIGNAL_COMMAND_SIZE);
 }
 
 IMessage::MessageType SignalData::getMessageType(void) const
@@ -70,8 +70,8 @@ IMessage::MessageType SignalData::getMessageType(void) const
 
 SignalData::Command SignalData::parseCommand(const unsigned char* src)
 {
-	int commandValue;
-	memcpy(&commandValue, src, IMessage::SIGNAL_COMMAND_SIZE);
+    int commandValue;
+    memcpy(&commandValue, src, IMessage::SIGNAL_COMMAND_SIZE);
     return static_cast<Command>(commandValue);
 }
 
@@ -84,31 +84,31 @@ SignalData::Parameter SignalData::parseParameter(const unsigned char* src)
 
 unsigned short SignalData::parseAllPacketsNumber(const unsigned char* src)
 {
-	unsigned short result = 0;
-	memcpy(&result, src + IMessage::SIGNAL_COMMAND_SIZE, 2);
-	return result;
+    unsigned short result = 0;
+    memcpy(&result, src + IMessage::SIGNAL_COMMAND_SIZE, 2);
+    return result;
 }
 
 unsigned short SignalData::parseActualPacketNumber(const unsigned char* src)
 {
-	unsigned short result = 0;
-	memcpy(&result, src + IMessage::SIGNAL_COMMAND_SIZE + 2, 2);
-	return result;
+    unsigned short result = 0;
+    memcpy(&result, src + IMessage::SIGNAL_COMMAND_SIZE + 2, 2);
+    return result;
 }
 
 bool SignalData::hasPayload(const SignalData::Command command)
 {
-	switch (command)
-	{
-	case CALIBRATION_SETTINGS_DATA:
-	case CONTROL_SETTINGS_DATA:
-	case ROUTE_CONTAINER_DATA:
-	case WIFI_CONFIGURATION_DATA:
-		return true;
+    switch (command)
+    {
+    case CALIBRATION_SETTINGS_DATA:
+    case CONTROL_SETTINGS_DATA:
+    case ROUTE_CONTAINER_DATA:
+    case WIFI_CONFIGURATION_DATA:
+        return true;
 
-	default:
-		return false;
-	}
+    default:
+        return false;
+    }
 }
 
 #ifdef __SKYDIVE_USE_STL__
@@ -121,8 +121,8 @@ std::string SignalData::toString() const
 std::string SignalData::toString(const SignalData& command)
 {
     return "SIGNAL_DATA(" + toString(command.getCommand())
-        + ":"
-        + toString(command.getParameter()) + ")";
+            + ":"
+            + toString(command.getParameter()) + ")";
 }
 
 std::string SignalData::toString(const SignalData::Command& command)
@@ -159,8 +159,8 @@ std::string SignalData::toString(const SignalData::Command& command)
         return std::string("UPLOAD_ROUTE");
     case SignalData::DOWNLOAD_ROUTE:
         return std::string("DOWNLOAD_ROUTE");
-	case SignalData::CONFIGURE_WIFI:
-		return std::string("CONFIGURE_WIFI");
+    case SignalData::CONFIGURE_WIFI:
+        return std::string("CONFIGURE_WIFI");
     case SignalData::SENSORS_LOGGER:
         return std::string("SENSORS_LOGGER");
     case SignalData::CALIBRATION_SETTINGS:

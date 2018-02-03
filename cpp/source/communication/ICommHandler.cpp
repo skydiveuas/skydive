@@ -27,10 +27,10 @@ ICommHandler::~ICommHandler(void)
 
 void ICommHandler::initialize(ICommInterface* _commInterface)
 {
-	commInterface = _commInterface;
+    commInterface = _commInterface;
     commDispatcher.reset();
     clearCounters();
-	sentMessages = 0;
+    sentMessages = 0;
 }
 
 void ICommHandler::reset(void)
@@ -43,28 +43,28 @@ void ICommHandler::reset(void)
 
 const ICommInterface* ICommHandler::getCommHandle(void) const
 {
-	return commInterface;
+    return commInterface;
 }
 
 IMessage::PreambleType ICommHandler::proceedReceiving(void)
 {
-	unsigned char data;
-	while (commInterface->getData(&data))
-	{
-		IMessage::PreambleType received = commDispatcher.putChar(data);
-		if (received != IMessage::EMPTY)
-		{
-			// if stream processor reports data received return immediately
-			return received;
-		}
-	}
-	return IMessage::EMPTY;
+    unsigned char data;
+    while (commInterface->getData(&data))
+    {
+        IMessage::PreambleType received = commDispatcher.putChar(data);
+        if (received != IMessage::EMPTY)
+        {
+            // if stream processor reports data received return immediately
+            return received;
+        }
+    }
+    return IMessage::EMPTY;
 }
 
 bool ICommHandler::send(const unsigned char* data, const unsigned dataSize)
 {
-	sentMessages++;
-	return commInterface->sendData(data, dataSize);
+    sentMessages++;
+    return commInterface->sendData(data, dataSize);
 }
 
 bool ICommHandler::send(const IMessage& message)
@@ -120,7 +120,7 @@ void ICommHandler::getSignalDataObject(ISignalPayloadMessage& data)
 
 unsigned ICommHandler::getSentMessages(void) const
 {
-	return sentMessages;
+    return sentMessages;
 }
 
 unsigned ICommHandler::getReceivedMessage(void) const
@@ -135,8 +135,8 @@ unsigned ICommHandler::getReceptionFailes(void) const
 
 void ICommHandler::clearCounters(void)
 {
-	sentMessages = 0;
-	commDispatcher.clearCounters();
+    sentMessages = 0;
+    commDispatcher.clearCounters();
 }
 
 bool ICommHandler::sendCommand(const SignalData& command)
@@ -169,19 +169,19 @@ bool ICommHandler::waitForAnyCommand(SignalData& command, const unsigned timeout
     resetTimer();
     while (true) // infinite loop
     {
-		if (proceedReceiving() == IMessage::SIGNAL)
-		{
+        if (proceedReceiving() == IMessage::SIGNAL)
+        {
             if (!SignalData::hasPayload(getCommand()))
-			{
-				command = getSignalData();
-				return true;
-			}
-		}
-		if (getTimerValue() > timeout)
-		{
-			return false;
-		}
-		holdThread(10);
+            {
+                command = getSignalData();
+                return true;
+            }
+        }
+        if (getTimerValue() > timeout)
+        {
+            return false;
+        }
+        holdThread(10);
     }
 }
 
@@ -212,7 +212,7 @@ bool ICommHandler::sendCommandGetAnyResponse(const SignalData& command, SignalDa
     {
         return false;
     }
-	return waitForAnyCommand(response);
+    return waitForAnyCommand(response);
 }
 
 bool ICommHandler::sendCommandGetAnyParameter(const SignalData& command, const Command responseCommand, Parameter& response)
@@ -228,141 +228,141 @@ bool ICommHandler::sendCommandGetResponse(const SignalData& command, const Signa
 {
     Parameter receivedParameter;
     return sendCommandGetAnyParameter(command, response.getCommand(), receivedParameter)
-        && receivedParameter == response.getParameter();
+            && receivedParameter == response.getParameter();
 }
 
 bool ICommHandler::readCommandAndRespond(const SignalData& command, const SignalData& response)
 {
-	if (waitForCommand(command))
-	{
-		return sendCommand(response);
-	}
-	else
-	{
-		return false;
-	}
+    if (waitForCommand(command))
+    {
+        return sendCommand(response);
+    }
+    else
+    {
+        return false;
+    }
 }
 
 bool ICommHandler::sendDataProcedure(const ISignalPayloadMessage& data)
 {
-	for (unsigned ret = 0; ret < MAX_RETRANSMISSION + 1; ret++)
-	{
-		if (!send(data))
-		{
-			// sending data failed
+    for (unsigned ret = 0; ret < MAX_RETRANSMISSION + 1; ret++)
+    {
+        if (!send(data))
+        {
+            // sending data failed
 #ifdef TRACER_H_
-			Tracer::Trace("sendDataProcedure::sending data failed", true);
+            Tracer::Trace("sendDataProcedure::sending data failed", true);
 #endif
-			return false;
-		}
-		SignalData receivedCommand;
-		if (waitForAnyCommand(receivedCommand, DEFAULT_TIMEOUT + 500))
-		{
-			if (receivedCommand.getCommand() == data.getSignalDataCommand())
-			{
-				switch (receivedCommand.getParameter())
-				{
-				case SignalData::ACK:
-					// sending data successful
-					return true;
+            return false;
+        }
+        SignalData receivedCommand;
+        if (waitForAnyCommand(receivedCommand, DEFAULT_TIMEOUT + 500))
+        {
+            if (receivedCommand.getCommand() == data.getSignalDataCommand())
+            {
+                switch (receivedCommand.getParameter())
+                {
+                case SignalData::ACK:
+                    // sending data successful
+                    return true;
 
-				case SignalData::DATA_INVALID:
+                case SignalData::DATA_INVALID:
 #ifdef TRACER_H_
-					Tracer::Trace("sendDataProcedure::DATA_INVALID, retransmitting", true);
+                    Tracer::Trace("sendDataProcedure::DATA_INVALID, retransmitting", true);
 #endif
-					// retransmit data
-					break;
+                    // retransmit data
+                    break;
 
-				case SignalData::TIMEOUT:
+                case SignalData::TIMEOUT:
 #ifdef TRACER_H_
-					Tracer::Trace("sendDataProcedure::TIMEOUT, retransmitting", true);
+                    Tracer::Trace("sendDataProcedure::TIMEOUT, retransmitting", true);
 #endif
-					// retransmit data
-					break;
+                    // retransmit data
+                    break;
 
-				default:
-					// bad parameter received
+                default:
+                    // bad parameter received
 #ifdef TRACER_H_
-					Tracer::Trace("sendDataProcedure::Bad parameter received!", true);
+                    Tracer::Trace("sendDataProcedure::Bad parameter received!", true);
 #endif
-					return false;
-				}
-			}
-			else
-			{
-				// bad command received
+                    return false;
+                }
+            }
+            else
+            {
+                // bad command received
 #ifdef TRACER_H_
-				Tracer::Trace("sendDataProcedure::Bad command received!", true);
+                Tracer::Trace("sendDataProcedure::Bad command received!", true);
 #endif
-				return false;
-			}
-		}
-		else
-		{
-			// timeout waiting for data
+                return false;
+            }
+        }
+        else
+        {
+            // timeout waiting for data
 #ifdef TRACER_H_
-			Tracer::Trace("sendDataProcedure::timeout waiting for command, wait for retransmission", true);
+            Tracer::Trace("sendDataProcedure::timeout waiting for command, wait for retransmission", true);
 #endif
-			return false;
-		}
-	}
+            return false;
+        }
+    }
 #ifdef TRACER_H_
-			Tracer::Trace("sendDataProcedure::failed after max retransmissions", true);
+    Tracer::Trace("sendDataProcedure::failed after max retransmissions", true);
 #endif
-	// failed after max retransmissions
-	return false;
+    // failed after max retransmissions
+    return false;
 }
 
 bool ICommHandler::receiveDataProcedure(ISignalPayloadMessage& data)
 {
-	resetTimer();
-	unsigned retransmissionCounter = 0;
-	while (true) // infinite loop
-	{
-		if (proceedReceiving() == IMessage::SIGNAL
-			&& getCommand() == data.getSignalDataType())
-		{
-			getSignalDataObject(data);
-			if (data.isValid())
-			{
-				send(SignalData(data.getSignalDataCommand(), SignalData::ACK));
-				return true;
-			}
-			else
-			{
+    resetTimer();
+    unsigned retransmissionCounter = 0;
+    while (true) // infinite loop
+    {
+        if (proceedReceiving() == IMessage::SIGNAL
+                && getCommand() == data.getSignalDataType())
+        {
+            getSignalDataObject(data);
+            if (data.isValid())
+            {
+                send(SignalData(data.getSignalDataCommand(), SignalData::ACK));
+                return true;
+            }
+            else
+            {
 #ifdef TRACER_H_
-				Tracer::Trace("receiveDataProcedure::DATA_INVALID!", true);
+                Tracer::Trace("receiveDataProcedure::DATA_INVALID!", true);
 #endif
-				retransmissionCounter++;
-				if (retransmissionCounter >= MAX_RETRANSMISSION + 1)
-				{
-					// failed after max retransmissions
-					break;
-				}
-				send(SignalData(data.getSignalDataCommand(), SignalData::DATA_INVALID));
-				resetTimer();
-			}
-		}
-		if (getTimerValue() > DEFAULT_TIMEOUT)
-		{
+                retransmissionCounter++;
+                if (retransmissionCounter >= MAX_RETRANSMISSION + 1)
+                {
+                    // failed after max retransmissions
+                    break;
+                }
+                send(SignalData(data.getSignalDataCommand(), SignalData::DATA_INVALID));
+                resetTimer();
+            }
+        }
+        if (getTimerValue() > DEFAULT_TIMEOUT)
+        {
 #ifdef TRACER_H_
-			Tracer::Trace("receiveDataProcedure::TIMEOUT!", true);
+            Tracer::Trace("receiveDataProcedure::TIMEOUT!", true);
 #endif
-			retransmissionCounter++;
-			if (retransmissionCounter >= MAX_RETRANSMISSION + 1)
-			{
-				// failed after max retransmissions
-				break;
-			}
-			send(SignalData(data.getSignalDataCommand(), SignalData::TIMEOUT));
-			resetTimer();
-		}
-		holdThread(10);
-	}
+            retransmissionCounter++;
+            if (retransmissionCounter >= MAX_RETRANSMISSION + 1)
+            {
+                // failed after max retransmissions
+                break;
+            }
+            send(SignalData(data.getSignalDataCommand(), SignalData::TIMEOUT));
+            resetTimer();
+        }
+        holdThread(10);
+    }
 #ifdef TRACER_H_
-	Tracer::Trace("receiveDataProcedure::Max retransmissions reached!", true);
+    Tracer::Trace("receiveDataProcedure::Max retransmissions reached!", true);
 #endif
-	return false;
+    return false;
 }
 
 bool ICommHandler::sendSignalData(const ISignalPayloadMessage* const data)
@@ -393,7 +393,7 @@ bool ICommHandler::sendSignalData(const ISignalPayloadMessage* const data)
             holdThread(2);
         }
     }
-	return true;
+    return true;
 }
 
 #ifdef __SKYDIVE_USE_STL__
@@ -403,8 +403,8 @@ void ICommHandler::sendCommandEx(const SignalData& command)
     if (!sendCommand(command))
     {
         std::string message = "Sending command: ("
-            + command.toString()
-            + ") failed!";
+                + command.toString()
+                + ") failed!";
         __RL_EXCEPTION__(message.c_str());
     }
 }
@@ -414,8 +414,8 @@ void ICommHandler::waitForCommandEx(const SignalData& command, const unsigned ti
     if (!waitForCommand(command, timeout))
     {
         std::string message = "Waiting for command: ("
-            + command.toString()
-            + ") timeout!";
+                + command.toString()
+                + ") timeout!";
         __RL_EXCEPTION__(message.c_str());
     }
 }
@@ -436,8 +436,8 @@ ICommHandler::Parameter ICommHandler::waitForAnyParameterEx(const Command comman
     if (!waitForAnyParameter(command, result, timeout))
     {
         std::string message = "Waiting for any parameter with command: ("
-            + SignalData::toString(command)
-            + ") timeout!";
+                + SignalData::toString(command)
+                + ") timeout!";
         __RL_EXCEPTION__(message.c_str());
     }
     return result;
@@ -449,8 +449,8 @@ SignalData ICommHandler::sendCommandGetAnyResponseEx(const SignalData& command)
     if (!sendCommandGetAnyResponse(command, result))
     {
         std::string message = "Send command: ("
-            + command.toString()
-            + ") with any response timeout!";
+                + command.toString()
+                + ") with any response timeout!";
         __RL_EXCEPTION__(message.c_str());
     }
     return result;
@@ -462,10 +462,10 @@ ICommHandler::Parameter ICommHandler::sendCommandGetAnyParameterEx(const SignalD
     if (!sendCommandGetAnyParameter(command, responseCommand, result))
     {
         std::string message = "Send command: ("
-            + command.toString()
-            + ") with any response with command: ("
-            + SignalData::toString(responseCommand)
-            + " timeout!";
+                + command.toString()
+                + ") with any response with command: ("
+                + SignalData::toString(responseCommand)
+                + " timeout!";
         __RL_EXCEPTION__(message.c_str());
     }
     return result;
@@ -476,10 +476,10 @@ void ICommHandler::sendCommandGetResponseEx(const SignalData& command, const Sig
     if (!sendCommandGetResponse(command, response))
     {
         std::string message = "Send command: ("
-            + command.toString()
-            + ") with response: ("
-            + response.toString()
-            + ") failed!";
+                + command.toString()
+                + ") with response: ("
+                + response.toString()
+                + ") failed!";
         __RL_EXCEPTION__(message.c_str());
     }
 }
@@ -489,10 +489,10 @@ void ICommHandler::readCommandAndRespondEx(const SignalData& command, const Sign
     if (!sendCommandGetResponse(command, response))
     {
         std::string message = "Read command: ("
-            + command.toString()
-            + ") and respond: ("
-            + response.toString()
-            + ") failed!";
+                + command.toString()
+                + ") and respond: ("
+                + response.toString()
+                + ") failed!";
         __RL_EXCEPTION__(message.c_str());
     }
 }

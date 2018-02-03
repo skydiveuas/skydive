@@ -15,19 +15,19 @@ class Location
 {
 public:
     Vect2Dd position;
-	float absoluteAltitude;
-	float relativeAltitude;
+    float absoluteAltitude;
+    float relativeAltitude;
 
-	Location(void);
+    Location(void);
     Location(const Vect2Dd& _position, const float _absoluteAltitude, const float _relativeAltitude);
 
-	bool isValidPosition(void) const;
-	bool isValidAbsoluteAltitude(void) const;
-	bool isValidRelativeAltitude(void) const;
+    bool isValidPosition(void) const;
+    bool isValidAbsoluteAltitude(void) const;
+    bool isValidRelativeAltitude(void) const;
 
-	static Vect2Df getInvalidPosition(void);
-	static float getInvalidAltitude(void);
-	static Location getInvalidLocation(void);
+    static Vect2Df getInvalidPosition(void);
+    static float getInvalidAltitude(void);
+    static Location getInvalidLocation(void);
 };
 
 

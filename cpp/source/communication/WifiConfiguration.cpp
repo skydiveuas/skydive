@@ -12,11 +12,11 @@ WifiConfiguration::WifiConfiguration(void)
 
 WifiConfiguration::WifiConfiguration(const WifiConfiguration& wifiConfiguration)
 {
-	routerName = NULL;
-	routerPassword = NULL;
-	routerIp = NULL;
-	clientIp = NULL;
-	*this = wifiConfiguration;
+    routerName = NULL;
+    routerPassword = NULL;
+    routerIp = NULL;
+    clientIp = NULL;
+    *this = wifiConfiguration;
 }
 
 WifiConfiguration::WifiConfiguration(const unsigned char* const src)
@@ -31,13 +31,13 @@ WifiConfiguration::WifiConfiguration(const unsigned char* const src)
 
     // parse strings
     setRouterName((const char*)src + SIZES_VALUES_SIZE,
-        routerNameSize);
+                  routerNameSize);
     setRouterPassword((const char*)src + SIZES_VALUES_SIZE + routerNameSize,
-        routerPasswordSize);
+                      routerPasswordSize);
     setRouterIp((const char*)src + SIZES_VALUES_SIZE + routerNameSize + routerPasswordSize,
-        routerIpSize);
+                routerIpSize);
     setClientIp((const char*)src + SIZES_VALUES_SIZE + routerNameSize + routerPasswordSize + routerIpSize,
-        clientIpSize);
+                clientIpSize);
 
     // parse CRC
     memcpy(&crcValue, src + getDataSize() - sizeof(unsigned), sizeof(unsigned));
@@ -66,13 +66,13 @@ void WifiConfiguration::serialize(unsigned char* dst) const
 
     // serialize strings
     memcpy(dst + SIZES_VALUES_SIZE,
-        routerName, routerNameSize);
+           routerName, routerNameSize);
     memcpy(dst + SIZES_VALUES_SIZE + routerNameSize,
-        routerPassword, routerPasswordSize);
+           routerPassword, routerPasswordSize);
     memcpy(dst + SIZES_VALUES_SIZE + routerNameSize + routerPasswordSize,
-        routerIp, routerIpSize);
+           routerIp, routerIpSize);
     memcpy(dst + SIZES_VALUES_SIZE + routerNameSize + routerPasswordSize + routerIpSize,
-        clientIp, clientIpSize);
+           clientIp, clientIpSize);
 
     // serialize CRC
     memcpy(dst + getDataSize() - sizeof(unsigned), &crcValue, sizeof(unsigned));
@@ -82,11 +82,11 @@ unsigned WifiConfiguration::getDataSize(void) const
 {
     // all strings size + sizes values + sizeof crcValue
     return routerNameSize
-        + routerPasswordSize
-        + routerIpSize
-        + clientIpSize
-        + SIZES_VALUES_SIZE
-        + sizeof(unsigned);
+            + routerPasswordSize
+            + routerIpSize
+            + clientIpSize
+            + SIZES_VALUES_SIZE
+            + sizeof(unsigned);
 }
 
 SignalData::Command WifiConfiguration::getSignalDataType(void) const

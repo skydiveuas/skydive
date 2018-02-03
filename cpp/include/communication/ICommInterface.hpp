@@ -27,42 +27,42 @@ public:
      * if there is no data in buffer or reception is ongoing - returns false
      * always non-blocking!
      */
-	virtual bool getData(unsigned char* data) = 0;
+    virtual bool getData(unsigned char* data) = 0;
 
     /**
      * sends data over specific communication interface
      * always non-blocking!
      */
-	virtual bool sendData(const unsigned char* data, const unsigned dataCount) = 0;
+    virtual bool sendData(const unsigned char* data, const unsigned dataCount) = 0;
 
     /**
      * is communication interface wireless - can be used to fly
      */
-	virtual bool isWireless(void) const = 0;
+    virtual bool isWireless(void) const = 0;
 
     /**
      * is communication interface connected
      */
-	virtual bool isConnected(void) const
-	{
-		return connected;
+    virtual bool isConnected(void) const
+    {
+        return connected;
     }
 
-	ICommInterface(void)
-	{
-		connected = false;
-	}
+    ICommInterface(void)
+    {
+        connected = false;
+    }
 
     /**
      * virtual destructor for memmory safeness
      */
-	virtual ~ICommInterface(void)
-	{
-		// nothing to do here
-	}
+    virtual ~ICommInterface(void)
+    {
+        // nothing to do here
+    }
 
 protected:
-	volatile bool connected;
+    volatile bool connected;
 };
 
 #endif // __I_COMM_INTERFACE__
