@@ -20,82 +20,82 @@
 class SignalData : public IMessage
 {
 public:
-	enum Command
-	{
-		DUMMY,
+    enum Command
+    {
+        DUMMY,
 
-		START_CMD = 100007,
+        START_CMD = 100007,
 
-		APP_LOOP,
-		FLIGHT_LOOP,
-		CALIBRATE_ACCEL,
-		CALIBRATE_MAGNET,
-		CALIBRATE_ESC,
-		UPLOAD_SETTINGS,
-		DOWNLOAD_SETTINGS,
-		CALIBRATE_RADIO,
-		CHECK_RADIO,
-		SOFTWARE_UPGRADE,
-		SYSTEM_RESET,
-		UPLOAD_ROUTE,
-		DOWNLOAD_ROUTE,
-		CONFIGURE_WIFI,
-		SENSORS_LOGGER,
+        APP_LOOP,
+        FLIGHT_LOOP,
+        CALIBRATE_ACCEL,
+        CALIBRATE_MAGNET,
+        CALIBRATE_ESC,
+        UPLOAD_SETTINGS,
+        DOWNLOAD_SETTINGS,
+        CALIBRATE_RADIO,
+        CHECK_RADIO,
+        SOFTWARE_UPGRADE,
+        SYSTEM_RESET,
+        UPLOAD_ROUTE,
+        DOWNLOAD_ROUTE,
+        CONFIGURE_WIFI,
+        SENSORS_LOGGER,
 
         PING_VALUE, // random ping key
 
-		CALIBRATION_SETTINGS,
+        CALIBRATION_SETTINGS,
         CALIBRATION_SETTINGS_DATA,
-		CONTROL_SETTINGS,
+        CONTROL_SETTINGS,
         CONTROL_SETTINGS_DATA,
-		ROUTE_CONTAINER,
+        ROUTE_CONTAINER,
         ROUTE_CONTAINER_DATA,
         WIFI_CONFIGURATION,
         WIFI_CONFIGURATION_DATA,
 
         // TODO sort these values in new lib release
         WHO_AM_I_VALUE // board type (CalibrationSettings::BoardType)
-	};
+    };
 
     enum Parameter
-	{
-		DUMMY_PARAMETER,
+    {
+        DUMMY_PARAMETER,
 
-		START = 1000011,
-		ACK,
-		DATA_ACK,
-		ENTER_DFU,
+        START = 1000011,
+        ACK,
+        DATA_ACK,
+        ENTER_DFU,
 
-		BREAK,
-		BREAK_ACK,
-		BREAK_FAIL,
+        BREAK,
+        BREAK_ACK,
+        BREAK_FAIL,
 
-		DONE,
-		READY,
-		FAIL,
-		SKIP,
+        DONE,
+        READY,
+        FAIL,
+        SKIP,
 
-		NON_STATIC,
-		NOT_ALLOWED,
+        NON_STATIC,
+        NOT_ALLOWED,
 
-		DATA_INVALID,
-		TIMEOUT,
+        DATA_INVALID,
+        TIMEOUT,
 
-		VIA_ROUTE_ALLOWED,
-		VIA_ROUTE_NOT_ALLOWED
-	};
+        VIA_ROUTE_ALLOWED,
+        VIA_ROUTE_NOT_ALLOWED
+    };
 
-	SignalData(void);
-	SignalData(const unsigned char* src);
+    SignalData(void);
+    SignalData(const unsigned char* src);
     SignalData(const Command& command, const Parameter& parameter);
-	SignalData(const Command& command, const int parameterValue);
+    SignalData(const Command& command, const int parameterValue);
 
-	Command getCommand(void) const;
+    Command getCommand(void) const;
     Parameter getParameter(void) const;
 
-	int getParameterValue() const;
+    int getParameterValue() const;
 
-	bool operator ==(const SignalData& right) const;
+    bool operator ==(const SignalData& right) const;
 
     unsigned getPayloadSize(void) const;
 
@@ -105,13 +105,13 @@ public:
 
     MessageType getMessageType(void) const;
 
-	static Command parseCommand(const unsigned char* src);
+    static Command parseCommand(const unsigned char* src);
     static Parameter parseParameter(const unsigned char* src);
 
-	static unsigned short parseAllPacketsNumber(const unsigned char* src);
-	static unsigned short parseActualPacketNumber(const unsigned char* src);
+    static unsigned short parseAllPacketsNumber(const unsigned char* src);
+    static unsigned short parseActualPacketNumber(const unsigned char* src);
 
-	static bool hasPayload(const Command command);
+    static bool hasPayload(const Command command);
 
 #ifdef __SKYDIVE_USE_STL__
 
@@ -124,8 +124,8 @@ public:
 #endif //__SKYDIVE_USE_STL__
 
 private:
-	int command;
-	int parameter;
+    int command;
+    int parameter;
 };
 
 

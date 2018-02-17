@@ -37,33 +37,33 @@ public:
         RETRANSMITED,
     };
 
-	AutopilotData(void);
+    AutopilotData(void);
     AutopilotData(const Type t, const Location& _location);
-	AutopilotData(const unsigned char* src);
+    AutopilotData(const unsigned char* src);
 
-	PreambleType getPreambleType(void) const;
+    PreambleType getPreambleType(void) const;
 
-	void serialize(unsigned char* dst) const;
+    void serialize(unsigned char* dst) const;
 
     MessageType getMessageType(void) const;
 
-	unsigned getDataSize() const;
+    unsigned getDataSize() const;
 
     const Location& getLocation() const;
 
-	const Vect2Dd& getTargetPosition(void) const;
-	float getTargetAltitude(void) const;
+    const Vect2Dd& getTargetPosition(void) const;
+    float getTargetAltitude(void) const;
     float getAbsoluteAltitude() const;
 
-	void setTargetPosition(const Vect2Dd& _targetPosition);
-	void setTargetAltitude(const float _targetAltitude);
+    void setTargetPosition(const Vect2Dd& _targetPosition);
+    void setTargetAltitude(const float _targetAltitude);
     void setAbsoluteAltitude(const float _absoluteAltitude);
 
     Type getType() const;
     void setType(const Type t);
 
-	const Flags<int>& flags(void) const;
-	Flags<int>& flags(void);
+    const Flags<int>& flags(void) const;
+    Flags<int>& flags(void);
 
 #ifdef __SKYDIVE_USE_STL__
 
@@ -80,7 +80,7 @@ private:
 
     int type;
 
-	Flags<int> flagsObj;
+    Flags<int> flagsObj;
 };
 
 #endif // __AUTOPILOT_DATA__
