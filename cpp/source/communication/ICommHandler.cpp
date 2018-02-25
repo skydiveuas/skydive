@@ -2,10 +2,6 @@
 
 #include <string.h>
 
-#ifdef STM32F40_41xxx
-#include "Tracer.h"
-#endif
-
 #ifdef __SKYDIVE_USE_STL__
 
 #include "Exception.hpp"

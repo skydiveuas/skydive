@@ -7,10 +7,6 @@
 
 #include <string.h>
 
-#ifdef STM32F40_41xxx
-#include "Tracer.h"
-#endif
-
 CommDispatcher::CommDispatcher(void)
 {
     reset();
