@@ -18,7 +18,7 @@ public:
     virtual void disconnect(void) = 0;
 
     /**
-     * flushes communication interface buffers (both outgoing and incomeing)
+     * flushes communication interface buffers (both outgoing and incoming)
      */
     virtual void flush(void) = 0;
 
