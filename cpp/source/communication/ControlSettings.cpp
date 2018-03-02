@@ -2,7 +2,7 @@
 
 #ifdef __SKYDIVE_USE_STL__
 
-#include "Exception.hpp"
+#include "SkyException.hpp"
 
 #endif // __SKYDIVE_USE_STL__
 
@@ -407,7 +407,7 @@ std::string ControlSettings::getUavTypeString(UavType type)
     case ControlSettings::OCTOCOPTER_PLUS:
         return std::string("Octocopter \"+\"");
     default:
-        __RL_EXCEPTION__("Unexpeted uav type");
+        __SKY_EXCEPTION__("Unexpeted uav type");
     }
 }
 
@@ -496,7 +496,7 @@ ControlSettings::UavType ControlSettings::uavTypeFromString(const std::string& u
     else if (uavTypeString == "Hexacopter \"+\"") return ControlSettings::HEXACOPTER_PLUS;
     else if (uavTypeString == "Octocopter \"X\"") return ControlSettings::OCTOCOPTER_X;
     else if (uavTypeString == "Octocopter \"+\"") return ControlSettings::OCTOCOPTER_PLUS;
-    else __RL_EXCEPTION__("Incorrect string for UavType");
+    else __SKY_EXCEPTION__("Incorrect string for UavType");
 }
 
 ControlData::SolverMode ControlSettings::solverModeFromString(const std::string& solverMode)
@@ -505,14 +505,14 @@ ControlData::SolverMode ControlSettings::solverModeFromString(const std::string&
     else if (solverMode == "Angle") return ControlData::ANGLE;
     else if (solverMode == "Angle no yaw") return ControlData::ANGLE_NO_YAW;
     else if (solverMode == "Headless") return ControlData::HEADLESS;
-    else __RL_EXCEPTION__("Incorrect string for InitialSolverMode");
+    else __SKY_EXCEPTION__("Incorrect string for InitialSolverMode");
 }
 
 ControlSettings::ThrottleMode ControlSettings::manualThrottleModeFromString(const std::string& throttleMode)
 {
     if (throttleMode == "Static") return ControlSettings::STATIC;
     else if (throttleMode == "Dynamic") return ControlSettings::DYNAMIC;
-    else __RL_EXCEPTION__("Incorrect string for MaunalThrottleMode");
+    else __SKY_EXCEPTION__("Incorrect string for MaunalThrottleMode");
 }
 
 ControlSettings::StickMovementMode ControlSettings::stickModeFromString(const std::string& stickMode)
@@ -520,7 +520,7 @@ ControlSettings::StickMovementMode ControlSettings::stickModeFromString(const st
     if (stickMode == "Copter") return ControlSettings::COPTER;
     else if (stickMode == "Geographic") return ControlSettings::GEOGRAPHIC;
     else if (stickMode == "Base point") return ControlSettings::BASE_POINT;
-    else __RL_EXCEPTION__("Incorrect string for StickMode");
+    else __SKY_EXCEPTION__("Incorrect string for StickMode");
 }
 
 ControlSettings::BatteryType ControlSettings::batteryTypeFromString(const std::string& batteryType)
@@ -545,7 +545,7 @@ ControlData::ControllerCommand ControlSettings::errorHandlingActionFromString(co
     else if (string == ControlData::getControllerCommandString(ControlData::BACK_TO_BASE))
         return ControlData::BACK_TO_BASE;
     else
-        __RL_EXCEPTION__("Incorrect string for ErrorHandlingAction");
+        __SKY_EXCEPTION__("Incorrect string for ErrorHandlingAction");
 }
 
 ControlSettings::EscPwmFreq ControlSettings::escPwmFreqFromString(const std::string& string)
@@ -555,7 +555,7 @@ ControlSettings::EscPwmFreq ControlSettings::escPwmFreqFromString(const std::str
     else if (string == "Fast") return ControlSettings::FAST;
     else if (string == "Very fast") return ControlSettings::VERY_FAST;
     else if (string == "Oneshot125") return ControlSettings::ONESHOT_125;
-    else __RL_EXCEPTION__("Incorrect string for EscPwmFreq");
+    else __SKY_EXCEPTION__("Incorrect string for EscPwmFreq");
 }
 
 std::vector<std::string> ControlSettings::getUavTypes(void)

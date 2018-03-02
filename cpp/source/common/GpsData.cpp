@@ -6,7 +6,7 @@
 
 #include <iomanip>
 
-#include "Exception.hpp"
+#include "SkyException.hpp"
 
 #endif //__SKYDIVE_USE_STL__
 
@@ -56,7 +56,7 @@ GpsData GpsData::parseFromString(const std::string& line)
           >> data.HDOP
           ))
     {
-        __RL_EXCEPTION__("Error while parsing data.");
+        __SKY_EXCEPTION__("Error while parsing data.");
     }
     data.fix = fix == 0 ? false : true;
     return data;

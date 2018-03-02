@@ -7,7 +7,7 @@
 #include <iomanip>
 #include <sstream>
 
-#include "Exception.hpp"
+#include "SkyException.hpp"
 
 #endif //__SKYDIVE_USE_STL__
 
@@ -109,7 +109,7 @@ Flags<int>& AutopilotData::flags(void)
 
 AutopilotData AutopilotData::parseFromString(const std::string&)
 {
-    __RL_EXCEPTION__("AutopilotData::parseFromString not implmented yet!");
+    __SKY_EXCEPTION__("AutopilotData::parseFromString not implmented yet!");
 }
 
 std::ostream& operator << (std::ostream& stream, const AutopilotData& autopilotData)
@@ -141,7 +141,7 @@ std::string AutopilotData::getTypeString(const Type type)
     case TARGET_NOT_ALLOWED_STATE: return "TARGET_NOT_ALLOWED_STATE";
     case TARGET_NOT_ALLOWED_SETTINGS: return "TARGET_NOT_ALLOWED_SETTINGS";
     default:
-        __RL_EXCEPTION__("Unxpected type");
+        __SKY_EXCEPTION__("Unxpected type");
     }
 }
 

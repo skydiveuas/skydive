@@ -6,7 +6,7 @@
 
 #include <iomanip>
 
-#include "Exception.hpp"
+#include "SkyException.hpp"
 
 #endif //__SKYDIVE_USE_STL__
 
@@ -39,7 +39,7 @@ ImuData ImuData::parseFromString(const std::string& line)
           >> data.pressRaw
           ))
     {
-        __RL_EXCEPTION__("Error while parsing data.");
+        __SKY_EXCEPTION__("Error while parsing data.");
     }
     return data;
 }
