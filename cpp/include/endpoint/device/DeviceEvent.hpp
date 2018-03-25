@@ -69,7 +69,7 @@ public:
     virtual std::string toString(void) const;
 };
 
-class UavEventMessage : public DeviceEvent
+class DeviceEventMessage : public DeviceEvent
 {
 public:
     enum MessageType
@@ -84,7 +84,7 @@ private:
     const std::string message;
 
 public:
-    UavEventMessage(const MessageType& _messageType, const std::string& _message);
+    DeviceEventMessage(const MessageType& _messageType, const std::string& _message);
 
     bool hasMessage(void) const;
     MessageType getMessageType(void) const;
@@ -93,37 +93,37 @@ public:
     std::string toString(void) const;
 };
 
-class UavEventReceived : public DeviceEvent
+class DeviceEventReceived : public DeviceEvent
 {
 private:
     const IMessage& received;
 
 public:
-    UavEventReceived(const IMessage& _received);
+    DeviceEventReceived(const IMessage& _received);
 
-    ~UavEventReceived(void);
+    ~DeviceEventReceived(void);
 
     const IMessage& getReceived(void) const;
 
     std::string toString(void) const;
 };
 
-class UavEventSent : public DeviceEvent
+class DeviceEventSent : public DeviceEvent
 {
 private:
     const IMessage& sent;
 
 public:
-    UavEventSent(const IMessage& _sent);
+    DeviceEventSent(const IMessage& _sent);
 
-    ~UavEventSent(void);
+    ~DeviceEventSent(void);
 
     const IMessage& getSent(void) const;
 
     std::string toString(void) const;
 };
 
-class UavEventConnectionStatus : public DeviceEvent
+class DeviceEventConnectionStatus : public DeviceEvent
 {
 private:
     const unsigned ping;
@@ -131,9 +131,9 @@ private:
     const unsigned fails;
 
 public:
-    UavEventConnectionStatus(const unsigned _ping,
-                             const unsigned _received,
-                             const unsigned _fails);
+    DeviceEventConnectionStatus(const unsigned _ping,
+                                const unsigned _received,
+                                const unsigned _fails);
 
     unsigned getPing(void) const;
     unsigned getReceived(void) const;
@@ -142,13 +142,26 @@ public:
     std::string toString(void) const;
 };
 
-class UavEventWhoAmI : public DeviceEvent
+class DeviceEventUpgradeStarted : public DeviceEvent
 {
 private:
     const CalibrationSettings::BoardType boardType;
 
 public:
-    UavEventWhoAmI(const CalibrationSettings::BoardType _type);
+    DeviceEventUpgradeStarted(const CalibrationSettings::BoardType _type);
+
+    CalibrationSettings::BoardType getBoardType(void) const;
+
+    std::string toString(void) const;
+};
+
+class DeviceEventWhoAmI : public DeviceEvent
+{
+private:
+    const CalibrationSettings::BoardType boardType;
+
+public:
+    DeviceEventWhoAmI(const CalibrationSettings::BoardType _type);
 
     CalibrationSettings::BoardType getBoardType(void) const;
 

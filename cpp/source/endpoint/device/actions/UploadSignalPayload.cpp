@@ -77,7 +77,7 @@ void UploadSignalPayload::handleSignalReception(const Parameter parameter)
         {
         case SignalData::ACK:
             monitor->trace("Upload successfull");
-            monitor->notifyDeviceEvent(new UavEventSent(data));
+            monitor->notifyDeviceEvent(new DeviceEventSent(data));
             state = IDLE;
             listener->startAction(new AppAction(listener));
             break;

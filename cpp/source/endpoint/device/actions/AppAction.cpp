@@ -67,7 +67,7 @@ void AppAction::handleReception(const IMessage& message)
     case APP_LOOP:
         if (IMessage::DEBUG_DATA == message.getMessageType())
         {
-            monitor->notifyDeviceEvent(new UavEventReceived(message));
+            monitor->notifyDeviceEvent(new DeviceEventReceived(message));
         }
         else if (isPingMessage(message))
         {

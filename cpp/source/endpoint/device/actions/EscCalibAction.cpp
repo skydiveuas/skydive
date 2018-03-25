@@ -135,14 +135,14 @@ void EscCalibAction::handleSignalReception(const Parameter parameter)
         case SignalData::BREAK_ACK:
             if (breaking)
             {
-                monitor->notifyDeviceEvent(new UavEventMessage(UavEventMessage::INFO,
-                                                            "ESC calibration broken."));
+                monitor->notifyDeviceEvent(new DeviceEventMessage(DeviceEventMessage::INFO,
+                                                                  "ESC calibration broken."));
                 state = IDLE;
                 listener->startAction(new AppAction(listener));
             }
             else
             {
-                 except("Received unexpected ACK for calibration break", parameter);
+                except("Received unexpected ACK for calibration break", parameter);
             }
             break;
 

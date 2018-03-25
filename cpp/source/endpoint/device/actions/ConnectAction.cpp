@@ -54,7 +54,7 @@ void ConnectAction::handleReception(const IMessage& message)
             state = FINAL_COMMAND;
             listener->send(SignalData(SignalData::APP_LOOP, SignalData::START));
             startSignalTimeout(SignalData::APP_LOOP);
-            monitor->notifyDeviceEvent(new UavEventReceived(message));
+            monitor->notifyDeviceEvent(new DeviceEventReceived(message));
         }
         break;
 

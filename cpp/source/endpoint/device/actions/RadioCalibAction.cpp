@@ -63,7 +63,7 @@ void RadioCalibAction::handleReception(const IMessage& message)
     case CHECK:
         if (IMessage::CONTROL_DATA == message.getMessageType())
         {
-            monitor->notifyDeviceEvent(new UavEventReceived(message));
+            monitor->notifyDeviceEvent(new DeviceEventReceived(message));
         }
         else
         {
@@ -75,10 +75,10 @@ void RadioCalibAction::handleReception(const IMessage& message)
         if (IMessage::CALIBRATION_SETTINGS == message.getMessageType())
         {
             monitor->trace("Calibration settings received, radio calibration successfull");
-            monitor->notifyDeviceEvent(new UavEventReceived(message));
+            monitor->notifyDeviceEvent(new DeviceEventReceived(message));
             monitor->notifyDeviceEvent(new DeviceEvent(DeviceEvent::CALIBRATE_RADIO_ENDED));
-            monitor->notifyDeviceEvent(new UavEventMessage(UavEventMessage::INFO,
-                                                        "Radio receiver calibration successfull."));
+            monitor->notifyDeviceEvent(new DeviceEventMessage(DeviceEventMessage::INFO,
+                                                              "Radio receiver calibration successfull."));
             state = IDLE;
             listener->startAction(new AppAction(listener));
         }
@@ -174,9 +174,9 @@ void RadioCalibAction::handleSignalReception(const Parameter parameter)
         case SignalData::BREAK_FAIL:
             monitor->trace("Radio calibration final command FAIL");
             monitor->notifyDeviceEvent(new DeviceEvent(DeviceEvent::CALIBRATE_RADIO_ENDED));
-            monitor->notifyDeviceEvent(new UavEventMessage(UavEventMessage::WARNING,
-                                                        "Error while safing data to internal memory."
-                                                        "Calibration results discarded."));
+            monitor->notifyDeviceEvent(new DeviceEventMessage(DeviceEventMessage::WARNING,
+                                                              "Error while safing data to internal memory."
+                                                              "Calibration results discarded."));
             state = IDLE;
             listener->startAction(new AppAction(listener));
             break;
@@ -184,8 +184,8 @@ void RadioCalibAction::handleSignalReception(const Parameter parameter)
         case SignalData::BREAK_ACK:
             monitor->trace("Radio calibration final command BREAK_ACK");
             monitor->notifyDeviceEvent(new DeviceEvent(DeviceEvent::CALIBRATE_RADIO_ENDED));
-            monitor->notifyDeviceEvent(new UavEventMessage(UavEventMessage::INFO,
-                                                        "Calibration results discarded."));
+            monitor->notifyDeviceEvent(new DeviceEventMessage(DeviceEventMessage::INFO,
+                                                              "Calibration results discarded."));
             state = IDLE;
             listener->startAction(new AppAction(listener));
             break;

@@ -59,7 +59,7 @@ void SensorsLoggerAction::handleReception(const IMessage& message)
     case LOGGING:
         if (IMessage::SENSORS_DATA == message.getMessageType())
         {
-            monitor->notifyDeviceEvent(new UavEventReceived(message));
+            monitor->notifyDeviceEvent(new DeviceEventReceived(message));
         }
         else
         {

@@ -25,7 +25,8 @@ private:
     enum State
     {
         IDLE,
-        INITIAL_COMMAND
+        INITIAL_COMMAND,
+        BOARD_VERSION,
     };
 
     std::atomic<State> state;

@@ -50,7 +50,7 @@ void AccelCalibAction::handleReception(const IMessage& message)
     case CALIBRATION_RECEPTION:
         if (handleSignalPayloadReception(message))
         {
-            monitor->notifyDeviceEvent(new UavEventReceived(message));
+            monitor->notifyDeviceEvent(new DeviceEventReceived(message));
             state = IDLE;
             listener->startAction(new AppAction(listener));
         }
@@ -89,7 +89,7 @@ void AccelCalibAction::handleSignalReception(const Parameter parameter)
             break;
 
         case SignalData::NON_STATIC:
-            monitor->notifyDeviceEvent(new UavEventMessage(UavEventMessage::WARNING,
+            monitor->notifyDeviceEvent(new DeviceEventMessage(DeviceEventMessage::WARNING,
                                                         "Accelerometer calibration aborted.\n"
                                                         "Was preformed in non-static conditions."));
             state = IDLE;

@@ -10,9 +10,9 @@
 #include <functional>
 
 SkyDevice::SkyDevice(ISkyDeviceMonitor* const _monitor,
-                               const double _pingFreq,
-                               const double _controlFreq,
-                               const double _connectionTimeout) :
+                     const double _pingFreq,
+                     const double _controlFreq,
+                     const double _connectionTimeout) :
     monitor(_monitor),
     pingFreq(_pingFreq),
     controlFreq(_controlFreq),
@@ -49,16 +49,16 @@ ISkyDeviceAction::Type SkyDevice::getState(void) const
 }
 
 void SkyDevice::notifyOperatorEvent(std::shared_ptr<ISkyDeviceAction> actionLock,
-                                        const OperatorEvent* const operatorEvent)
+                                    const OperatorEvent* const operatorEvent)
 {
     actionLock->handleUserEvent(*operatorEvent);
 }
 
 void SkyDevice::notifyReception(std::shared_ptr<ISkyDeviceAction> actionLock,
-                                     const IMessage* const message)
+                                const IMessage* const message)
 {
-//    monitor->trace("HandleReception with " + actionLock->getName() +
-//                   " msg: " + message->getMessageName());
+    //    monitor->trace("HandleReception with " + actionLock->getName() +
+    //                   " msg: " + message->getMessageName());
 
     receptionFeed = true;
     if (connectionLost)
@@ -84,7 +84,7 @@ void SkyDevice::handleError(const std::string& message)
     enableConnectionTimeoutTask(false);
     std::shared_ptr<ISkyDeviceAction> newAct = std::make_shared<IdleAction>(this);
     action.swap(newAct);
-    monitor->notifyDeviceEvent(new UavEventMessage(UavEventMessage::ERROR, message));
+    monitor->notifyDeviceEvent(new DeviceEventMessage(DeviceEventMessage::ERROR, message));
     interface->disconnect();
 }
 
@@ -100,10 +100,10 @@ void SkyDevice::handlePong(const SignalData& signalData) const
     if (signalData.getParameterValue() == sentPingValue)
     {
         unsigned ping = (unsigned)(((clock() - sentPingTime) / 2.0f) + 0.5f);
-        monitor->notifyDeviceEvent(new UavEventConnectionStatus(
-                                    ping,
-                                    dispatcher.getSucessfullReceptions(),
-                                    dispatcher.getFailedReceptions()));
+        monitor->notifyDeviceEvent(new DeviceEventConnectionStatus(
+                                       ping,
+                                       dispatcher.getSucessfullReceptions(),
+                                       dispatcher.getFailedReceptions()));
     }
 }
 
@@ -165,7 +165,7 @@ void SkyDevice::startAction(ISkyDeviceAction* newAction, bool immediateStart)
     {
         std::string message = "Previous action (" + action->getName() +
                 ") not done, when performing: " + newAction->getName() + ".";
-    __SKY_EXCEPTION__(message.c_str());
+        __SKY_EXCEPTION__(message.c_str());
     }
 
     action->end();

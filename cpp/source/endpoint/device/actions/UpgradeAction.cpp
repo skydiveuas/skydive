@@ -32,8 +32,9 @@ std::string UpgradeAction::getStateName(void) const
     {
     case IDLE: return "IDLE";
     case INITIAL_COMMAND: return "INITIAL_COMMAND";
+    case BOARD_VERSION: return "BOARD_VERSION";
     default:
-        __SKY_EXCEPTION__("UpgradeAction::ge__SKY_EXCEPTION__pected state");
+        __SKY_EXCEPTION__("UpgradeAction::unexpected state");
     }
 }
 
@@ -50,24 +51,28 @@ void UpgradeAction::handleSignalReception(const Parameter parameter)
         switch (parameter)
         {
         case SignalData::ACK:
-            state = IDLE;
-            listener->startAction(new IdleAction(listener));
-            monitor->notifyDeviceEvent(new DeviceEvent(DeviceEvent::UPGRADE_STARTED));
-            monitor->notifyDeviceEvent(new DeviceEvent(DeviceEvent::APPLICATION_LOOP_TERMINATED));
-            listener->disconnectInterface();
+            state = BOARD_VERSION;
+            startSignalTimeout(SignalData::WHO_AM_I_VALUE);
             break;
 
         case SignalData::NOT_ALLOWED:
             state = IDLE;
             listener->startAction(new AppAction(listener));
-            monitor->notifyDeviceEvent(new UavEventMessage(UavEventMessage::WARNING,
-                                                        "Board refused upgrade command, can not"
-                                                        " be done over wireless interface."));
+            monitor->notifyDeviceEvent(new DeviceEventMessage(DeviceEventMessage::WARNING,
+                                                              "Board refused upgrade command, can not"
+                                                              " be done over wireless interface."));
             break;
 
         default:
             except("Unexpected signal parameter message received", parameter);
         }
+        break;
+
+    case BOARD_VERSION:
+        state = IDLE;
+        listener->startAction(new IdleAction(listener));
+        monitor->notifyDeviceEvent(new DeviceEventUpgradeStarted(static_cast<CalibrationSettings::BoardType>(parameter)));
+        listener->disconnectInterface();
         break;
 
     default:

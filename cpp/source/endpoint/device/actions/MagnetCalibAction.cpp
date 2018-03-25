@@ -56,7 +56,7 @@ void MagnetCalibAction::handleReception(const IMessage& message)
     case CALIBRATION_RECEPTION:
         if (handleSignalPayloadReception(message))
         {
-            monitor->notifyDeviceEvent(new UavEventReceived(message));
+            monitor->notifyDeviceEvent(new DeviceEventReceived(message));
             state = IDLE;
             listener->startAction(new AppAction(listener));
         }
@@ -96,9 +96,9 @@ void MagnetCalibAction::handleSignalReception(const Parameter parameter)
             break;
 
         case SignalData::FAIL:
-            monitor->notifyDeviceEvent(new UavEventMessage(UavEventMessage::WARNING,
-                                                        "Error during solving magnetometer calibration!\n"
-                                                        "Bad data acquired."));
+            monitor->notifyDeviceEvent(new DeviceEventMessage(DeviceEventMessage::WARNING,
+                                                              "Error during solving magnetometer calibration!\n"
+                                                              "Bad data acquired."));
             state = IDLE;
             listener->startAction(new AppAction(listener));
             break;

@@ -104,11 +104,11 @@ void FlightAction::handleRunningReception(const IMessage& message)
     switch (message.getMessageType())
     {
     case IMessage::DEBUG_DATA:
-        monitor->notifyDeviceEvent(new UavEventReceived(message));
+        monitor->notifyDeviceEvent(new DeviceEventReceived(message));
         break;
 
     case IMessage::AUTOPILOT_DATA:
-        monitor->notifyDeviceEvent(new UavEventReceived(message));
+        monitor->notifyDeviceEvent(new DeviceEventReceived(message));
         handleAutopilotReception(reinterpret_cast<const AutopilotData&>(message));
         break;
 
@@ -183,7 +183,7 @@ void FlightAction::controlTaskHandler(void)
         state = BREAKING;
     }
     listener->send(*data);
-    monitor->notifyDeviceEvent(new UavEventSent(*data.release()));
+    monitor->notifyDeviceEvent(new DeviceEventSent(*data.release()));
 }
 
 void FlightAction::flightEnded(const bool byBoard)
@@ -210,7 +210,7 @@ void FlightAction::sendAutopilotTarget(const OperatorEventAutopilot& event)
     data->setTargetPosition(event.getPosition());
     data->flags().setFlagState(AutopilotData::ALTITUDE_DEFINED, false);
     listener->send(*data);
-    monitor->notifyDeviceEvent(new UavEventSent(*data.release()));
+    monitor->notifyDeviceEvent(new DeviceEventSent(*data.release()));
 }
 
 void FlightAction::sendBaseConfirmation(const AutopilotData& base)
@@ -219,5 +219,5 @@ void FlightAction::sendBaseConfirmation(const AutopilotData& base)
     std::unique_ptr<AutopilotData> data(new AutopilotData(base));
     data->setType(AutopilotData::BASE_ACK);
     listener->send(*data);
-    monitor->notifyDeviceEvent(new UavEventSent(*data.release()));
+    monitor->notifyDeviceEvent(new DeviceEventSent(*data.release()));
 }

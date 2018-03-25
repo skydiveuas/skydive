@@ -60,7 +60,7 @@ void RadioCheckAction::handleReception(const IMessage& message)
         if (handleSignalPayloadReception(message))
         {
             monitor->trace("Check radio started");
-            monitor->notifyDeviceEvent(new UavEventReceived(message));
+            monitor->notifyDeviceEvent(new DeviceEventReceived(message));
             monitor->notifyDeviceEvent(new DeviceEvent(DeviceEvent::CHECK_RADIO_STARTED));
             state = RUNNING;
         }
@@ -70,7 +70,7 @@ void RadioCheckAction::handleReception(const IMessage& message)
     case RUNNING:
         if (IMessage::CONTROL_DATA == message.getMessageType())
         {
-            monitor->notifyDeviceEvent(new UavEventReceived(message));
+            monitor->notifyDeviceEvent(new DeviceEventReceived(message));
         }
         else
         {

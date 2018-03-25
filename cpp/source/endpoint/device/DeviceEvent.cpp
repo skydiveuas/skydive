@@ -61,78 +61,78 @@ std::string DeviceEvent::toString(void) const
     }
 }
 
-UavEventMessage::UavEventMessage(const MessageType& _messageType, const std::string& _message):
+DeviceEventMessage::DeviceEventMessage(const MessageType& _messageType, const std::string& _message):
     DeviceEvent(MESSAGE),
     messageType(_messageType),
     message(_message)
 {
 }
 
-bool UavEventMessage::hasMessage(void) const
+bool DeviceEventMessage::hasMessage(void) const
 {
     return true;
 }
 
-UavEventMessage::MessageType UavEventMessage::getMessageType(void) const
+DeviceEventMessage::MessageType DeviceEventMessage::getMessageType(void) const
 {
     return messageType;
 }
 
-std::string UavEventMessage::getMessage(void) const
+std::string DeviceEventMessage::getMessage(void) const
 {
     return message;
 }
 
-std::string UavEventMessage::toString(void) const
+std::string DeviceEventMessage::toString(void) const
 {
     return DeviceEvent::toString() + " with:\n\"" + message + "\"";
 }
 
-UavEventReceived::UavEventReceived(const IMessage& _received) :
+DeviceEventReceived::DeviceEventReceived(const IMessage& _received) :
     DeviceEvent(DATA_RECEIVED),
     received(_received)
 {
 }
 
-UavEventReceived::~UavEventReceived(void)
+DeviceEventReceived::~DeviceEventReceived(void)
 {
     delete &received;
 }
 
-const IMessage& UavEventReceived::getReceived(void) const
+const IMessage& DeviceEventReceived::getReceived(void) const
 {
     return received;
 }
 
-std::string UavEventReceived::toString(void) const
+std::string DeviceEventReceived::toString(void) const
 {
     return DeviceEvent::toString() + " with: " + received.getMessageName();
 }
 
-UavEventSent::UavEventSent(const IMessage& _sent) :
+DeviceEventSent::DeviceEventSent(const IMessage& _sent) :
     DeviceEvent(DATA_SENT),
     sent(_sent)
 {
 }
 
-UavEventSent::~UavEventSent(void)
+DeviceEventSent::~DeviceEventSent(void)
 {
     delete &sent;
 }
 
-const IMessage& UavEventSent::getSent(void) const
+const IMessage& DeviceEventSent::getSent(void) const
 {
     return sent;
 }
 
-std::string UavEventSent::toString(void) const
+std::string DeviceEventSent::toString(void) const
 {
     return DeviceEvent::toString() + " with: " + sent.getMessageName();
 }
 
-UavEventConnectionStatus::UavEventConnectionStatus(const unsigned _ping,
-                                                   const unsigned _received,
-                                                   const unsigned _fails) :
+DeviceEventConnectionStatus::DeviceEventConnectionStatus(const unsigned _ping,
+                                                         const unsigned _received,
+                                                         const unsigned _fails) :
     DeviceEvent(CONNECTION_STATUS),
     ping(_ping),
     received(_received),
@@ -140,38 +140,54 @@ UavEventConnectionStatus::UavEventConnectionStatus(const unsigned _ping,
 {
 }
 
-unsigned UavEventConnectionStatus::getPing(void) const
+unsigned DeviceEventConnectionStatus::getPing(void) const
 {
     return ping;
 }
 
-unsigned UavEventConnectionStatus::getReceived(void) const
+unsigned DeviceEventConnectionStatus::getReceived(void) const
 {
     return received;
 }
 
-unsigned UavEventConnectionStatus::getFails(void) const
+unsigned DeviceEventConnectionStatus::getFails(void) const
 {
     return fails;
 }
 
-std::string UavEventConnectionStatus::toString(void) const
+std::string DeviceEventConnectionStatus::toString(void) const
 {
     return DeviceEvent::toString() + ": " + std::to_string(ping) + " ms";
 }
 
-UavEventWhoAmI::UavEventWhoAmI(const CalibrationSettings::BoardType _type) :
+DeviceEventUpgradeStarted::DeviceEventUpgradeStarted(const CalibrationSettings::BoardType _type) :
+    DeviceEvent(UPGRADE_STARTED),
+    boardType(_type)
+{
+}
+
+CalibrationSettings::BoardType DeviceEventUpgradeStarted::getBoardType(void) const
+{
+    return boardType;
+}
+
+std::string DeviceEventUpgradeStarted::toString(void) const
+{
+    return DeviceEvent::toString() + ": " + CalibrationSettings::getBoardTypeString(boardType);
+}
+
+DeviceEventWhoAmI::DeviceEventWhoAmI(const CalibrationSettings::BoardType _type) :
     DeviceEvent(WHO_AM_I),
     boardType(_type)
 {
 }
 
-CalibrationSettings::BoardType UavEventWhoAmI::getBoardType(void) const
+CalibrationSettings::BoardType DeviceEventWhoAmI::getBoardType(void) const
 {
     return boardType;
 }
 
-std::string UavEventWhoAmI::toString(void) const
+std::string DeviceEventWhoAmI::toString(void) const
 {
     return DeviceEvent::toString() + ": " + CalibrationSettings::getBoardTypeString(boardType);
 }

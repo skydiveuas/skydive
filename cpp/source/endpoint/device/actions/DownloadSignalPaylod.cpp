@@ -53,7 +53,7 @@ void DownloadSignalPaylod::handleReception(const IMessage& message)
         {
             state = IDLE;
             listener->startAction(new AppAction(listener));
-            monitor->notifyDeviceEvent(new UavEventReceived(message));
+            monitor->notifyDeviceEvent(new DeviceEventReceived(message));
         }
         break;
 

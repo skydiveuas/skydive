@@ -54,7 +54,7 @@ void FlightInitializationAction::handleReception(const IMessage& message)
     case CONTROLS_RECEPTION:
         if (handleSignalPayloadReception(message))
         {
-            monitor->notifyDeviceEvent(new UavEventReceived(message));
+            monitor->notifyDeviceEvent(new DeviceEventReceived(message));
             startSignalTimeout(SignalData::FLIGHT_LOOP);
             state = ROUTE_COMMAND;
         }
@@ -63,7 +63,7 @@ void FlightInitializationAction::handleReception(const IMessage& message)
     case ROUTE_RECEPTION:
         if (handleSignalPayloadReception(message))
         {
-            monitor->notifyDeviceEvent(new UavEventReceived(message));
+            monitor->notifyDeviceEvent(new DeviceEventReceived(message));
             flightReady();
         }
         break;
