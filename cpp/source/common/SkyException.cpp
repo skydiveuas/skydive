@@ -1,5 +1,7 @@
 #include "SkyException.hpp"
 
+#ifdef __SKYDIVE_USE_STL__
+
 #include <iostream>
 
 std::vector<std::string> SkyException::trace;
@@ -52,3 +54,5 @@ void SkyException::printTrace(void)
     }
     trace.clear();
 }
+
+#endif // __SKYDIVE_USE_STL__
