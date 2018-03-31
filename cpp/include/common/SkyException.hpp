@@ -4,6 +4,8 @@
 #ifndef __SKY_EXCEPTION_GUARD__
 #define __SKY_EXCEPTION_GUARD__
 
+#ifdef __SKYDIVE_USE_STL__
+
 #include <exception>
 #include <vector>
 #include <iostream>
@@ -41,5 +43,7 @@ public:
     static const std::vector<std::string>& getTrace(void);
     static void printTrace(void);
 };
+
+#endif // __SKYDIVE_USE_STL__
 
 #endif // __SKY_EXCEPTION_GUARD__
