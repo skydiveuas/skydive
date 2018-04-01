@@ -54,7 +54,6 @@ public:
 
     virtual bool isSignalPayloadMessage(void) const;
 
-    // virtual destructor for memory safeness
     virtual ~IMessage(void);
 
     static unsigned char getPreambleCharByType(const PreambleType type);
