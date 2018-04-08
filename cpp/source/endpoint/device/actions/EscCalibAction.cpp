@@ -184,15 +184,15 @@ void EscCalibAction::handleSignalReception(const Parameter parameter)
 }
 
 
-void EscCalibAction::handleUserEvent(const OperatorEvent& event)
+void EscCalibAction::handleUserEvent(const PilotEvent& event)
 {
     switch (event.getType())
     {
-    case OperatorEvent::ESC_CALIB_DONE:
+    case PilotEvent::ESC_CALIB_DONE:
         proceed(Parameter::DONE);
         break;
 
-    case OperatorEvent::ESC_CALIB_ABORT:
+    case PilotEvent::ESC_CALIB_ABORT:
         breaking = true;
         proceed(Parameter::BREAK_FAIL);
         break;

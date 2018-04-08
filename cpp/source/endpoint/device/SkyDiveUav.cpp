@@ -25,12 +25,12 @@ SkyDevice::SkyDevice(ISkyDeviceMonitor* const _monitor,
     std::srand(std::time(0));
 }
 
-void SkyDevice::pushOperatorEvent(const OperatorEvent* const operatorEvent)
+void SkyDevice::pushOperatorEvent(const PilotEvent* const operatorEvent)
 {
-    pushOperatorEvent(std::unique_ptr<const OperatorEvent>(operatorEvent));
+    pushOperatorEvent(std::unique_ptr<const PilotEvent>(operatorEvent));
 }
 
-void SkyDevice::pushOperatorEvent(std::unique_ptr<const OperatorEvent> operatorEvent)
+void SkyDevice::pushOperatorEvent(std::unique_ptr<const PilotEvent> operatorEvent)
 {
     monitor->trace("Handling user event: " + operatorEvent->toString() + " at: " + action->getName());
     notifyOperatorEvent(action, operatorEvent.get());
@@ -49,7 +49,7 @@ ISkyDeviceAction::Type SkyDevice::getState(void) const
 }
 
 void SkyDevice::notifyOperatorEvent(std::shared_ptr<ISkyDeviceAction> actionLock,
-                                    const OperatorEvent* const operatorEvent)
+                                    const PilotEvent* const operatorEvent)
 {
     actionLock->handleUserEvent(*operatorEvent);
 }

@@ -84,19 +84,19 @@ void AppAction::handleReception(const IMessage& message)
     }
 }
 
-void AppAction::handleUserEvent(const OperatorEvent& event)
+void AppAction::handleUserEvent(const PilotEvent& event)
 {
     switch (event.getType())
     {
-    case OperatorEvent::ACTION:
+    case PilotEvent::ACTION:
         handleUserUavEventAction(reinterpret_cast<const UserUavEventAction&>(event));
         break;
 
-    case OperatorEvent::UPLOAD:
+    case PilotEvent::UPLOAD:
         handleUserUavEventUpload(reinterpret_cast<const OperatorEventUpload&>(event));
         break;
 
-    case OperatorEvent::DOWNLOAD:
+    case PilotEvent::DOWNLOAD:
         handleUserUavEventDownload(reinterpret_cast<const OperatorEventDownload&>(event));
         break;
 

@@ -72,20 +72,20 @@ void FlightAction::handleReception(const IMessage& message)
     }
 }
 
-void FlightAction::handleUserEvent(const OperatorEvent& event)
+void FlightAction::handleUserEvent(const PilotEvent& event)
 {
     switch (state)
     {
     case FLING:
         switch (event.getType())
         {
-        case OperatorEvent::BREAK_FLIGHT_LOOP:
+        case PilotEvent::BREAK_FLIGHT_LOOP:
             listener->enablePingTask(false);
             listener->enableConnectionTimeoutTask(false);
             state = BREAKING;
             break;
 
-        case OperatorEvent::AUTOPILOT:
+        case PilotEvent::AUTOPILOT:
             sendAutopilotTarget(reinterpret_cast<const OperatorEventAutopilot&>(event));
             break;
 

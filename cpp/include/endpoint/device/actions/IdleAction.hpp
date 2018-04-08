@@ -21,7 +21,7 @@ public:
 
 private:
     void handleReception(const IMessage& message) override;
-    void handleUserEvent(const OperatorEvent& event) override;
+    void handleUserEvent(const PilotEvent& event) override;
 };
 
 #endif // IDLEACTION_HPP

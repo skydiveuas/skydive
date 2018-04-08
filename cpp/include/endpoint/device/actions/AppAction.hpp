@@ -37,7 +37,7 @@ private:
     std::atomic<State> state;
 
     void handleReception(const IMessage& message) override;
-    void handleUserEvent(const OperatorEvent& event) override;
+    void handleUserEvent(const PilotEvent& event) override;
 
     void handleUserUavEventAction(const UserUavEventAction& event);
     void handleUserUavEventUpload(const OperatorEventUpload& event);

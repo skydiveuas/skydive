@@ -200,24 +200,24 @@ void RadioCalibAction::handleSignalReception(const Parameter parameter)
     }
 }
 
-void RadioCalibAction::handleUserEvent(const OperatorEvent& event)
+void RadioCalibAction::handleUserEvent(const PilotEvent& event)
 {
     switch (state)
     {
     case CALIBRATION_COMMAND:
         switch (event.getType())
         {
-        case OperatorEvent::RADIO_CALIBRATION_DONE:
+        case PilotEvent::RADIO_CALIBRATION_DONE:
             state = CALIBRATION_RESPONSE;
             sendSignal(SignalData::CALIBRATE_RADIO, SignalData::DONE);
             break;
 
-        case OperatorEvent::RADIO_CALIBRATION_SKIP:
+        case PilotEvent::RADIO_CALIBRATION_SKIP:
             state = CALIBRATION_RESPONSE;
             sendSignal(SignalData::CALIBRATE_RADIO, SignalData::SKIP);
             break;
 
-        case OperatorEvent::RADIO_CALIBRATION_BREAK:
+        case PilotEvent::RADIO_CALIBRATION_BREAK:
             state = BREAKING;
             sendSignal(SignalData::CALIBRATE_RADIO, SignalData::BREAK);
             break;
@@ -230,12 +230,12 @@ void RadioCalibAction::handleUserEvent(const OperatorEvent& event)
     case CHECK:
         switch (event.getType())
         {
-        case OperatorEvent::RADIO_CALIBRATION_DONE:
+        case PilotEvent::RADIO_CALIBRATION_DONE:
             state = FINAL_COMMAND;
             sendSignal(SignalData::CALIBRATE_RADIO, SignalData::BREAK);
             break;
 
-        case OperatorEvent::RADIO_CALIBRATION_SKIP:
+        case PilotEvent::RADIO_CALIBRATION_SKIP:
             state = FINAL_COMMAND;
             sendSignal(SignalData::CALIBRATE_RADIO, SignalData::BREAK_FAIL);
             break;

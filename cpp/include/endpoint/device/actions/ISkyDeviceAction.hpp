@@ -13,7 +13,7 @@
 #include <atomic>
 #include <memory>
 
-class OperatorEvent;
+class PilotEvent;
 
 class ISkyDeviceAction
 {
@@ -71,7 +71,7 @@ public:
     void baseHandleReception(std::unique_ptr<const IMessage> message);
 
     virtual void handleReception(const IMessage& message) = 0;
-    virtual void handleUserEvent(const OperatorEvent& event);
+    virtual void handleUserEvent(const PilotEvent& event);
 
     virtual bool isActionDone(void) const = 0;
 
@@ -137,7 +137,7 @@ protected:
 
     void except(const std::string& message) const;
     void except(const std::string& message, const IMessage& received) const;
-    void except(const std::string& message, const OperatorEvent& event) const;
+    void except(const std::string& message, const PilotEvent& event) const;
     void except(const std::string& message, const SignalData::Parameter parameter) const;
 };
 

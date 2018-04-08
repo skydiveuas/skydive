@@ -40,7 +40,7 @@ private:
 
     void handleReception(const IMessage& message) override;
     void handleSignalReception(const Parameter parameter) override;
-    void handleUserEvent(const OperatorEvent& event) override;
+    void handleUserEvent(const PilotEvent& event) override;
 
     int current;
 };

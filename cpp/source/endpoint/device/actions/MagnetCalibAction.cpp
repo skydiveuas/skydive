@@ -127,18 +127,18 @@ void MagnetCalibAction::handleSignalReception(const Parameter parameter)
 }
 
 
-void MagnetCalibAction::handleUserEvent(const OperatorEvent& event)
+void MagnetCalibAction::handleUserEvent(const PilotEvent& event)
 {
     if (CALIBRATION == state)
     {
         switch (event.getType())
         {
-        case OperatorEvent::MAGNET_CALIB_DONE:
+        case PilotEvent::MAGNET_CALIB_DONE:
             state = CALIBRATION_RESULT;
             sendSignal(SignalData::CALIBRATE_MAGNET, SignalData::DONE);
             break;
 
-        case OperatorEvent::MAGNET_CALIB_ABORT:
+        case PilotEvent::MAGNET_CALIB_ABORT:
             state = CALIBRATION_SKIP_RESULT;
             sendSignal(SignalData::CALIBRATE_MAGNET, SignalData::SKIP);
             break;

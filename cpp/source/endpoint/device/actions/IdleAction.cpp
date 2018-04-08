@@ -35,11 +35,11 @@ void IdleAction::handleReception(const IMessage& message)
     except("Unexpected message received", message);
 }
 
-void IdleAction::handleUserEvent(const OperatorEvent& event)
+void IdleAction::handleUserEvent(const PilotEvent& event)
 {
     switch (event.getType())
     {
-    case OperatorEvent::CONNECT:
+    case PilotEvent::CONNECT:
     {
         const OperatorEventConnect& ev = reinterpret_cast<const OperatorEventConnect&>(event);
         switch (ev.getConnectionType())

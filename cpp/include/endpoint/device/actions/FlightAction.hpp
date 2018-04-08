@@ -41,7 +41,7 @@ private:
     ISkyTimer* controlTimer;
 
     void handleReception(const IMessage& message) override;
-    void handleUserEvent(const OperatorEvent& event) override;
+    void handleUserEvent(const PilotEvent& event) override;
 
     void handleRunningReception(const IMessage& message);
     void handleAutopilotReception(const AutopilotData& message);

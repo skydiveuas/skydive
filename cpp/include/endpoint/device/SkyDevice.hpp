@@ -36,12 +36,12 @@ public:
      * Event should be dynamicaly allocated and will be deleted after processing.
      * Calling this method is thread safe.
      */
-    void pushOperatorEvent(const OperatorEvent* const operatorEvent);
+    void pushOperatorEvent(const PilotEvent* const operatorEvent);
 
     /**
      * Memory safe implementation for raw pointer argument pushUserUavEvent method.
      */
-    void pushOperatorEvent(std::unique_ptr<const OperatorEvent> operatorEvent);
+    void pushOperatorEvent(std::unique_ptr<const PilotEvent> operatorEvent);
 
     /**
      * Returns state of communication with UAV. Also this is state of UAV processing loop.
@@ -86,7 +86,7 @@ private:
     // notify methods, can be called from another thread so action
     // has to be locked under shared pointer
     void notifyOperatorEvent(std::shared_ptr<ISkyDeviceAction> actionLock,
-                            const OperatorEvent* const operatorEvent);
+                            const PilotEvent* const operatorEvent);
     void notifyReception(std::shared_ptr<ISkyDeviceAction> actionLock,
                          const IMessage* const message);
 

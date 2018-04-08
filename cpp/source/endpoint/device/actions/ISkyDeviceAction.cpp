@@ -43,7 +43,7 @@ void ISkyDeviceAction::baseHandleReception(std::unique_ptr<const IMessage> messa
     }
 }
 
-void ISkyDeviceAction::handleUserEvent(const OperatorEvent& event)
+void ISkyDeviceAction::handleUserEvent(const PilotEvent& event)
 {
     except("Unexpected user uav event received", event);
 }
@@ -272,7 +272,7 @@ void ISkyDeviceAction::except(const std::string& message, const IMessage& receiv
     __SKY_EXCEPTION__(msg.c_str());
 }
 
-void ISkyDeviceAction::except(const std::string& message, const OperatorEvent& event) const
+void ISkyDeviceAction::except(const std::string& message, const PilotEvent& event) const
 {
     std::string msg = message + " at " + getName() + " event: " + event.toString();
     __SKY_EXCEPTION__(msg.c_str());

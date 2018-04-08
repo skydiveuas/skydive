@@ -17,7 +17,7 @@ class ISkyDeviceAction;
  * UserUavEvent
  * =============================================================================================
  */
-class PilotEvent
+class OperatorEvent
 {
 public:
     enum Type
@@ -43,15 +43,15 @@ public:
 
     const Type type;
 
-    PilotEvent(const Type& _type);
+    OperatorEvent(const Type& _type);
 
-    virtual ~PilotEvent(void);
+    virtual ~OperatorEvent(void);
     Type getType(void) const;
 
     virtual std::string toString(void) const;
 };
 
-class OperatorEventConnect : public PilotEvent
+class OperatorEventConnect : public OperatorEvent
 {
     ISkyDeviceAction::Type connetionType;
     ISkyCommInterface* interface;
@@ -64,7 +64,7 @@ public:
     ISkyCommInterface* getCommInnterface(void) const;
 };
 
-class UserUavEventAction : public PilotEvent
+class UserUavEventAction : public OperatorEvent
 {
     ISkyDeviceAction::Type action;
 
@@ -74,7 +74,7 @@ public:
     ISkyDeviceAction::Type getAction(void) const;
 };
 
-class OperatorEventUpload : public PilotEvent
+class OperatorEventUpload : public OperatorEvent
 {
     const ISignalPayloadMessage& data;
 
@@ -86,7 +86,7 @@ public:
     const ISignalPayloadMessage& getData(void) const;
 };
 
-class OperatorEventDownload : public PilotEvent
+class OperatorEventDownload : public OperatorEvent
 {
     SignalData::Command dataType;
 
@@ -96,7 +96,7 @@ public:
     SignalData::Command getDataType(void) const;
 };
 
-class OperatorEventAutopilot : public PilotEvent
+class OperatorEventAutopilot : public OperatorEvent
 {
     Vect2Dd position;
 

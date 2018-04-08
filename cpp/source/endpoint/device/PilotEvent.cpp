@@ -3,21 +3,21 @@
 // ================================
 #include "OperatorEvent.hpp"
 
-OperatorEvent::OperatorEvent(const Type& _type) :
+PilotEvent::PilotEvent(const Type& _type) :
     type(_type)
 {
 }
 
-OperatorEvent::~OperatorEvent(void)
+PilotEvent::~PilotEvent(void)
 {
 }
 
-OperatorEvent::Type OperatorEvent::getType(void) const
+PilotEvent::Type PilotEvent::getType(void) const
 {
     return type;
 }
 
-std::string OperatorEvent::toString(void) const
+std::string PilotEvent::toString(void) const
 {
     switch (type)
     {
@@ -44,7 +44,7 @@ std::string OperatorEvent::toString(void) const
 }
 
 OperatorEventConnect::OperatorEventConnect(ISkyDeviceAction::Type _connectionType, ISkyCommInterface* _interface) :
-    OperatorEvent(CONNECT),
+    PilotEvent(CONNECT),
     connetionType(_connectionType),
     interface(_interface)
 {
@@ -61,7 +61,7 @@ ISkyCommInterface* OperatorEventConnect::getCommInnterface(void) const
 }
 
 UserUavEventAction::UserUavEventAction(ISkyDeviceAction::Type _action) :
-    OperatorEvent(ACTION),
+    PilotEvent(ACTION),
     action(_action)
 {
 }
@@ -72,7 +72,7 @@ ISkyDeviceAction::Type UserUavEventAction::getAction(void) const
 }
 
 OperatorEventUpload::OperatorEventUpload(const ISignalPayloadMessage& _data) :
-    OperatorEvent(UPLOAD),
+    PilotEvent(UPLOAD),
     data(_data)
 {
 }
@@ -88,7 +88,7 @@ const ISignalPayloadMessage& OperatorEventUpload::getData(void) const
 }
 
 OperatorEventDownload::OperatorEventDownload(SignalData::Command _dataType) :
-    OperatorEvent(DOWNLOAD),
+    PilotEvent(DOWNLOAD),
     dataType(_dataType)
 {
 }
@@ -99,7 +99,7 @@ SignalData::Command OperatorEventDownload::getDataType(void) const
 }
 
 OperatorEventAutopilot::OperatorEventAutopilot(const Vect2Dd& _position):
-    OperatorEvent(AUTOPILOT),
+    PilotEvent(AUTOPILOT),
     position(_position)
 {
 }

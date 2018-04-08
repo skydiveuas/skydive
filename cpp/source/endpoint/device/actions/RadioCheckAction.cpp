@@ -129,13 +129,13 @@ void RadioCheckAction::handleSignalReception(const Parameter parameter)
     }
 }
 
-void RadioCheckAction::handleUserEvent(const OperatorEvent& event)
+void RadioCheckAction::handleUserEvent(const PilotEvent& event)
 {
     if (RUNNING == state)
     {
         switch (event.getType())
         {
-        case OperatorEvent::RADIO_CHECK_DONE:
+        case PilotEvent::RADIO_CHECK_DONE:
             state = BREAKING;
             listener->enableConnectionTimeoutTask(false);
             sendSignal(SignalData::CHECK_RADIO, SignalData::BREAK);

@@ -108,9 +108,9 @@ void SensorsLoggerAction::handleSignalReception(const Parameter parameter)
     }
 }
 
-void SensorsLoggerAction::handleUserEvent(const OperatorEvent& event)
+void SensorsLoggerAction::handleUserEvent(const PilotEvent& event)
 {
-    if (LOGGING == state && OperatorEvent::BREAK_SENSORS_LOGGER == event.getType())
+    if (LOGGING == state && PilotEvent::BREAK_SENSORS_LOGGER == event.getType())
     {
         state = BREAKING;
         listener->enableConnectionTimeoutTask(false);
