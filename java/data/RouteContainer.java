@@ -58,8 +58,7 @@ public class RouteContainer implements SignalPayloadData {
         }
 
         byte[] serialize() {
-            byte[] dataArray = new byte[getWaypointDataSize()];
-            ByteBuffer buffer = ByteBuffer.allocate(dataArray.length);
+            ByteBuffer buffer = ByteBuffer.allocate(getWaypointDataSize());
             buffer.order(ByteOrder.LITTLE_ENDIAN);
 
             buffer.putDouble(latitude);
@@ -68,8 +67,7 @@ public class RouteContainer implements SignalPayloadData {
             buffer.putFloat(relativeAltitude);
             buffer.putFloat(velocity);
 
-            System.arraycopy(buffer.array(), 0, dataArray, 0, dataArray.length);
-            return dataArray;
+            return buffer.array();
         }
 
         @Override
