@@ -75,9 +75,9 @@ bool CalibrationSettings::isValid(void) const
     case TYPE_UNKNOWN:
     case TYPE_ULTIMATE_V4:
     case TYPE_ULTIMATE_V5:
-    case TYPE_BASIC_V1:
     case TYPE_BASIC_V2:
     case TYPE_BASIC_V3:
+    case TYPE_PRO_V1:
         break;
     default:
         return false;
@@ -169,12 +169,12 @@ std::string CalibrationSettings::getBoardTypeString(BoardType boardType)
         return "ULTIMATE v4";
     case CalibrationSettings::TYPE_ULTIMATE_V5:
         return "ULTIMATE v5";
-    case CalibrationSettings::TYPE_BASIC_V1:
-        return "BASIC v1";
     case CalibrationSettings::TYPE_BASIC_V2:
         return "BASIC v2";
     case CalibrationSettings::TYPE_BASIC_V3:
         return "BASIC v3";
+    case CalibrationSettings::TYPE_PRO_V1:
+        return "PRO v1";
     default:
         return "Unknown board type";
     }
@@ -189,9 +189,9 @@ CalibrationSettings::BoardType CalibrationSettings::boardTypeFromString(const st
 {
     if (boardTypeString == "ULTIMATE v4") return CalibrationSettings::TYPE_ULTIMATE_V4;
     else if (boardTypeString == "ULTIMATE v5") return CalibrationSettings::TYPE_ULTIMATE_V5;
-    else if (boardTypeString == "BASIC v1") return CalibrationSettings::TYPE_BASIC_V1;
     else if (boardTypeString == "BASIC v2") return CalibrationSettings::TYPE_BASIC_V2;
     else if (boardTypeString == "BASIC v3") return CalibrationSettings::TYPE_BASIC_V3;
+    else if (boardTypeString == "PRO v1") return CalibrationSettings::TYPE_PRO_V1;
     else return CalibrationSettings::TYPE_UNKNOWN;
 }
 

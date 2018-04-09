@@ -30,9 +30,9 @@ public:
         TYPE_UNKNOWN,
         TYPE_ULTIMATE_V4 = 4,
         TYPE_ULTIMATE_V5 = 5,
-        TYPE_BASIC_V1 = 101,
         TYPE_BASIC_V2 = 102,
-        TYPE_BASIC_V3 = 103
+        TYPE_BASIC_V3 = 103,
+        TYPE_PRO_V1 = 201
     };
 
     enum FlagId
