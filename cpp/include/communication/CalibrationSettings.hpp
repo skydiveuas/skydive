@@ -39,7 +39,7 @@ public:
     {
         IS_GPS_CONNECTED,
         IS_EXTERNAL_MAGNETOMETER_USED,
-        IS_BATTERY_MEASURMENT_VALID
+        IS_BATTERY_MEASUREMENT_VALID
     };
 
     Vect3Df gyroOffset;

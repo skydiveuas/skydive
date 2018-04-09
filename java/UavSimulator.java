@@ -508,7 +508,7 @@ public class UavSimulator implements CommInterface.CommInterfaceListener,
         result.setBoardTypeValue(CalibrationSettings.BoardType.TYPE_BASIC_V3.getValue());
         result.setGyroOffset(new float[]{getRandN() * 400.0f, getRandN() * 400.f, getRandN() * 200.0f});
         result.setFlagState(CalibrationSettings.FlagId.IS_GPS_CONNECTED, true);
-        result.setFlagState(CalibrationSettings.FlagId.IS_BATTERY_MESURMENT_VALID, true);
+        result.setFlagState(CalibrationSettings.FlagId.IS_BATTERY_MEASUREMENT_VALID, true);
         result.setCrc();
         return result;
     }

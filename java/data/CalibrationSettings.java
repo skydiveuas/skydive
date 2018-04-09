@@ -272,7 +272,7 @@ public class CalibrationSettings implements SignalPayloadData {
     public enum FlagId {
         IS_GPS_CONNECTED(0),
         IS_EXTERNAL_MAGNETOMETER_USED(1),
-        IS_BATTERY_MESURMENT_VALID(2);
+        IS_BATTERY_MEASUREMENT_VALID(2);
 
         private final int value;
 
