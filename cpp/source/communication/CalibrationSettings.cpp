@@ -73,7 +73,6 @@ bool CalibrationSettings::isValid(void) const
     switch (boardType)
     {
     case TYPE_UNKNOWN:
-    case TYPE_ULTIMATE_V4:
     case TYPE_ULTIMATE_V5:
     case TYPE_BASIC_V2:
     case TYPE_BASIC_V3:
@@ -165,8 +164,6 @@ std::string CalibrationSettings::getBoardTypeString(BoardType boardType)
 {
     switch (boardType)
     {
-    case CalibrationSettings::TYPE_ULTIMATE_V4:
-        return "ULTIMATE v4";
     case CalibrationSettings::TYPE_ULTIMATE_V5:
         return "ULTIMATE v5";
     case CalibrationSettings::TYPE_BASIC_V2:
@@ -187,8 +184,7 @@ std::string CalibrationSettings::getBoardTypeString(void) const
 
 CalibrationSettings::BoardType CalibrationSettings::boardTypeFromString(const std::string& boardTypeString)
 {
-    if (boardTypeString == "ULTIMATE v4") return CalibrationSettings::TYPE_ULTIMATE_V4;
-    else if (boardTypeString == "ULTIMATE v5") return CalibrationSettings::TYPE_ULTIMATE_V5;
+	if (boardTypeString == "ULTIMATE v5") return CalibrationSettings::TYPE_ULTIMATE_V5;
     else if (boardTypeString == "BASIC v2") return CalibrationSettings::TYPE_BASIC_V2;
     else if (boardTypeString == "BASIC v3") return CalibrationSettings::TYPE_BASIC_V3;
     else if (boardTypeString == "PRO v1") return CalibrationSettings::TYPE_PRO_V1;

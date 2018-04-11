@@ -28,7 +28,6 @@ public:
     enum BoardType
     {
         TYPE_UNKNOWN,
-        TYPE_ULTIMATE_V4 = 4,
         TYPE_ULTIMATE_V5 = 5,
         TYPE_BASIC_V2 = 102,
         TYPE_BASIC_V3 = 103,
