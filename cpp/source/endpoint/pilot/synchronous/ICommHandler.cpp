@@ -247,7 +247,7 @@ bool ICommHandler::sendDataProcedure(const ISignalPayloadMessage& data)
         {
             // sending data failed
 #ifdef TRACER_H_
-            Tracer::Trace("sendDataProcedure::sending data failed", true);
+            Tracer::Trace("sendDataProcedure::sending data failed");
 #endif
             return false;
         }
@@ -264,14 +264,14 @@ bool ICommHandler::sendDataProcedure(const ISignalPayloadMessage& data)
 
                 case SignalData::DATA_INVALID:
 #ifdef TRACER_H_
-                    Tracer::Trace("sendDataProcedure::DATA_INVALID, retransmitting", true);
+                    Tracer::Trace("sendDataProcedure::DATA_INVALID, retransmitting");
 #endif
                     // retransmit data
                     break;
 
                 case SignalData::TIMEOUT:
 #ifdef TRACER_H_
-                    Tracer::Trace("sendDataProcedure::TIMEOUT, retransmitting", true);
+                    Tracer::Trace("sendDataProcedure::TIMEOUT, retransmitting");
 #endif
                     // retransmit data
                     break;
@@ -279,7 +279,7 @@ bool ICommHandler::sendDataProcedure(const ISignalPayloadMessage& data)
                 default:
                     // bad parameter received
 #ifdef TRACER_H_
-                    Tracer::Trace("sendDataProcedure::Bad parameter received!", true);
+                    Tracer::Trace("sendDataProcedure::Bad parameter received!");
 #endif
                     return false;
                 }
@@ -288,7 +288,7 @@ bool ICommHandler::sendDataProcedure(const ISignalPayloadMessage& data)
             {
                 // bad command received
 #ifdef TRACER_H_
-                Tracer::Trace("sendDataProcedure::Bad command received!", true);
+                Tracer::Trace("sendDataProcedure::Bad command received!");
 #endif
                 return false;
             }
@@ -297,13 +297,13 @@ bool ICommHandler::sendDataProcedure(const ISignalPayloadMessage& data)
         {
             // timeout waiting for data
 #ifdef TRACER_H_
-            Tracer::Trace("sendDataProcedure::timeout waiting for command, wait for retransmission", true);
+            Tracer::Trace("sendDataProcedure::timeout waiting for command, wait for retransmission");
 #endif
             return false;
         }
     }
 #ifdef TRACER_H_
-    Tracer::Trace("sendDataProcedure::failed after max retransmissions", true);
+    Tracer::Trace("sendDataProcedure::failed after max retransmissions");
 #endif
     // failed after max retransmissions
     return false;
@@ -327,7 +327,7 @@ bool ICommHandler::receiveDataProcedure(ISignalPayloadMessage& data)
             else
             {
 #ifdef TRACER_H_
-                Tracer::Trace("receiveDataProcedure::DATA_INVALID!", true);
+                Tracer::Trace("receiveDataProcedure::DATA_INVALID!");
 #endif
                 retransmissionCounter++;
                 if (retransmissionCounter >= MAX_RETRANSMISSION + 1)
@@ -342,7 +342,7 @@ bool ICommHandler::receiveDataProcedure(ISignalPayloadMessage& data)
         if (getTimerValue() > DEFAULT_TIMEOUT)
         {
 #ifdef TRACER_H_
-            Tracer::Trace("receiveDataProcedure::TIMEOUT!", true);
+            Tracer::Trace("receiveDataProcedure::TIMEOUT!");
 #endif
             retransmissionCounter++;
             if (retransmissionCounter >= MAX_RETRANSMISSION + 1)
@@ -356,7 +356,7 @@ bool ICommHandler::receiveDataProcedure(ISignalPayloadMessage& data)
         holdThread(10);
     }
 #ifdef TRACER_H_
-    Tracer::Trace("receiveDataProcedure::Max retransmissions reached!", true);
+    Tracer::Trace("receiveDataProcedure::Max retransmissions reached!");
 #endif
     return false;
 }
@@ -382,7 +382,7 @@ bool ICommHandler::sendSignalData(const ISignalPayloadMessage* const data)
             if (getTimerValue() >= 10)
             {
 #ifdef TRACER_H_
-                Tracer::Trace("Sending payload signal data failed after retries, ERROR!", true);
+                Tracer::Trace("Sending payload signal data failed after retries, ERROR!");
 #endif
                 return false;
             }
