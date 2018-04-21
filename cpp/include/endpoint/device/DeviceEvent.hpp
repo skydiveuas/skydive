@@ -1,5 +1,8 @@
-#ifndef __UAV_EVENT__
-#define __UAV_EVENT__
+// =========== roboLib ============
+// ===  *** BARTOSZ NAWROT ***  ===
+// ================================
+#ifndef DEVICEEVENT_HPP
+#define DEVICEEVENT_HPP
 
 #include "IMessage.hpp"
 #include "ISignalPayloadMessage.hpp"
@@ -168,4 +171,4 @@ public:
     std::string toString(void) const;
 };
 
-#endif // __UAV_EVENT__
+#endif // DEVICEEVENT_HPP

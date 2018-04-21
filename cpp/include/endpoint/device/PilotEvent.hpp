@@ -1,5 +1,8 @@
-#ifndef __USER_UAV_EVENT__
-#define __USER_UAV_EVENT__
+// =========== roboLib ============
+// ===  *** BARTOSZ NAWROT ***  ===
+// ================================
+#ifndef PILOTEVENT_HPP
+#define PILOTEVENT_HPP
 
 #include "ISignalPayloadMessage.hpp"
 
@@ -106,4 +109,4 @@ public:
     const Vect2Dd& getPosition(void) const;
 };
 
-#endif // __USER_UAV_EVENT__
+#endif // PILOTEVENT_HPP
