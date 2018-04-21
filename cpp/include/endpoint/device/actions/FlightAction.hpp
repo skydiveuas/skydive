@@ -10,7 +10,7 @@
 
 #include <atomic>
 
-class OperatorEventAutopilot;
+class PilotEventAutopilot;
 
 class FlightAction : public ISkyDeviceAction
 {
@@ -50,7 +50,7 @@ private:
 
     void flightEnded(const bool byBoard);
 
-    void sendAutopilotTarget(const OperatorEventAutopilot& event);
+    void sendAutopilotTarget(const PilotEventAutopilot& event);
     void sendBaseConfirmation(const AutopilotData& base);
 };
 

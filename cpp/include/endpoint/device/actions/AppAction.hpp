@@ -8,9 +8,9 @@
 
 #include <atomic>
 
-class UserUavEventAction;
-class OperatorEventUpload;
-class OperatorEventDownload;
+class PilotEventAction;
+class PilotEventUpload;
+class PilotEventDownload;
 
 class AppAction : public ISkyDeviceAction
 {
@@ -39,9 +39,9 @@ private:
     void handleReception(const IMessage& message) override;
     void handleUserEvent(const PilotEvent& event) override;
 
-    void handleUserUavEventAction(const UserUavEventAction& event);
-    void handleUserUavEventUpload(const OperatorEventUpload& event);
-    void handleUserUavEventDownload(const OperatorEventDownload& event);
+    void handleUserUavEventAction(const PilotEventAction& event);
+    void handleUserUavEventUpload(const PilotEventUpload& event);
+    void handleUserUavEventDownload(const PilotEventDownload& event);
 };
 
 #endif // APPACTION_HPP

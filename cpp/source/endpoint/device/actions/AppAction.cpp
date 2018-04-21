@@ -2,7 +2,7 @@
 
 #include "SkyException.hpp"
 
-#include "OperatorEvent.hpp"
+#include "PilotEvent.hpp"
 
 #include "UpgradeAction.hpp"
 #include "DisconnectAction.hpp"
@@ -89,15 +89,15 @@ void AppAction::handleUserEvent(const PilotEvent& event)
     switch (event.getType())
     {
     case PilotEvent::ACTION:
-        handleUserUavEventAction(reinterpret_cast<const UserUavEventAction&>(event));
+        handleUserUavEventAction(reinterpret_cast<const PilotEventAction&>(event));
         break;
 
     case PilotEvent::UPLOAD:
-        handleUserUavEventUpload(reinterpret_cast<const OperatorEventUpload&>(event));
+        handleUserUavEventUpload(reinterpret_cast<const PilotEventUpload&>(event));
         break;
 
     case PilotEvent::DOWNLOAD:
-        handleUserUavEventDownload(reinterpret_cast<const OperatorEventDownload&>(event));
+        handleUserUavEventDownload(reinterpret_cast<const PilotEventDownload&>(event));
         break;
 
     default:
@@ -105,7 +105,7 @@ void AppAction::handleUserEvent(const PilotEvent& event)
     }
 }
 
-void AppAction::handleUserUavEventAction(const UserUavEventAction& event)
+void AppAction::handleUserUavEventAction(const PilotEventAction& event)
 {
     switch (event.getAction())
     {
@@ -154,12 +154,12 @@ void AppAction::handleUserUavEventAction(const UserUavEventAction& event)
     }
 }
 
-void AppAction::handleUserUavEventUpload(const OperatorEventUpload& event)
+void AppAction::handleUserUavEventUpload(const PilotEventUpload& event)
 {
     listener->startAction(new UploadSignalPayload(listener, *event.getData().clone()));
 }
 
-void AppAction::handleUserUavEventDownload(const OperatorEventDownload& event)
+void AppAction::handleUserUavEventDownload(const PilotEventDownload& event)
 {
     listener->startAction(new DownloadSignalPaylod(listener, event.getDataType()));
 }

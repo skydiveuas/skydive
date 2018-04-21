@@ -2,7 +2,7 @@
 
 #include "AppAction.hpp"
 
-#include "OperatorEvent.hpp"
+#include "PilotEvent.hpp"
 
 EscCalibAction::EscCalibAction(Listener* const _listener):
     ISkyDeviceAction(_listener)

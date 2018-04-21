@@ -1,6 +1,6 @@
 #include "IdleAction.hpp"
 
-#include "OperatorEvent.hpp"
+#include "PilotEvent.hpp"
 
 #include "ConnectAction.hpp"
 #include "UpgradeAction.hpp"
@@ -41,7 +41,7 @@ void IdleAction::handleUserEvent(const PilotEvent& event)
     {
     case PilotEvent::CONNECT:
     {
-        const OperatorEventConnect& ev = reinterpret_cast<const OperatorEventConnect&>(event);
+        const PilotEventConnect& ev = reinterpret_cast<const PilotEventConnect&>(event);
         switch (ev.getConnectionType())
         {
         case ISkyDeviceAction::APP:

@@ -1,6 +1,6 @@
 #include "ISkyDeviceAction.hpp"
 
-#include "OperatorEvent.hpp"
+#include "PilotEvent.hpp"
 #include "SKyException.hpp"
 
 #include <memory>

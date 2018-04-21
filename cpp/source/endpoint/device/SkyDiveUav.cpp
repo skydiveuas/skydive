@@ -2,7 +2,7 @@
 
 #include "SkyException.hpp"
 
-#include "OperatorEvent.hpp"
+#include "PilotEvent.hpp"
 
 #include "IdleAction.hpp"
 

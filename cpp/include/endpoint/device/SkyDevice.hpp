@@ -5,7 +5,7 @@
 #define SKYDIVEUAV_HPP
 
 #include "DeviceEvent.hpp"
-#include "OperatorEvent.hpp"
+#include "PilotEvent.hpp"
 
 #include "ISkyCommInterface.hpp"
 #include "ISkyDeviceMonitor.hpp"

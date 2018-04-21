@@ -2,7 +2,7 @@
 
 #include "AppAction.hpp"
 
-#include "OperatorEvent.hpp"
+#include "PilotEvent.hpp"
 
 #include "SkyException.hpp"
 
@@ -86,7 +86,7 @@ void FlightAction::handleUserEvent(const PilotEvent& event)
             break;
 
         case PilotEvent::AUTOPILOT:
-            sendAutopilotTarget(reinterpret_cast<const OperatorEventAutopilot&>(event));
+            sendAutopilotTarget(reinterpret_cast<const PilotEventAutopilot&>(event));
             break;
 
         default:
@@ -202,7 +202,7 @@ void FlightAction::flightEnded(const bool byBoard)
     listener->startAction(new AppAction(listener));
 }
 
-void FlightAction::sendAutopilotTarget(const OperatorEventAutopilot& event)
+void FlightAction::sendAutopilotTarget(const PilotEventAutopilot& event)
 {
     monitor->trace("Sending autopilot data event");
     std::unique_ptr<AutopilotData> data(new AutopilotData());

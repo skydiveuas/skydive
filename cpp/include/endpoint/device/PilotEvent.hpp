@@ -14,10 +14,10 @@ class ISkyDeviceAction;
 
 /**
  * =============================================================================================
- * UserUavEvent
+ * PilotEvent
  * =============================================================================================
  */
-class OperatorEvent
+class PilotEvent
 {
 public:
     enum Type
@@ -43,65 +43,65 @@ public:
 
     const Type type;
 
-    OperatorEvent(const Type& _type);
+    PilotEvent(const Type& _type);
 
-    virtual ~OperatorEvent(void);
+    virtual ~PilotEvent(void);
     Type getType(void) const;
 
     virtual std::string toString(void) const;
 };
 
-class OperatorEventConnect : public OperatorEvent
+class PilotEventConnect : public PilotEvent
 {
     ISkyDeviceAction::Type connetionType;
     ISkyCommInterface* interface;
 
 public:
-    OperatorEventConnect(ISkyDeviceAction::Type _connectionType, ISkyCommInterface* _interface);
+    PilotEventConnect(ISkyDeviceAction::Type _connectionType, ISkyCommInterface* _interface);
 
     ISkyDeviceAction::Type getConnectionType(void) const;
 
     ISkyCommInterface* getCommInnterface(void) const;
 };
 
-class UserUavEventAction : public OperatorEvent
+class PilotEventAction : public PilotEvent
 {
     ISkyDeviceAction::Type action;
 
 public:
-    UserUavEventAction(ISkyDeviceAction::Type _action);
+    PilotEventAction(ISkyDeviceAction::Type _action);
 
     ISkyDeviceAction::Type getAction(void) const;
 };
 
-class OperatorEventUpload : public OperatorEvent
+class PilotEventUpload : public PilotEvent
 {
     const ISignalPayloadMessage& data;
 
 public:
-    OperatorEventUpload(const ISignalPayloadMessage& _data);
+    PilotEventUpload(const ISignalPayloadMessage& _data);
 
-    ~OperatorEventUpload(void);
+    ~PilotEventUpload(void);
 
     const ISignalPayloadMessage& getData(void) const;
 };
 
-class OperatorEventDownload : public OperatorEvent
+class PilotEventDownload : public PilotEvent
 {
     SignalData::Command dataType;
 
 public:
-    OperatorEventDownload(SignalData::Command _dataType);
+    PilotEventDownload(SignalData::Command _dataType);
 
     SignalData::Command getDataType(void) const;
 };
 
-class OperatorEventAutopilot : public OperatorEvent
+class PilotEventAutopilot : public PilotEvent
 {
     Vect2Dd position;
 
 public:
-    OperatorEventAutopilot(const Vect2Dd& _position);
+    PilotEventAutopilot(const Vect2Dd& _position);
 
     const Vect2Dd& getPosition(void) const;
 };

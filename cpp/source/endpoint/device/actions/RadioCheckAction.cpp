@@ -2,7 +2,7 @@
 
 #include "AppAction.hpp"
 
-#include "OperatorEvent.hpp"
+#include "PilotEvent.hpp"
 
 RadioCheckAction::RadioCheckAction(Listener* const _listener):
     ISkyDeviceAction(_listener)

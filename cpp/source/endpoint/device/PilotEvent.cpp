@@ -1,7 +1,7 @@
 // =========== roboLib ============
 // ===  *** BARTOSZ NAWROT ***  ===
 // ================================
-#include "OperatorEvent.hpp"
+#include "PilotEvent.hpp"
 
 PilotEvent::PilotEvent(const Type& _type) :
     type(_type)
@@ -43,68 +43,68 @@ std::string PilotEvent::toString(void) const
     }
 }
 
-OperatorEventConnect::OperatorEventConnect(ISkyDeviceAction::Type _connectionType, ISkyCommInterface* _interface) :
+PilotEventConnect::PilotEventConnect(ISkyDeviceAction::Type _connectionType, ISkyCommInterface* _interface) :
     PilotEvent(CONNECT),
     connetionType(_connectionType),
     interface(_interface)
 {
 }
 
-ISkyDeviceAction::Type OperatorEventConnect::getConnectionType(void) const
+ISkyDeviceAction::Type PilotEventConnect::getConnectionType(void) const
 {
     return connetionType;
 }
 
-ISkyCommInterface* OperatorEventConnect::getCommInnterface(void) const
+ISkyCommInterface* PilotEventConnect::getCommInnterface(void) const
 {
     return interface;
 }
 
-UserUavEventAction::UserUavEventAction(ISkyDeviceAction::Type _action) :
+PilotEventAction::PilotEventAction(ISkyDeviceAction::Type _action) :
     PilotEvent(ACTION),
     action(_action)
 {
 }
 
-ISkyDeviceAction::Type UserUavEventAction::getAction(void) const
+ISkyDeviceAction::Type PilotEventAction::getAction(void) const
 {
     return action;
 }
 
-OperatorEventUpload::OperatorEventUpload(const ISignalPayloadMessage& _data) :
+PilotEventUpload::PilotEventUpload(const ISignalPayloadMessage& _data) :
     PilotEvent(UPLOAD),
     data(_data)
 {
 }
 
-OperatorEventUpload::~OperatorEventUpload(void)
+PilotEventUpload::~PilotEventUpload(void)
 {
     delete &data;
 }
 
-const ISignalPayloadMessage& OperatorEventUpload::getData(void) const
+const ISignalPayloadMessage& PilotEventUpload::getData(void) const
 {
     return data;
 }
 
-OperatorEventDownload::OperatorEventDownload(SignalData::Command _dataType) :
+PilotEventDownload::PilotEventDownload(SignalData::Command _dataType) :
     PilotEvent(DOWNLOAD),
     dataType(_dataType)
 {
 }
 
-SignalData::Command OperatorEventDownload::getDataType(void) const
+SignalData::Command PilotEventDownload::getDataType(void) const
 {
     return dataType;
 }
 
-OperatorEventAutopilot::OperatorEventAutopilot(const Vect2Dd& _position):
+PilotEventAutopilot::PilotEventAutopilot(const Vect2Dd& _position):
     PilotEvent(AUTOPILOT),
     position(_position)
 {
 }
 
-const Vect2Dd& OperatorEventAutopilot::getPosition(void) const
+const Vect2Dd& PilotEventAutopilot::getPosition(void) const
 {
     return position;
 }
