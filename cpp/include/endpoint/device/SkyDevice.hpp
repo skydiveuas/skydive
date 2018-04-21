@@ -57,7 +57,10 @@ private:
     // used communication buffer
     ISkyCommInterface* interface;
 
-    // preformed UAV action
+    // preformed UAV action, device state
+    // this is shared because when new action is starting
+    // we need to prevent it from beeing destructed if
+    // antoher thread is still working on this state
     std::shared_ptr<ISkyDeviceAction> action;
 
     // dispatcher for SkyDive Comm Protocol
@@ -85,9 +88,9 @@ private:
 
     // notify methods, can be called from another thread so action
     // has to be locked under shared pointer
-    void notifyOperatorEvent(std::shared_ptr<ISkyDeviceAction> actionLock,
-                            const PilotEvent* const operatorEvent);
-    void notifyReception(std::shared_ptr<ISkyDeviceAction> actionLock,
+    void notifyOperatorEvent(std::shared_ptr<ISkyDeviceAction> guard,
+                             const PilotEvent* const operatorEvent);
+    void notifyReception(std::shared_ptr<ISkyDeviceAction> guard,
                          const IMessage* const message);
 
     void handleError(const std::string& message);

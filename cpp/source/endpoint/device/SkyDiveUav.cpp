@@ -32,7 +32,6 @@ void SkyDevice::pushOperatorEvent(const PilotEvent* const operatorEvent)
 
 void SkyDevice::pushOperatorEvent(std::unique_ptr<const PilotEvent> operatorEvent)
 {
-    monitor->trace("Handling user event: " + operatorEvent->toString() + " at: " + action->getName());
     notifyOperatorEvent(action, operatorEvent.get());
 }
 
@@ -48,17 +47,17 @@ ISkyDeviceAction::Type SkyDevice::getState(void) const
     }
 }
 
-void SkyDevice::notifyOperatorEvent(std::shared_ptr<ISkyDeviceAction> actionLock,
+void SkyDevice::notifyOperatorEvent(std::shared_ptr<ISkyDeviceAction> guard,
                                     const PilotEvent* const operatorEvent)
 {
-    actionLock->handleUserEvent(*operatorEvent);
+    monitor->trace("Handling user event: " + operatorEvent->toString() + " at: " + guard->getName());
+    guard->handleUserEvent(*operatorEvent);
 }
 
-void SkyDevice::notifyReception(std::shared_ptr<ISkyDeviceAction> actionLock,
+void SkyDevice::notifyReception(std::shared_ptr<ISkyDeviceAction> guard,
                                 const IMessage* const message)
 {
-    //    monitor->trace("HandleReception with " + actionLock->getName() +
-    //                   " msg: " + message->getMessageName());
+    //monitor->trace("HandleReception reception: " + message->getMessageName() + " at: " + guard->getName());
 
     receptionFeed = true;
     if (connectionLost)
@@ -69,7 +68,7 @@ void SkyDevice::notifyReception(std::shared_ptr<ISkyDeviceAction> actionLock,
 
     try
     {
-        actionLock->baseHandleReception(std::unique_ptr<const IMessage>(message));
+        guard->baseHandleReception(std::unique_ptr<const IMessage>(message));
     }
     catch (SkyException e)
     {
@@ -79,11 +78,11 @@ void SkyDevice::notifyReception(std::shared_ptr<ISkyDeviceAction> actionLock,
 
 void SkyDevice::handleError(const std::string& message)
 {
-    monitor->trace("SkyDiveUav::handleError: " + message);
+    monitor->trace("SkyDevice::handleError: " + message);
     enablePingTask(false);
     enableConnectionTimeoutTask(false);
-    std::shared_ptr<ISkyDeviceAction> newAct = std::make_shared<IdleAction>(this);
-    action.swap(newAct);
+    std::shared_ptr<ISkyDeviceAction> newAction = std::make_shared<IdleAction>(this);
+    action.swap(newAction);
     monitor->notifyDeviceEvent(new DeviceEventMessage(DeviceEventMessage::ERROR, message));
     interface->disconnect();
 }
@@ -111,7 +110,7 @@ void SkyDevice::connectionTimerHandler(void)
 {
     if (false == receptionFeed)
     {
-        // connection timeout ocured
+        // connection timeout occured
         if (false == connectionLost)
         {
             // first time
@@ -124,13 +123,13 @@ void SkyDevice::connectionTimerHandler(void)
 
 void SkyDevice::onConnected()
 {
-    monitor->trace("SkyDiveUav::onConnected");
+    monitor->trace("SkyDevice::onConnected");
     action->start();
 }
 
 void SkyDevice::onDisconnected()
 {
-    monitor->trace("SkyDiveUav::onDisconnected");
+    monitor->trace("SkyDevice::onDisconnected");
 }
 
 void SkyDevice::onError(const std::string& message)
@@ -170,8 +169,8 @@ void SkyDevice::startAction(ISkyDeviceAction* newAction, bool immediateStart)
 
     action->end();
 
-    std::shared_ptr<ISkyDeviceAction> newActionShared(newAction);
-    action.swap(newActionShared);
+    std::shared_ptr<ISkyDeviceAction> newActionGuard(newAction);
+    action.swap(newActionGuard);
 
     if (immediateStart)
     {
