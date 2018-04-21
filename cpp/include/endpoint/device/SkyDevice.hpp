@@ -16,6 +16,7 @@
 
 #include <ctime>
 #include <memory>
+#include <mutex>
 #include <atomic>
 
 class SkyDevice :
@@ -62,6 +63,7 @@ private:
     // we need to prevent it from beeing destructed if
     // antoher thread is still working on this state
     std::shared_ptr<ISkyDeviceAction> action;
+    std::mutex actionLock;
 
     // dispatcher for SkyDive Comm Protocol
     CommDispatcher dispatcher;

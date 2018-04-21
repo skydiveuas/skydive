@@ -37,6 +37,7 @@ void SkyDevice::pushOperatorEvent(std::unique_ptr<const PilotEvent> operatorEven
 
 ISkyDeviceAction::Type SkyDevice::getState(void) const
 {
+    std::unique_lock<std::mutex>(actionLock);
     if (nullptr == action)
     {
         return ISkyDeviceAction::IDLE_ACTION;
@@ -50,7 +51,8 @@ ISkyDeviceAction::Type SkyDevice::getState(void) const
 void SkyDevice::notifyOperatorEvent(std::shared_ptr<ISkyDeviceAction> guard,
                                     const PilotEvent* const operatorEvent)
 {
-    monitor->trace("Handling user event: " + operatorEvent->toString() + " at: " + guard->getName());
+    monitor->trace("Handling pilot event: " + operatorEvent->toString() + " at: " + guard->getName());
+    std::unique_lock<std::mutex>(actionLock);
     guard->handleUserEvent(*operatorEvent);
 }
 
@@ -68,6 +70,7 @@ void SkyDevice::notifyReception(std::shared_ptr<ISkyDeviceAction> guard,
 
     try
     {
+        std::unique_lock<std::mutex>(actionLock);
         guard->baseHandleReception(std::unique_ptr<const IMessage>(message));
     }
     catch (SkyException e)
@@ -82,6 +85,7 @@ void SkyDevice::handleError(const std::string& message)
     enablePingTask(false);
     enableConnectionTimeoutTask(false);
     std::shared_ptr<ISkyDeviceAction> newAction = std::make_shared<IdleAction>(this);
+    std::unique_lock<std::mutex>(actionLock);
     action.swap(newAction);
     monitor->notifyDeviceEvent(new DeviceEventMessage(DeviceEventMessage::ERROR, message));
     interface->disconnect();
@@ -124,6 +128,7 @@ void SkyDevice::connectionTimerHandler(void)
 void SkyDevice::onConnected()
 {
     monitor->trace("SkyDevice::onConnected");
+    std::unique_lock<std::mutex>(actionLock);
     action->start();
 }
 
@@ -167,9 +172,10 @@ void SkyDevice::startAction(ISkyDeviceAction* newAction, bool immediateStart)
         __SKY_EXCEPTION__(message.c_str());
     }
 
-    action->end();
-
     std::shared_ptr<ISkyDeviceAction> newActionGuard(newAction);
+    std::unique_lock<std::mutex>(actionLock);
+
+    action->end();
     action.swap(newActionGuard);
 
     if (immediateStart)
