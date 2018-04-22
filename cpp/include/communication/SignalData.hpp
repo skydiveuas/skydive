@@ -115,7 +115,7 @@ public:
 
 #ifdef __SKYDIVE_USE_STL__
 
-    std::string toString(void) const;
+    std::string toString(void) const override;
 
     static std::string toString(const SignalData& command);
     static std::string toString(const SignalData::Command& command);

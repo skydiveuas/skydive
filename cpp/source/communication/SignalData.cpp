@@ -120,9 +120,22 @@ std::string SignalData::toString() const
 
 std::string SignalData::toString(const SignalData& command)
 {
-    return "SIGNAL_DATA(" + toString(command.getCommand())
-            + ":"
-            + toString(command.getParameter()) + ")";
+    if (PING_VALUE == command.getCommand())
+    {
+        return "SINGAL_DATA(PING_VALUE: "
+                + std::to_string(command.getParameter()) + ")";
+    }
+    else if (WHO_AM_I_VALUE == command.getCommand())
+    {
+        return "SINGAL_DATA(WHO_AM_I_VALUE: "
+                + std::to_string(command.getParameter()) + ")";
+    }
+    else
+    {
+        return "SIGNAL_DATA(" + toString(command.getCommand())
+                + ":"
+                + toString(command.getParameter()) + ")";
+    }
 }
 
 std::string SignalData::toString(const SignalData::Command& command)
