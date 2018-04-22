@@ -37,15 +37,7 @@ void SkyDevice::pushOperatorEvent(std::unique_ptr<const PilotEvent> operatorEven
 
 ISkyDeviceAction::Type SkyDevice::getState(void) const
 {
-    std::unique_lock<std::mutex>(actionLock);
-    if (nullptr == action)
-    {
-        return ISkyDeviceAction::IDLE_ACTION;
-    }
-    else
-    {
-        return action->getType();
-    }
+    return action->getType();
 }
 
 void SkyDevice::notifyOperatorEvent(std::shared_ptr<ISkyDeviceAction> guard,
@@ -173,9 +165,10 @@ void SkyDevice::startAction(ISkyDeviceAction* newAction, bool immediateStart)
     }
 
     std::shared_ptr<ISkyDeviceAction> newActionGuard(newAction);
-    std::unique_lock<std::mutex>(actionLock);
 
+    std::unique_lock<std::mutex>(actionLock);
     action->end();
+
     action.swap(newActionGuard);
 
     if (immediateStart)
