@@ -102,13 +102,13 @@ private:
 
     void connectionTimerHandler(void);
 
-    // IAppCommInterface::Listener overrides
+    // ISkyCommInterface::Listener overrides
     void onConnected(void) override;
     void onDisconnected(void) override;
     void onError(const std::string& message) override;
     void onReceived(const unsigned char* data, const size_t length) override;
 
-    // ICommAction::Listener overrides
+    // ISkyDeviceAction::Listener overrides
     ISkyDeviceMonitor* getMonitor(void) override;
     void startAction(ISkyDeviceAction* action, bool immediateStart = true) override;
     void onPongReception(const SignalData& pong) override;
