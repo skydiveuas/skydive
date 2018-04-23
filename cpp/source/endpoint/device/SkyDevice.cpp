@@ -134,10 +134,10 @@ void SkyDevice::onError(const std::string& message)
     handleError(message);
 }
 
-void SkyDevice::onDataReceived(const unsigned char* data, const unsigned dataSize)
+void SkyDevice::onReceived(const unsigned char* data, const size_t length)
 {
     IMessage::PreambleType receivedPreamble;
-    for (unsigned i = 0; i < dataSize; i++)
+    for (unsigned i = 0; i < length; i++)
     {
         receivedPreamble = dispatcher.putChar(data[i]);
         if (IMessage::EMPTY != receivedPreamble)
@@ -185,7 +185,7 @@ void SkyDevice::onPongReception(const SignalData& pong)
 void SkyDevice::send(const IMessage& message)
 {
     message.serializeMessage(messageBuildingBuffer);
-    interface->sendData(messageBuildingBuffer, message.getMessageSize());
+    interface->send(messageBuildingBuffer, message.getMessageSize());
 }
 
 void SkyDevice::send(const ISignalPayloadMessage& message)
@@ -194,7 +194,7 @@ void SkyDevice::send(const ISignalPayloadMessage& message)
     while (builder.hasNext())
     {
         builder.getNext(messageBuildingBuffer);
-        interface->sendData(messageBuildingBuffer, IMessage::SIGNAL_DATA_MESSAGE_SIZE);
+        interface->send(messageBuildingBuffer, IMessage::SIGNAL_DATA_MESSAGE_SIZE);
     }
 }
 

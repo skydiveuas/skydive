@@ -106,7 +106,7 @@ private:
     void onConnected(void) override;
     void onDisconnected(void) override;
     void onError(const std::string& message) override;
-    void onDataReceived(const unsigned char* data, const unsigned dataSize) override;
+    void onReceived(const unsigned char* data, const size_t length) override;
 
     // ICommAction::Listener overrides
     ISkyDeviceMonitor* getMonitor(void) override;

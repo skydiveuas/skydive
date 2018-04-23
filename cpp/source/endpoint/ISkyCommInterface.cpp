@@ -28,7 +28,7 @@ void ISkyCommInterface::onError(const std::string& message)
     listener->onError(message);
 }
 
-void ISkyCommInterface::onDataReceived(const unsigned char* data, const unsigned dataSize)
+void ISkyCommInterface::onReceived(const unsigned char* data, const size_t length)
 {
-    listener->onDataReceived(data, dataSize);
+    listener->onReceived(data, length);
 }

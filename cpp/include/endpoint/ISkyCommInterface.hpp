@@ -20,7 +20,7 @@ public:
 
         virtual void onError(const std::string& message) = 0;
 
-        virtual void onDataReceived(const unsigned char* data, const unsigned dataSize) = 0;
+        virtual void onReceived(const unsigned char* data, const size_t length) = 0;
     };
 
     virtual ~ISkyCommInterface(void);
@@ -29,7 +29,7 @@ public:
 
     virtual void disconnect(void) = 0;
 
-    virtual void sendData(const unsigned char* data, const unsigned dataSize) = 0;
+    virtual void send(const unsigned char* data, const size_t length) = 0;
 
     void setListener(Listener* _listener);
 
@@ -39,7 +39,7 @@ public:
 
     void onError(const std::string& message);
 
-    void onDataReceived(const unsigned char* data, const unsigned dataSize);
+    void onReceived(const unsigned char* data, const size_t length);
 
 protected:
     Listener* listener;
