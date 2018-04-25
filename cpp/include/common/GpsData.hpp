@@ -25,7 +25,7 @@ public:
     float alt; // wysokosc
     float speed, course; // predkosc
     float HDOP; // dokladnosc
-    bool fix;
+    bool fix, justFixed, justFixLost;
 
     GpsData(void);
     GpsData(const unsigned char* tab);
