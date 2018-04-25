@@ -11,6 +11,9 @@
 #endif //__SKYDIVE_USE_STL__
 
 GpsData::GpsData(void)
+: fix(false),
+  justFixed(false),
+  justFixLost(false)
 {
 }
 
