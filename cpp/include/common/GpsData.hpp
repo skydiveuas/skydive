@@ -32,6 +32,9 @@ public:
 
     void serialize(unsigned char* tab) const;
 
+    Vect2Dd getSpeedVector() const;
+    Vect2Dd getGeoPoint() const;
+
 #ifdef __SKYDIVE_USE_STL__
 
     void print(void) const;

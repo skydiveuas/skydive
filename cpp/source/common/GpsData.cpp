@@ -24,6 +24,17 @@ void GpsData::serialize(unsigned char* tab) const
     memcpy(tab, this, sizeof(*this));
 }
 
+Vect2Dd GpsData::getSpeedVector() const
+{
+    return {std::cos(roboLib::toRad(course))*speed,
+                std::sin(roboLib::toRad(course))*speed};
+}
+
+Vect2Dd GpsData::getGeoPoint() const
+{
+    return {lat, lon};
+}
+
 #ifdef __SKYDIVE_USE_STL__
 
 void GpsData::print(void) const
