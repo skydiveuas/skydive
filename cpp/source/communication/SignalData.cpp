@@ -194,6 +194,10 @@ std::string SignalData::toString(const SignalData::Command& command)
         return std::string("WIFI_CONFIGURATION_DATA");
     case SignalData::WHO_AM_I_VALUE:
         return std::string("WHO_AM_I_VALUE");
+    case SignalData::PROTOCOL_VERSION_VALUE:
+        return std::string("PROTOCOL_VERSION_VALUE");
+    case SignalData::PROTOCOL_VERSION:
+        return std::string("PROTOCOL_VERSION");
     default:
         return std::string("Bad command type");
     }

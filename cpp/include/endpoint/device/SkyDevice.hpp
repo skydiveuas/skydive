@@ -110,6 +110,7 @@ private:
 
     // ISkyDeviceAction::Listener overrides
     ISkyDeviceMonitor* getMonitor(void) override;
+    bool setupProtocolVersion(const unsigned version) override;
     void startAction(ISkyDeviceAction* action, bool immediateStart = true) override;
     void onPongReception(const SignalData& pong) override;
     void send(const IMessage& message) override;

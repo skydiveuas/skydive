@@ -18,6 +18,8 @@
 class IMessage
 {
 public:
+    static const unsigned PROTOCOL_VERSION = 0xD6CE5A35; // 28-04-2018
+
     enum PreambleType
     {
         EMPTY,

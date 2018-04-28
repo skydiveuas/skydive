@@ -54,7 +54,9 @@ public:
         WIFI_CONFIGURATION_DATA,
 
         // TODO sort these values in new lib release
-        WHO_AM_I_VALUE // board type (CalibrationSettings::BoardType)
+        WHO_AM_I_VALUE, // board type (CalibrationSettings::BoardType)
+        PROTOCOL_VERSION_VALUE,
+        PROTOCOL_VERSION
     };
 
     enum Parameter

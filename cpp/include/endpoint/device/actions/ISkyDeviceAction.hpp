@@ -46,6 +46,8 @@ public:
 
         virtual ISkyDeviceMonitor* getMonitor(void) = 0;
 
+        virtual bool setupProtocolVersion(const unsigned version) = 0;
+
         virtual void startAction(ISkyDeviceAction* action, bool immediateStart = true) = 0;
 
         virtual void onPongReception(const SignalData& pong) = 0;

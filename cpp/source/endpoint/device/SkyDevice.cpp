@@ -85,7 +85,7 @@ void SkyDevice::handleError(const std::string& message)
 
 void SkyDevice::pingTimerHandler(void)
 {
-    sentPingValue = std::rand();
+    sentPingValue = std::rand() * 163;
     sentPingTime = clock();
     send(SignalData(SignalData::PING_VALUE, sentPingValue));
 }
@@ -151,6 +151,14 @@ void SkyDevice::onReceived(const unsigned char* data, const size_t length)
 ISkyDeviceMonitor* SkyDevice::getMonitor(void)
 {
     return monitor;
+}
+
+bool SkyDevice::setupProtocolVersion(const unsigned version)
+{
+    monitor->trace("Setting up protocol version: " + std::to_string(version) +
+                   ", compiled version: " + std::to_string(IMessage::PROTOCOL_VERSION));
+    // TODO currenty protocol version handling is not supported
+    return IMessage::PROTOCOL_VERSION == version;
 }
 
 void SkyDevice::startAction(ISkyDeviceAction* newAction, bool immediateStart)

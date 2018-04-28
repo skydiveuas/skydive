@@ -28,6 +28,7 @@ private:
     {
         IDLE,
         INITIAL_COMMAND,
+        PROTOCOL_VERSION,
         CALIBRATION,
         CALIBRATION_RECEPTION,
         FINAL_COMMAND,

@@ -36,6 +36,7 @@ std::string ConnectAction::getStateName(void) const
     {
     case IDLE: return "IDLE";
     case INITIAL_COMMAND: return "INITIAL_COMMAND";
+    case PROTOCOL_VERSION: return "PROTOCOL_VERSION";
     case CALIBRATION: return "CALIBRATION";
     case CALIBRATION_RECEPTION: return "CALIBRATION_RECEPTION";
     case FINAL_COMMAND: return "FINAL_COMMAND";
@@ -72,11 +73,26 @@ void ConnectAction::handleSignalReception(const Parameter parameter)
         {
         case SignalData::ACK:
             monitor->trace("Initial command successfull");
-            startSignalTimeout(SignalData::CALIBRATION_SETTINGS);
-            state = CALIBRATION;
+            startSignalTimeout(SignalData::PROTOCOL_VERSION_VALUE);
+            state = PROTOCOL_VERSION;
             break;
 
         default:
+            except("Unexpected signal parameter message received", parameter);
+        }
+        break;
+
+    case PROTOCOL_VERSION:
+        if (listener->setupProtocolVersion(static_cast<const unsigned>(parameter)))
+        {
+            monitor->trace("Protocol setup done");
+            sendSignal(SignalData::PROTOCOL_VERSION, SignalData::ACK);
+            startSignalTimeout(SignalData::CALIBRATION_SETTINGS);
+            state = CALIBRATION;
+        }
+        else
+        {
+            sendSignal(SignalData::PROTOCOL_VERSION, SignalData::NOT_ALLOWED);
             except("Unexpected signal parameter message received", parameter);
         }
         break;
