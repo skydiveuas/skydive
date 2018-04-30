@@ -86,7 +86,7 @@ void ConnectAction::handleSignalReception(const Parameter parameter)
         if (listener->setupProtocolVersion(static_cast<const unsigned>(parameter)))
         {
             monitor->trace("Protocol setup done");
-            sendSignal(SignalData::PROTOCOL_VERSION, SignalData::ACK);
+            listener->send(SignalData(SignalData::PROTOCOL_VERSION, SignalData::ACK));
             startSignalTimeout(SignalData::CALIBRATION_SETTINGS);
             state = CALIBRATION;
         }
