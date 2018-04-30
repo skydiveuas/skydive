@@ -59,7 +59,7 @@ void UpgradeAction::handleSignalReception(const Parameter parameter)
             state = IDLE;
             listener->startAction(new AppAction(listener));
             monitor->notifyDeviceEvent(new DeviceEventMessage(DeviceEventMessage::WARNING,
-                                                              "Board refused upgrade command, can not"
+                                                              "Board refused upgrade command, cannot"
                                                               " be done over wireless interface."));
             break;
 
