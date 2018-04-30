@@ -21,16 +21,13 @@
 class GpsData
 {
 public:
-    double lat, lon; // polozenie
-    float alt; // wysokosc
-    float speed, course; // predkosc
-    float HDOP; // dokladnosc
+    double lat, lon;
+    float alt;
+    float speed, course;
+    float HDOP;
     bool fix, justFixed, justFixLost;
 
     GpsData(void);
-    GpsData(const unsigned char* tab);
-
-    void serialize(unsigned char* tab) const;
 
     Vect2Dd getSpeedVector() const;
     Vect2Dd getGeoPoint() const;

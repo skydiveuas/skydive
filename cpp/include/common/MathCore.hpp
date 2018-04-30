@@ -666,7 +666,7 @@ template <typename _Tp> unsigned short roboLib::valToShort(const _Tp min, const 
 }
 template <typename _Tp> _Tp roboLib::shortToVal(const _Tp min, const _Tp max, const unsigned short val)
 {
-    const _Tp xLenght = fabs(min - max);
+    const _Tp xLenght = std::abs(min - max);
     return min + (val * xLenght) / USHRT_MAX;
 }
 

@@ -21,6 +21,8 @@
 /**
  * =============================================================================================
  * DebugData
+ * Max data size: 58 bytes
+ * Used: 48 bytes
  * =============================================================================================
  */
 class DebugData : public IMessage
@@ -57,7 +59,8 @@ public:
         ERROR_HANDLING,
         LOW_BATTERY_VOLTAGE,
         GPS_FIX_3D,
-        GPS_FIX
+        GPS_FIX,
+        // 8 flags left to use
     };
 
     Vect3Df euler; // rotation [roll; pitch; yaw] [rad]
@@ -79,6 +82,8 @@ public:
     Flags<unsigned char> flagsObj;
 
     unsigned char battery; // percent of battery capacity
+
+    // 10 bytes left to use
 
     DebugData(void);
     DebugData(const unsigned char* src);

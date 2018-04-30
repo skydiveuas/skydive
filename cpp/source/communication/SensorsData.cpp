@@ -31,14 +31,44 @@ unsigned SensorsData::getDataSize(void) const
     return sizeof(SensorsData) - 4;
 }
 
+void SensorsData::setGpsSpeed(const float _speed)
+{
+    speedGps = roboLib::valToShort(0.0f, MAX_GPS_SPEED, _speed);
+}
+
+void SensorsData::setGpsCourse(const float _course)
+{
+    courseGps = roboLib::valToShort(0.0f, MAX_GPS_COURSE, _course);
+}
+
+void SensorsData::setGpsAltitude(const float _altitude)
+{
+    altitudeGps = roboLib::valToShort(0.0f, MAX_GPS_ALTITUDE, _altitude);
+}
+
+float SensorsData::getGpsSpeed(void) const
+{
+    return roboLib::shortToVal(0.0f, MAX_GPS_SPEED, speedGps);
+}
+
+float SensorsData::getGpsCourse(void) const
+{
+    return roboLib::shortToVal(0.0f, MAX_GPS_COURSE, courseGps);
+}
+
+float SensorsData::getGpsAltitude(void) const
+{
+    return roboLib::shortToVal(0.0f, MAX_GPS_ALTITUDE, altitudeGps);
+}
+
 GpsData SensorsData::getGpsData(void) const
 {
     GpsData gpsData;
     gpsData.lat = lat;
     gpsData.lon = lon;
-    gpsData.speed = speedGps;
-    gpsData.course = courseGps;
-    gpsData.alt = altitudeGps;
+    gpsData.speed = getGpsSpeed();
+    gpsData.course = getGpsCourse();
+    gpsData.alt = getGpsAltitude();
     gpsData.fix = (HDOP >= 0.0f);
     gpsData.HDOP = HDOP;
     return gpsData;
@@ -47,9 +77,9 @@ GpsData SensorsData::getGpsData(void) const
 ImuData SensorsData::getImuData(void) const
 {
     ImuData imuData;
-    imuData.gyroRaw = gyroRaw;
-    imuData.accelRaw = accelRaw;
-    imuData.magnetRaw = magnetRaw;
-    imuData.pressRaw = pressRaw;
+    imuData.omega = omega;
+    imuData.accel = accel;
+    imuData.magnet = magnet;
+    imuData.pressure = pressure;
     return imuData;
 }

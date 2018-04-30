@@ -98,7 +98,7 @@ unsigned IMessage::getPayloadSizeByType(const IMessage::PreambleType type)
     switch (type)
     {
     case CONTROL:
-        return 48;
+        return 58;
 
     case SIGNAL:
         return 8;
@@ -124,7 +124,7 @@ unsigned short IMessage::computeCrc16(const unsigned char* data, const unsigned 
         crcShort ^= ((crcShort & 0xFF) << 5) & 0xffff;
     }
     crcShort &= 0xffff;
-    return (unsigned short)crcShort;
+    return static_cast<unsigned short>(crcShort);
 }
 
 unsigned IMessage::computeCrc32(const unsigned char* data, const unsigned dataSize)
@@ -142,7 +142,7 @@ unsigned IMessage::computeCrc32(const unsigned char* data, const unsigned dataSi
             crc = crc & 1 ? (crc >> 1) ^ 0x82f63b78 : crc >> 1;
         }
     }
-    return (unsigned)(~crc);
+    return static_cast<unsigned>(~crc);
 }
 
 #ifdef __SKYDIVE_USE_STL__

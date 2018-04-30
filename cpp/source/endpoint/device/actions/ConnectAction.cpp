@@ -93,7 +93,9 @@ void ConnectAction::handleSignalReception(const Parameter parameter)
         else
         {
             sendSignal(SignalData::PROTOCOL_VERSION, SignalData::NOT_ALLOWED);
-            except("Unexpected signal parameter message received", parameter);
+            except("Target uses unsupported SkyComm protocol version (" +
+                   std::to_string(static_cast<unsigned>(parameter)) +
+                   "). Can not proceed with connection procedure");
         }
         break;
 

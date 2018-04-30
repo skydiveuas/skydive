@@ -21,10 +21,10 @@
 class ImuData
 {
 public:
-    Vect3Ds gyroRaw;
-    Vect3Ds accelRaw;
-    Vect3Ds magnetRaw;
-    float pressRaw;
+    Vect3Df omega;
+    Vect3Df accel;
+    Vect3Df magnet;
+    float pressure;
 
     ImuData(void);
     ImuData(const unsigned char* tab);

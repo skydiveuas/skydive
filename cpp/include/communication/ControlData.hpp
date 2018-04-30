@@ -18,6 +18,8 @@
 /**
  * =============================================================================================
  * ControlData
+ * Max data size: 58 bytes
+ * Used: 19 bytes
  * =============================================================================================
  */
 class ControlData : public IMessage
@@ -50,10 +52,13 @@ public:
     Vect3Df euler; // rotation control
     float throttle; // throttle
 
-    // 18 bytes left to use
-
     unsigned short controllerCommand; // ControllerCommand
     unsigned char solverMode; // SolverMode
+
+    unsigned char padding;
+    unsigned short sequenceNumber;
+
+    // 39 bytes left to use
 
     ControlData(void);
     ControlData(const unsigned char* src);

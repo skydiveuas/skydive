@@ -14,24 +14,30 @@
 /**
  * =============================================================================================
  * SensorsData
+ * Max data size: 58 bytes
+ * Used: 58 bytes
  * =============================================================================================
  */
 class SensorsData : public IMessage
 {
+private:
+    static constexpr float MAX_GPS_SPEED = 1000.0f;
+    static constexpr float MAX_GPS_COURSE = 360.0f;
+    static constexpr float MAX_GPS_ALTITUDE = 5000.0f;
+
 public:
-    float pressRaw;
+    // IMU
+    float pressure;
+    Vect3Df omega;
+    Vect3Df accel;
+    Vect3Df magnet;
 
+    // GPS
     float lat, lon;
-    float speedGps;
-    float courseGps;
-    float altitudeGps;
     float HDOP;
-
-    Vect3Ds gyroRaw;
-    Vect3Ds accelRaw;
-    Vect3Ds magnetRaw;
-
-    // 2 bytes left to use
+    unsigned short speedGps;
+    unsigned short courseGps;
+    unsigned short altitudeGps;
 
     SensorsData(void);
     SensorsData(const unsigned char* tab);
@@ -43,6 +49,14 @@ public:
     MessageType getMessageType(void) const;
 
     unsigned getDataSize(void) const;
+
+    void setGpsSpeed(const float _speed);
+    void setGpsCourse(const float _course);
+    void setGpsAltitude(const float _altitude);
+
+    float getGpsSpeed(void) const;
+    float getGpsCourse(void) const;
+    float getGpsAltitude(void) const;
 
     GpsData getGpsData(void) const;
     ImuData getImuData(void) const;

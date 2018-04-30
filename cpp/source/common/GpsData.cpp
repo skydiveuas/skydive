@@ -17,16 +17,6 @@ GpsData::GpsData(void)
 {
 }
 
-GpsData::GpsData(const unsigned char* tab)
-{
-    memcpy(this, tab, sizeof(*this));
-}
-
-void GpsData::serialize(unsigned char* tab) const
-{
-    memcpy(tab, this, sizeof(*this));
-}
-
 Vect2Dd GpsData::getSpeedVector() const
 {
     return {std::cos(roboLib::toRad(course))*speed,
