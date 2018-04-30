@@ -10,6 +10,9 @@ import java.util.ArrayList;
  * Created by Bartosz Nawrot on 2016-10-13.
  */
 public class CommMessage {
+    //public static final int PROTOCOL_VERSION = 0xD6CE5A35;
+    public static final int PROTOCOL_VERSION = 0xD6CE5A35 + 1;// 30-04-2018
+
     public static final int PREAMBLE_SIZE = 4;
     public static final int SIGNAL_COMMAND_SIZE = 4;
     public static final int CRC_SIZE = 2;
@@ -100,7 +103,7 @@ public class CommMessage {
     public static int getPayloadSizeByType(MessageType type) {
         switch (type) {
             case CONTROL:
-                return 48;
+                return 58;
             case SIGNAL:
                 return 8;
             case AUTOPILOT:

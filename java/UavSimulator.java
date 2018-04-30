@@ -48,6 +48,7 @@ public class UavSimulator implements CommInterface.CommInterfaceListener,
 
     private enum ConnectionStage {
         INITIAL_COMMAND,
+        PROTOCOL_VERSION_ACK,
         CALIBRATION_ACK,
         FINAL_COMMAND
     }
@@ -117,13 +118,10 @@ public class UavSimulator implements CommInterface.CommInterfaceListener,
         switch (connectionStage) {
             case INITIAL_COMMAND:
                 if (event.matchSignalData(new SignalData(SignalData.Command.START_CMD, SignalData.Parameter.START))) {
-                    System.out.println("Start command received, staring calibration procedure");
+                    System.out.println("Start command received, negotiation protocol version");
                     send(new SignalData(SignalData.Command.START_CMD, SignalData.Parameter.ACK).getMessage());
-                    // simulate calibration process (sleep 0.5s)
-                    Thread.sleep(500);
-                    send(new SignalData(SignalData.Command.CALIBRATION_SETTINGS, SignalData.Parameter.READY).getMessage());
-                    startSignalPayloadSending(calibrationSettings);
-                    connectionStage = ConnectionStage.CALIBRATION_ACK;
+                    send(new SignalData(SignalData.Command.PROTOCOL_VERSION_VALUE, CommMessage.PROTOCOL_VERSION).getMessage());
+                    connectionStage = ConnectionStage.PROTOCOL_VERSION_ACK;
                 } else if (event.matchSignalData(new SignalData(SignalData.Command.WHO_AM_I_VALUE, SignalData.Parameter.START))) {
                     System.out.println("Who am I procedure started, responding with board type");
                     send(new SignalData(SignalData.Command.WHO_AM_I_VALUE, calibrationSettings.getBoardType().getValue()).getMessage());
@@ -132,6 +130,20 @@ public class UavSimulator implements CommInterface.CommInterfaceListener,
                     commInterface.disconnect();
                 } else {
                     throw new Exception("Unexpected message received");
+                }
+                break;
+
+            case PROTOCOL_VERSION_ACK:
+                if (event.matchSignalData(new SignalData(SignalData.Command.PROTOCOL_VERSION, SignalData.Parameter.ACK))) {
+                    System.out.println("Protocol version accepted, staring calibration procedure");
+                    send(new SignalData(SignalData.Command.START_CMD, SignalData.Parameter.ACK).getMessage());
+                    // simulate calibration process (sleep 0.5s)
+                    Thread.sleep(500);
+                    send(new SignalData(SignalData.Command.CALIBRATION_SETTINGS, SignalData.Parameter.READY).getMessage());
+                    startSignalPayloadSending(calibrationSettings);
+                    connectionStage = ConnectionStage.CALIBRATION_ACK;
+                } else {
+
                 }
                 break;
 

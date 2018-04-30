@@ -1,6 +1,7 @@
 package com.skydive.java.actions;
 
 import com.skydive.java.CommHandler;
+import com.skydive.java.CommMessage;
 import com.skydive.java.UavEvent;
 import com.skydive.java.data.CalibrationSettings;
 import com.skydive.java.data.SignalData;
@@ -20,6 +21,7 @@ public class ConnectAction extends CommHandlerAction {
     public enum ConnectState {
         IDLE,
         INITIAL_COMMAND,
+        PROTOCOL_VERSION,
         WAITING_FOR_CALIBRATION,
         WAITING_FOR_CALIBRATION_DATA,
         FINAL_COMMAND,
@@ -59,10 +61,23 @@ public class ConnectAction extends CommHandlerAction {
                 if (event.matchSignalData(
                         new SignalData(SignalData.Command.START_CMD, SignalData.Parameter.ACK))) {
                     timer.cancel();
-                    state = ConnectState.WAITING_FOR_CALIBRATION;
+                    state = ConnectState.PROTOCOL_VERSION;
                     System.out.println("Initial command received successfully");
                 } else {
                     System.out.println("Unexpected event received at state " + state.toString());
+                }
+                break;
+
+            case PROTOCOL_VERSION:
+                SignalData protocolResponse = event.getSignalData();
+                if (protocolResponse.getCommand() == SignalData.Command.PROTOCOL_VERSION_VALUE &&
+                        protocolResponse.getParameterValue() == CommMessage.PROTOCOL_VERSION) {
+                    commHandler.send(new SignalData(SignalData.Command.PROTOCOL_VERSION, SignalData.Parameter.ACK).getMessage());
+                    state = ConnectState.WAITING_FOR_CALIBRATION;
+                    System.out.println("Protocol setup done");
+                } else {
+                    commHandler.send(new SignalData(SignalData.Command.PROTOCOL_VERSION, SignalData.Parameter.NOT_ALLOWED).getMessage());
+                    commHandler.getUavManager().notifyUavEvent(new UavEvent(UavEvent.Type.ERROR, "Unsupported protocol version"));
                 }
                 break;
 

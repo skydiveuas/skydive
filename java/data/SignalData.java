@@ -122,7 +122,9 @@ public class SignalData {
         WIFI_CONFIGURATION_DATA(100031),
 
         // TODO sort these commands at new release
-        WHO_AM_I_VALUE(100032);
+        WHO_AM_I_VALUE(100032), // board type (CalibrationSettings::BoardType)
+        PROTOCOL_VERSION_VALUE(100033),
+        PROTOCOL_VERSION(100034);
 
         private final int value;
 
@@ -162,6 +164,8 @@ public class SignalData {
             else if (value == WIFI_CONFIGURATION.getValue()) return WIFI_CONFIGURATION;
             else if (value == WIFI_CONFIGURATION_DATA.getValue()) return WIFI_CONFIGURATION_DATA;
             else if (value == WHO_AM_I_VALUE.getValue()) return WHO_AM_I_VALUE;
+            else if (value == PROTOCOL_VERSION_VALUE.getValue()) return PROTOCOL_VERSION_VALUE;
+            else if (value == PROTOCOL_VERSION.getValue()) return PROTOCOL_VERSION;
             else return DUMMY; // TODO throw some exception
         }
     }
