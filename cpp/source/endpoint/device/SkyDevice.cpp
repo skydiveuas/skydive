@@ -25,14 +25,14 @@ SkyDevice::SkyDevice(ISkyDeviceMonitor* const _monitor,
     std::srand(std::time(0));
 }
 
-void SkyDevice::pushOperatorEvent(const PilotEvent* const operatorEvent)
+void SkyDevice::pushPilotEvent(const PilotEvent* const pilotEvent)
 {
-    pushOperatorEvent(std::unique_ptr<const PilotEvent>(operatorEvent));
+    pushPilotEvent(std::unique_ptr<const PilotEvent>(pilotEvent));
 }
 
-void SkyDevice::pushOperatorEvent(std::unique_ptr<const PilotEvent> operatorEvent)
+void SkyDevice::pushPilotEvent(std::unique_ptr<const PilotEvent> pilotEvent)
 {
-    notifyOperatorEvent(action, operatorEvent.get());
+    notifyPilotEvent(action, pilotEvent.get());
 }
 
 ISkyDeviceAction::Type SkyDevice::getState(void) const
@@ -40,7 +40,7 @@ ISkyDeviceAction::Type SkyDevice::getState(void) const
     return action->getType();
 }
 
-void SkyDevice::notifyOperatorEvent(std::shared_ptr<ISkyDeviceAction> guard,
+void SkyDevice::notifyPilotEvent(std::shared_ptr<ISkyDeviceAction> guard,
                                     const PilotEvent* const operatorEvent)
 {
     monitor->trace("Handling pilot event: " + operatorEvent->toString() + " at: " + guard->getName());
