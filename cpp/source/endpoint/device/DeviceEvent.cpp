@@ -1,7 +1,7 @@
 // =========== roboLib ============
 // ===  *** BARTOSZ NAWROT ***  ===
 // ================================
-#include "DeviceEvent.hpp"
+#include "endpoint/device/DeviceEvent.hpp"
 
 DeviceEvent::DeviceEvent(const Type& _type):
     type(_type)

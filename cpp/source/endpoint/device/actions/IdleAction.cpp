@@ -1,10 +1,10 @@
-#include "IdleAction.hpp"
+#include "endpoint/device/actions/IdleAction.hpp"
 
-#include "PilotEvent.hpp"
+#include "endpoint/device/PilotEvent.hpp"
 
-#include "ConnectAction.hpp"
-#include "UpgradeAction.hpp"
-#include "WhoAmIAction.hpp"
+#include "endpoint/device/actions/ConnectAction.hpp"
+#include "endpoint/device/actions/UpgradeAction.hpp"
+#include "endpoint/device/actions/WhoAmIAction.hpp"
 
 IdleAction::IdleAction(Listener* const _listener):
     ISkyDeviceAction(_listener)

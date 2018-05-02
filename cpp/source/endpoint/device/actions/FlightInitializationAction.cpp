@@ -1,9 +1,9 @@
-#include "FlightInitializationAction.hpp"
+#include "endpoint/device/actions/FlightInitializationAction.hpp"
 
-#include "AppAction.hpp"
-#include "FlightAction.hpp"
+#include "endpoint/device/actions/AppAction.hpp"
+#include "endpoint/device/actions/FlightAction.hpp"
 
-#include "SkyException.hpp"
+#include "common/SkyException.hpp"
 
 FlightInitializationAction::FlightInitializationAction(Listener* const _listener):
     ISkyDeviceAction(_listener)

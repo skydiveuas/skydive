@@ -1,8 +1,8 @@
-#include "IMessage.hpp"
+#include "communication/IMessage.hpp"
 
 #ifdef __SKYDIVE_USE_STL__
 
-#include "SkyException.hpp"
+#include "common/SkyException.hpp"
 
 #endif // __SKYDIVE_USE_STL__
 

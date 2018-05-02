@@ -11,12 +11,12 @@
 
 #endif //__SKYDIVE_USE_STL__
 
-#include "MathCore.hpp"
+#include "common/MathCore.hpp"
 
 #include "IMessage.hpp"
 
 #include "ControlData.hpp"
-#include "Flags.hpp"
+#include "common/Flags.hpp"
 
 /**
  * =============================================================================================

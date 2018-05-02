@@ -6,7 +6,7 @@
 
 #include "ISkyDeviceAction.hpp"
 
-#include "AutopilotData.hpp"
+#include "communication/AutopilotData.hpp"
 
 #include <atomic>
 

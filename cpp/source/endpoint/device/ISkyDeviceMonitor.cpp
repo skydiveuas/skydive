@@ -1,4 +1,4 @@
-#include "ISkyDeviceMonitor.hpp"
+#include "endpoint/device/ISkyDeviceMonitor.hpp"
 
 ISkyDeviceMonitor::~ISkyDeviceMonitor()
 {

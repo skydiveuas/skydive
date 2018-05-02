@@ -1,7 +1,7 @@
 // =========== roboLib ============
 // ===  *** BARTOSZ NAWROT ***  ===
 // ================================
-#include "PilotEvent.hpp"
+#include "endpoint/device/PilotEvent.hpp"
 
 PilotEvent::PilotEvent(const Type& _type) :
     type(_type)

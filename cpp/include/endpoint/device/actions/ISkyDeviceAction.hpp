@@ -4,11 +4,11 @@
 #ifndef ISKYDEVICEACTION_HPP
 #define ISKYDEVICEACTION_HPP
 
-#include "IMessage.hpp"
+#include "communication/IMessage.hpp"
 
-#include "ISkyDeviceMonitor.hpp"
+#include "endpoint/device/ISkyDeviceMonitor.hpp"
 
-#include "ISkyCommInterface.hpp"
+#include "endpoint/ISkyCommInterface.hpp"
 
 #include <atomic>
 #include <memory>

@@ -1,10 +1,10 @@
-#include "SkyDevice.hpp"
+#include "endpoint/device/SkyDevice.hpp"
 
-#include "SkyException.hpp"
+#include "common/SkyException.hpp"
 
-#include "PilotEvent.hpp"
+#include "endpoint/device/PilotEvent.hpp"
 
-#include "IdleAction.hpp"
+#include "endpoint/device/actions/IdleAction.hpp"
 
 #include <stdlib.h>
 #include <functional>

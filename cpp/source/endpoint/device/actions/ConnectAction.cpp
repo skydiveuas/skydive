@@ -1,10 +1,10 @@
-#include "ConnectAction.hpp"
+#include "endpoint/device/actions/ConnectAction.hpp"
 
-#include "SkyException.hpp"
+#include "common/SkyException.hpp"
 
-#include "AppAction.hpp"
+#include "endpoint/device/actions/AppAction.hpp"
 
-#include "CalibrationSettings.hpp"
+#include "communication/CalibrationSettings.hpp"
 
 ConnectAction::ConnectAction(Listener* const _listener):
     ISkyDeviceAction(_listener)

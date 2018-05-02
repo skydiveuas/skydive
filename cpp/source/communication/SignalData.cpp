@@ -1,8 +1,8 @@
-#include "SignalData.hpp"
+#include "communication/SignalData.hpp"
 
-#include "CalibrationSettings.hpp"
-#include "ControlSettings.hpp"
-#include "RouteContainer.hpp"
+#include "communication/CalibrationSettings.hpp"
+#include "communication/ControlSettings.hpp"
+#include "communication/RouteContainer.hpp"
 
 #include <string.h>
 

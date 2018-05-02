@@ -1,7 +1,7 @@
-#include "UpgradeAction.hpp"
+#include "endpoint/device/actions/UpgradeAction.hpp"
 
-#include "IdleAction.hpp"
-#include "AppAction.hpp"
+#include "endpoint/device/actions/IdleAction.hpp"
+#include "endpoint/device/actions/AppAction.hpp"
 
 UpgradeAction::UpgradeAction(Listener* const _listener):
     ISkyDeviceAction(_listener)

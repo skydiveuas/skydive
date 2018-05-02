@@ -1,8 +1,8 @@
-#include "SensorsLoggerAction.hpp"
+#include "endpoint/device/actions/SensorsLoggerAction.hpp"
 
-#include "AppAction.hpp"
+#include "endpoint/device/actions/AppAction.hpp"
 
-#include "PilotEvent.hpp"
+#include "endpoint/device/PilotEvent.hpp"
 
 SensorsLoggerAction::SensorsLoggerAction(Listener* const _listener):
     ISkyDeviceAction(_listener)

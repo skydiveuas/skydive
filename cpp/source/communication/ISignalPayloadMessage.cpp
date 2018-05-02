@@ -1,4 +1,4 @@
-#include "ISignalPayloadMessage.hpp"
+#include "communication/ISignalPayloadMessage.hpp"
 
 #include <string.h>
 

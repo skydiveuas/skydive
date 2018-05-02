@@ -1,4 +1,4 @@
-#include "SkyException.hpp"
+#include "common/SkyException.hpp"
 
 #ifdef __SKYDIVE_USE_STL__
 

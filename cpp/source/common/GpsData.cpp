@@ -1,4 +1,4 @@
-#include "GpsData.hpp"
+#include "common/GpsData.hpp"
 
 #include <string.h>
 
@@ -6,14 +6,14 @@
 
 #include <iomanip>
 
-#include "SkyException.hpp"
+#include "common/SkyException.hpp"
 
-#endif //__SKYDIVE_USE_STL__
+#endif // __SKYDIVE_USE_STL__
 
 GpsData::GpsData(void)
-: fix(false),
-  justFixed(false),
-  justFixLost(false)
+    : fix(false),
+      justFixed(false),
+      justFixLost(false)
 {
 }
 

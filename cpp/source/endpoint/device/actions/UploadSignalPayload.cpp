@@ -1,6 +1,6 @@
-#include "UploadSignalPayload.hpp"
+#include "endpoint/device/actions/UploadSignalPayload.hpp"
 
-#include "AppAction.hpp"
+#include "endpoint/device/actions/AppAction.hpp"
 
 UploadSignalPayload::UploadSignalPayload(Listener* const _listener,  const ISignalPayloadMessage& _data):
     ISkyDeviceAction(_listener),

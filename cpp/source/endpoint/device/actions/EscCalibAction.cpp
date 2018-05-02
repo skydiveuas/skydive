@@ -1,8 +1,8 @@
-#include "EscCalibAction.hpp"
+#include "endpoint/device/actions/EscCalibAction.hpp"
 
-#include "AppAction.hpp"
+#include "endpoint/device/actions/AppAction.hpp"
 
-#include "PilotEvent.hpp"
+#include "endpoint/device/PilotEvent.hpp"
 
 EscCalibAction::EscCalibAction(Listener* const _listener):
     ISkyDeviceAction(_listener)

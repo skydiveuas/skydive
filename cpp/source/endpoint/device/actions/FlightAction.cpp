@@ -1,10 +1,10 @@
-#include "FlightAction.hpp"
+#include "endpoint/device/actions/FlightAction.hpp"
 
-#include "AppAction.hpp"
+#include "endpoint/device/actions/AppAction.hpp"
 
-#include "PilotEvent.hpp"
+#include "endpoint/device/PilotEvent.hpp"
 
-#include "SkyException.hpp"
+#include "common/SkyException.hpp"
 
 #include <functional>
 

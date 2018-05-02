@@ -4,12 +4,12 @@
 #ifndef ISKYDIVEMONITOR_HPP
 #define ISKYDIVEMONITOR_HPP
 
-#include "ISkyTimer.hpp"
+#include "endpoint/ISkyTimer.hpp"
 
-#include "IMessage.hpp"
+#include "communication/IMessage.hpp"
 
 #include "DeviceEvent.hpp"
-#include "ControlData.hpp"
+#include "communication/ControlData.hpp"
 
 #include <string>
 #include <functional>

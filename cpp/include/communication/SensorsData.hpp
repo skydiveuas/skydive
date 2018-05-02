@@ -4,12 +4,12 @@
 #ifndef __SENSORS_DATA__
 #define __SENSORS_DATA__
 
-#include "MathCore.hpp"
+#include "common/MathCore.hpp"
 
 #include "IMessage.hpp"
 
-#include "ImuData.hpp"
-#include "GpsData.hpp"
+#include "common/ImuData.hpp"
+#include "common/GpsData.hpp"
 
 /**
  * =============================================================================================

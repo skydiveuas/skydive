@@ -1,4 +1,4 @@
-#include "ISkyTimer.hpp"
+#include "endpoint/ISkyTimer.hpp"
 
 ISkyTimer::ISkyTimer(std::function<void (void)> _exec):
     exec(_exec)

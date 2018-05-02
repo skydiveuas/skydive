@@ -1,8 +1,8 @@
-#include "MagnetCalibAction.hpp"
+#include "endpoint/device/actions/MagnetCalibAction.hpp"
 
-#include "AppAction.hpp"
+#include "endpoint/device/actions/AppAction.hpp"
 
-#include "PilotEvent.hpp"
+#include "endpoint/device/PilotEvent.hpp"
 
 MagnetCalibAction::MagnetCalibAction(Listener* const _listener):
     ISkyDeviceAction(_listener)

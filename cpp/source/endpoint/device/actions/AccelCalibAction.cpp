@@ -1,6 +1,6 @@
-#include "AccelCalibAction.hpp"
+#include "endpoint/device/actions/AccelCalibAction.hpp"
 
-#include "AppAction.hpp"
+#include "endpoint/device/actions/AppAction.hpp"
 
 AccelCalibAction::AccelCalibAction(Listener* const _listener):
     ISkyDeviceAction(_listener)

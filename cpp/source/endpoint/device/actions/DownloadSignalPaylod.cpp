@@ -1,6 +1,6 @@
-#include "DownloadSignalPaylod.hpp"
+#include "endpoint/device/actions/DownloadSignalPaylod.hpp"
 
-#include "AppAction.hpp"
+#include "endpoint/device/actions/AppAction.hpp"
 
 DownloadSignalPaylod::DownloadSignalPaylod(Listener* const _listener, const SignalData::Command _type):
     ISkyDeviceAction(_listener),

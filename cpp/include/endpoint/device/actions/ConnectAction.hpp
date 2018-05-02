@@ -6,7 +6,7 @@
 
 #include "ISkyDeviceAction.hpp"
 
-#include "ISkyCommInterface.hpp"
+#include "endpoint/ISkyCommInterface.hpp"
 
 #include <atomic>
 

@@ -1,16 +1,16 @@
-#include "ControlSettings.hpp"
+#include "communication/ControlSettings.hpp"
 
 #ifdef __SKYDIVE_USE_STL__
 
-#include "SkyException.hpp"
+#include "common/SkyException.hpp"
 
 #endif // __SKYDIVE_USE_STL__
 
 #include <string.h>
 
-#include "IMessage.hpp"
-#include "SignalData.hpp"
-#include "DebugData.hpp"
+#include "communication/IMessage.hpp"
+#include "communication/SignalData.hpp"
+#include "communication/DebugData.hpp"
 
 ControlSettings::ControlSettings(void)
 {

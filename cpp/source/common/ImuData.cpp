@@ -1,4 +1,4 @@
-#include "ImuData.hpp"
+#include "common/ImuData.hpp"
 
 #include <string.h>
 
@@ -6,7 +6,7 @@
 
 #include <iomanip>
 
-#include "SkyException.hpp"
+#include "common/SkyException.hpp"
 
 #endif //__SKYDIVE_USE_STL__
 

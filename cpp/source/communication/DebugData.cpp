@@ -1,4 +1,4 @@
-#include "DebugData.hpp"
+#include "communication/DebugData.hpp"
 
 #include <string.h>
 
@@ -6,7 +6,7 @@
 
 #include <iomanip>
 
-#include "SkyException.hpp"
+#include "common/SkyException.hpp"
 
 #endif //__SKYDIVE_USE_STL__
 

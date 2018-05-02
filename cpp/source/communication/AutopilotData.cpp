@@ -1,4 +1,4 @@
-#include "AutopilotData.hpp"
+#include "communication/AutopilotData.hpp"
 
 #include <string.h>
 
@@ -7,7 +7,7 @@
 #include <iomanip>
 #include <sstream>
 
-#include "SkyException.hpp"
+#include "common/SkyException.hpp"
 
 #endif //__SKYDIVE_USE_STL__
 

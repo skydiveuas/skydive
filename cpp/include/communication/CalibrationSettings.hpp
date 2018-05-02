@@ -10,12 +10,12 @@
 
 #endif // __SKYDIVE_USE_STL__
 
-#include "MathCore.hpp"
+#include "common/MathCore.hpp"
 
 #include "ISignalPayloadMessage.hpp"
 
 #include "SignalData.hpp"
-#include "Flags.hpp"
+#include "common/Flags.hpp"
 
 /**
  * =============================================================================================

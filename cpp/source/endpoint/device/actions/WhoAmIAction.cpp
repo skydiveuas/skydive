@@ -1,7 +1,7 @@
-#include "WhoAmIAction.hpp"
+#include "endpoint/device/actions/WhoAmIAction.hpp"
 
-#include "IdleAction.hpp"
-#include "AppAction.hpp"
+#include "endpoint/device/actions/IdleAction.hpp"
+#include "endpoint/device/actions/AppAction.hpp"
 
 WhoAmIAction::WhoAmIAction(Listener* const _listener):
     ISkyDeviceAction(_listener)

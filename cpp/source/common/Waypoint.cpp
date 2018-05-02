@@ -1,4 +1,4 @@
-#include "Waypoint.hpp"
+#include "common/Waypoint.hpp"
 
 #include <cstring>
 

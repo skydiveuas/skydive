@@ -11,7 +11,7 @@
 
 #endif //__SKYDIVE_USE_STL__
 
-#include "MathCore.hpp"
+#include "common/MathCore.hpp"
 
 #include "IMessage.hpp"
 

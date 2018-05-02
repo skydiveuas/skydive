@@ -1,6 +1,6 @@
-#include "ResetAction.hpp"
+#include "endpoint/device/actions/ResetAction.hpp"
 
-#include "IdleAction.hpp"
+#include "endpoint/device/actions/IdleAction.hpp"
 
 ResetAction::ResetAction(Listener* const _listener):
     ISkyDeviceAction(_listener)

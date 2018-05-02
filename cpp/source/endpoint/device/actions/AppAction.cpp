@@ -1,22 +1,22 @@
-#include "AppAction.hpp"
+#include "endpoint/device/actions/AppAction.hpp"
 
-#include "SkyException.hpp"
+#include "common/SkyException.hpp"
 
-#include "PilotEvent.hpp"
+#include "endpoint/device/PilotEvent.hpp"
 
-#include "UpgradeAction.hpp"
-#include "DisconnectAction.hpp"
-#include "FlightInitializationAction.hpp"
-#include "FlightAction.hpp"
-#include "AccelCalibAction.hpp"
-#include "MagnetCalibAction.hpp"
-#include "UploadSignalPayload.hpp"
-#include "DownloadSignalPaylod.hpp"
-#include "SensorsLoggerAction.hpp"
-#include "RadioCheckAction.hpp"
-#include "RadioCalibAction.hpp"
-#include "ResetAction.hpp"
-#include "EscCalibAction.hpp"
+#include "endpoint/device/actions/UpgradeAction.hpp"
+#include "endpoint/device/actions/DisconnectAction.hpp"
+#include "endpoint/device/actions/FlightInitializationAction.hpp"
+#include "endpoint/device/actions/FlightAction.hpp"
+#include "endpoint/device/actions/AccelCalibAction.hpp"
+#include "endpoint/device/actions/MagnetCalibAction.hpp"
+#include "endpoint/device/actions/UploadSignalPayload.hpp"
+#include "endpoint/device/actions/DownloadSignalPaylod.hpp"
+#include "endpoint/device/actions/SensorsLoggerAction.hpp"
+#include "endpoint/device/actions/RadioCheckAction.hpp"
+#include "endpoint/device/actions/RadioCalibAction.hpp"
+#include "endpoint/device/actions/ResetAction.hpp"
+#include "endpoint/device/actions/EscCalibAction.hpp"
 
 #include <functional>
 

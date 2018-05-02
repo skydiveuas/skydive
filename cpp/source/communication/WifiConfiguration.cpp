@@ -1,4 +1,4 @@
-#include "WifiConfiguration.hpp"
+#include "communication/WifiConfiguration.hpp"
 
 #include <string.h>
 

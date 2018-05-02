@@ -1,7 +1,8 @@
-#include "ISkyDeviceAction.hpp"
+#include "endpoint/device/actions/ISkyDeviceAction.hpp"
 
-#include "PilotEvent.hpp"
-#include "SKyException.hpp"
+#include "endpoint/device/PilotEvent.hpp"
+
+#include "common/SkyException.hpp"
 
 #include <memory>
 

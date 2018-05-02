@@ -13,7 +13,7 @@
 #include "ISignalPayloadMessage.hpp"
 
 #include "SignalData.hpp"
-#include "Waypoint.hpp"
+#include "common/Waypoint.hpp"
 
 /**
  * =============================================================================================

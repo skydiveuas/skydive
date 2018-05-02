@@ -4,12 +4,12 @@
 #ifndef PILOTEVENT_HPP
 #define PILOTEVENT_HPP
 
-#include "ISignalPayloadMessage.hpp"
+#include "communication/ISignalPayloadMessage.hpp"
 
-#include "ISkyCommInterface.hpp"
-#include "ISkyDeviceAction.hpp"
+#include "endpoint/ISkyCommInterface.hpp"
+#include "actions/ISkyDeviceAction.hpp"
 
-#include "SkyException.hpp"
+#include "common/SkyException.hpp"
 
 #include <string>
 

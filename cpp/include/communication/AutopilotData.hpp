@@ -4,12 +4,12 @@
 #ifndef __AUTOPILOT_DATA__
 #define __AUTOPILOT_DATA__
 
-#include "MathCore.hpp"
+#include "common/MathCore.hpp"
 
 #include "IMessage.hpp"
 
-#include "Location.hpp"
-#include "Flags.hpp"
+#include "common/Location.hpp"
+#include "common/Flags.hpp"
 
 /**
  * =============================================================================================

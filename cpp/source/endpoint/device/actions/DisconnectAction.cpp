@@ -1,8 +1,8 @@
-#include "DisconnectAction.hpp"
+#include "endpoint/device/actions/DisconnectAction.hpp"
 
-#include "IdleAction.hpp"
+#include "endpoint/device/actions/IdleAction.hpp"
 
-#include "SkyException.hpp"
+#include "common/SkyException.hpp"
 
 DisconnectAction::DisconnectAction(Listener* const _listener):
     ISkyDeviceAction(_listener)

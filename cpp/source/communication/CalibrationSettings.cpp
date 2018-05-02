@@ -1,4 +1,4 @@
-#include "CalibrationSettings.hpp"
+#include "communication/CalibrationSettings.hpp"
 
 #ifdef __SKYDIVE_USE_STL__
 
@@ -8,8 +8,8 @@
 
 #include <string.h>
 
-#include "IMessage.hpp"
-#include "SignalData.hpp"
+#include "communication/IMessage.hpp"
+#include "communication/SignalData.hpp"
 
 CalibrationSettings::CalibrationSettings(void)
 {

@@ -4,12 +4,12 @@
 #ifndef DEVICEEVENT_HPP
 #define DEVICEEVENT_HPP
 
-#include "IMessage.hpp"
-#include "ISignalPayloadMessage.hpp"
+#include "communication/IMessage.hpp"
+#include "communication/ISignalPayloadMessage.hpp"
 
-#include "CalibrationSettings.hpp"
+#include "communication/CalibrationSettings.hpp"
 
-#include "SkyException.hpp"
+#include "common/SkyException.hpp"
 
 #include <string>
 

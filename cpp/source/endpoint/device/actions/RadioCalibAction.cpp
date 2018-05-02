@@ -1,8 +1,8 @@
-#include "RadioCalibAction.hpp"
+#include "endpoint/device/actions/RadioCalibAction.hpp"
 
-#include "AppAction.hpp"
+#include "endpoint/device/actions/AppAction.hpp"
 
-#include "PilotEvent.hpp"
+#include "endpoint/device/PilotEvent.hpp"
 
 RadioCalibAction::RadioCalibAction(Listener* const _listener):
     ISkyDeviceAction(_listener)

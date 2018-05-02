@@ -7,12 +7,12 @@
 #include "DeviceEvent.hpp"
 #include "PilotEvent.hpp"
 
-#include "ISkyCommInterface.hpp"
+#include "endpoint/ISkyCommInterface.hpp"
 #include "ISkyDeviceMonitor.hpp"
 
-#include "ISkyDeviceAction.hpp"
+#include "actions/ISkyDeviceAction.hpp"
 
-#include "CommDispatcher.hpp"
+#include "communication/CommDispatcher.hpp"
 
 #include <ctime>
 #include <memory>

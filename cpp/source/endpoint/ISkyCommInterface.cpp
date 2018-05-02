@@ -1,4 +1,4 @@
-#include "ISkyCommInterface.hpp"
+#include "endpoint/ISkyCommInterface.hpp"
 
 ISkyCommInterface::Listener::~Listener(void)
 {
