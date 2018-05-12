@@ -29,10 +29,8 @@ public class CommHandler implements CommInterface.CommInterfaceListener,
     private CommTask controlTask;
     private CommTask pingTask;
 
-    public CommHandler(UavManager uavManager, CommInterface commInterface, double controlFreq, double pingFreq) {
+    public CommHandler(UavManager uavManager, double controlFreq, double pingFreq) {
         this.commHandlerAction = new IdleAction(this);
-        this.commInterface = commInterface;
-        this.commInterface.setListener(this);
         this.dispatcher = new CommDispatcher(this);
 
         this.uavManager = uavManager;
@@ -81,13 +79,15 @@ public class CommHandler implements CommInterface.CommInterfaceListener,
         };
     }
 
-    public void connectInterface() {
-        System.out.println("CommHandler: connectSocket");
-        commInterface.connect();
+    public void connect(CommInterface commInterface) {
+        System.out.println("CommHandler: connect over: " + commInterface.getClass().getSimpleName());
+        this.commInterface = commInterface;
+        this.commInterface.setListener(this);
+        this.commInterface.connect();
     }
 
     void disconnectInterface() {
-        System.out.println("CommHandler: disconnectSocket");
+        System.out.println("CommHandler: disconnectInterface");
         stopAllTasks();
         commInterface.disconnect();
     }

@@ -1,5 +1,6 @@
 package com.skydive.java;
 
+import com.addrone.communication.TcpClientSocket;
 import com.skydive.java.actions.CommHandlerAction;
 import com.skydive.java.data.*;
 import com.skydive.java.events.UserEvent;
@@ -36,10 +37,10 @@ public class UavManager {
 
     private ControlDataSource controlDataSource;
 
-    public UavManager(CommInterface commInterface, double controlFreq, double pingFreq) {
+    public UavManager(double controlFreq, double pingFreq) {
         this.listeners = new ArrayList<>();
         this.commDelay = 0;
-        this.commHandler = new CommHandler(this, commInterface, controlFreq, pingFreq);
+        this.commHandler = new CommHandler(this, controlFreq, pingFreq);
     }
 
     public CommHandler getCommHandler() {
@@ -265,6 +266,10 @@ public class UavManager {
 
     public void unregisterListener(UavManagerListener listener) {
         listeners.remove(listener);
+    }
+
+    public void connect(CommInterface commInterface) {
+        commHandler.connect(commInterface);
     }
 
     public interface UavManagerListener {

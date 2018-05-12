@@ -2,6 +2,7 @@ package com.skydive.java.actions;
 
 import com.skydive.java.CommHandler;
 import com.skydive.java.CommMessage;
+import com.skydive.java.CommTask;
 import com.skydive.java.UavEvent;
 import com.skydive.java.data.CalibrationSettings;
 import com.skydive.java.data.SignalData;
@@ -31,12 +32,28 @@ public class ConnectAction extends CommHandlerAction {
 
     private boolean connectionProcedureDone;
 
-    private Timer timer;
+    private CommTask connectionTimeoutTask;
 
     public ConnectAction(CommHandler commHandler) {
         super(commHandler);
         state = ConnectState.IDLE;
         connectionProcedureDone = false;
+
+        connectionTimeoutTask = new CommTask(1000.0 / CONNECTION_TIMEOUT) {
+            @Override
+            protected String getTaskName() {
+                return "connection_timeout_task";
+            }
+
+            @Override
+            protected void task() {
+                if (state == ConnectState.INITIAL_COMMAND) {
+                    ConnectAction.this.commHandler.getUavManager().notifyUavEvent(
+                            new UavEvent(UavEvent.Type.ERROR,
+                                    "Timeout waiting for initial command response."));
+                }
+            }
+        };
     }
 
     @Override
@@ -50,7 +67,7 @@ public class ConnectAction extends CommHandlerAction {
         connectionProcedureDone = false;
         state = ConnectState.INITIAL_COMMAND;
         commHandler.send(new SignalData(SignalData.Command.START_CMD, SignalData.Parameter.START).getMessage());
-        startConnectionTimer();
+        commHandler.startCommTask(connectionTimeoutTask);
     }
 
     @Override
@@ -60,7 +77,7 @@ public class ConnectAction extends CommHandlerAction {
             case INITIAL_COMMAND:
                 if (event.matchSignalData(
                         new SignalData(SignalData.Command.START_CMD, SignalData.Parameter.ACK))) {
-                    timer.cancel();
+                    commHandler.stopCommTask(connectionTimeoutTask);
                     state = ConnectState.PROTOCOL_VERSION;
                     System.out.println("Initial command received successfully");
                 } else {
@@ -137,20 +154,6 @@ public class ConnectAction extends CommHandlerAction {
         } else {
             System.out.println("HandleEvent done, no state change");
         }
-    }
-
-    private void startConnectionTimer() {
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                if (state == ConnectState.INITIAL_COMMAND) {
-                    commHandler.getUavManager().notifyUavEvent(
-                            new UavEvent(UavEvent.Type.ERROR,
-                                    "Timeout waiting for initial command response."));
-                }
-            }
-        }, CONNECTION_TIMEOUT);
     }
 
     @Override
