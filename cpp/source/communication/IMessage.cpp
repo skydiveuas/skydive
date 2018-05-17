@@ -2,7 +2,7 @@
 
 #ifdef __SKYDIVE_USE_STL__
 
-#include "common/SkyException.hpp"
+#include <stdexcept>
 
 #endif // __SKYDIVE_USE_STL__
 
@@ -170,7 +170,8 @@ std::string IMessage::toString(const MessageType type)
     case CONTROL_SETTINGS: return "CONTROL_SETTINGS";
     case ROUTE_CONTAINER: return "ROUTE_CONTAINER";
     case WIFI_CONFIGURATION: return "WIFI_CONFIGURATION";
-    default: __SKY_EXCEPTION__("IMessage::toString::Unexpected message type");
+    default:
+        throw std::runtime_error("IMessage::toString::Unexpected message type");
     }
 }
 

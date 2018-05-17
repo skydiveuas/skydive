@@ -1,7 +1,5 @@
 #include "endpoint/device/SkyDevice.hpp"
 
-#include "common/SkyException.hpp"
-
 #include "endpoint/device/PilotEvent.hpp"
 
 #include "endpoint/device/actions/IdleAction.hpp"
@@ -65,9 +63,9 @@ void SkyDevice::notifyReception(std::shared_ptr<ISkyDeviceAction> guard,
         std::unique_lock<std::mutex>(actionLock);
         guard->baseHandleReception(std::unique_ptr<const IMessage>(message));
     }
-    catch (SkyException e)
+    catch (const std::runtime_error& e)
     {
-        handleError(e.message());
+        handleError(e.what());
     }
 }
 
@@ -169,7 +167,7 @@ void SkyDevice::startAction(ISkyDeviceAction* newAction, bool immediateStart)
     {
         std::string message = "Previous action (" + action->getName() +
                 ") not done, when performing: " + newAction->getName() + ".";
-        __SKY_EXCEPTION__(message.c_str());
+        throw std::runtime_error(message.c_str());
     }
 
     std::shared_ptr<ISkyDeviceAction> newActionGuard(newAction);

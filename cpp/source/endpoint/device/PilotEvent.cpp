@@ -39,7 +39,7 @@ std::string PilotEvent::toString(void) const
     case RADIO_CALIBRATION_DONE: return "RADIO_CALIBRATION_DONE";
     case RADIO_CALIBRATION_SKIP: return "RADIO_CHECK_DONE";
     default:
-        __SKY_EXCEPTION__("UserUavEvent::toString:Unexpected event type");
+        throw std::runtime_error("UserUavEvent::toString:Unexpected event type");
     }
 }
 

@@ -46,7 +46,7 @@ std::string RadioCalibAction::getStateName(void) const
     case FINAL_COMMAND: return "FINAL_COMMAND";
     case CALIBRATION_RECEPTION: return "CALIBRATION_RECEPTION";
     default:
-        __SKY_EXCEPTION__("RadioCalibAction::getStateName::Unexpected state");
+        throw std::runtime_error("RadioCalibAction::getStateName::Unexpected state");
     }
 }
 

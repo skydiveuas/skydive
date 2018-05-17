@@ -6,8 +6,7 @@
 
 #include <iomanip>
 #include <sstream>
-
-#include "common/SkyException.hpp"
+#include <stdexcept>
 
 #endif //__SKYDIVE_USE_STL__
 
@@ -168,7 +167,7 @@ ControlData::ControllerCommand ControlData::getCommandFromString(const std::stri
     }
     else
     {
-        __SKY_EXCEPTION__("Unexpected command string");
+        throw std::runtime_error("Unexpected command string");
     }
 }
 
@@ -209,7 +208,7 @@ ControlData::SolverMode ControlData::getSolverModeFromString(const std::string& 
     }
     else
     {
-        __SKY_EXCEPTION__("Unexpected command string");
+        throw std::runtime_error("Unexpected command string");
     }
 }
 
@@ -227,7 +226,7 @@ ControlData ControlData::parseFromString(const std::string& line)
           >> solverMode
           ))
     {
-        __SKY_EXCEPTION__("Error while parsing data.");
+        throw std::runtime_error("Error while parsing data.");
     }
     controlData.solverMode = (unsigned char)solverMode;
     return controlData;

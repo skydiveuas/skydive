@@ -5,8 +5,7 @@
 #ifdef __SKYDIVE_USE_STL__
 
 #include <iomanip>
-
-#include "common/SkyException.hpp"
+#include <stdexcept>
 
 #endif //__SKYDIVE_USE_STL__
 
@@ -297,7 +296,7 @@ DebugData DebugData::parseFromString(const std::string& line)
           >> battery
           ))
     {
-        __SKY_EXCEPTION__("Error while parsing data.");
+        throw std::runtime_error("Error while parsing data.");
     }
     debugData.battery = (unsigned char)battery;
     return debugData;

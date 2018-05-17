@@ -57,7 +57,7 @@ std::string DeviceEvent::toString(void) const
     case CALIBRATE_ESC_DONE: return "CALIBRATE_ESC_DONE";
     case CALIBRATE_ESC_ENDED: return "CALIBRATE_ESC_ENDED";
     default:
-        __SKY_EXCEPTION__("UavEvent::toString:Unexpected event type");
+        throw std::runtime_error("UavEvent::toString:Unexpected event type");
     }
 }
 

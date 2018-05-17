@@ -1,7 +1,5 @@
 #include "endpoint/device/actions/ConnectAction.hpp"
 
-#include "common/SkyException.hpp"
-
 #include "endpoint/device/actions/AppAction.hpp"
 
 #include "communication/CalibrationSettings.hpp"
@@ -41,7 +39,7 @@ std::string ConnectAction::getStateName(void) const
     case CALIBRATION_RECEPTION: return "CALIBRATION_RECEPTION";
     case FINAL_COMMAND: return "FINAL_COMMAND";
     default:
-        __SKY_EXCEPTION__("ConnectAction::getStateName::Unexpected state");
+        throw std::runtime_error("ConnectAction::getStateName::Unexpected state");
     }
 }
 

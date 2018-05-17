@@ -4,9 +4,8 @@
 
 #ifdef __SKYDIVE_USE_STL__
 
+#include <stdexcept>
 #include <iomanip>
-
-#include "common/SkyException.hpp"
 
 #endif //__SKYDIVE_USE_STL__
 
@@ -29,7 +28,7 @@ ImuData ImuData::parseFromString(const std::string& line)
           >> data.pressure
           ))
     {
-        __SKY_EXCEPTION__("Error while parsing data.");
+        throw std::runtime_error("Error while parsing data.");
     }
     return data;
 }

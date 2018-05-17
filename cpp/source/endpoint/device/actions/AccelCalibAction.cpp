@@ -34,7 +34,7 @@ std::string AccelCalibAction::getStateName(void) const
     case CALIBRATION: return "CALIBRATION";
     case CALIBRATION_RECEPTION: return "CALIBRATION_RECEPTION";
     default:
-        __SKY_EXCEPTION__("AccelCalibAction::__SKY_EXCEPTION__expected state");
+        throw std::runtime_error("AccelCalibAction::throw std::runtime_errorexpected state");
     }
 }
 

@@ -2,8 +2,6 @@
 
 #include "endpoint/device/PilotEvent.hpp"
 
-#include "common/SkyException.hpp"
-
 #include <memory>
 
 ISkyDeviceAction::Listener::~Listener(void)
@@ -80,7 +78,7 @@ std::string ISkyDeviceAction::toString(const Type type)
     case RADIO_CALIB: return "RADIO_CALIB";
     case ESC_CALIB: return "ESC_CALIB";
     case RESET: return "RESET";
-    default: __SKY_EXCEPTION__("ICommAction::toString::Unexpected action type");
+    default: throw std::runtime_error("ICommAction::toString::Unexpected action type");
     }
 }
 
@@ -264,23 +262,23 @@ bool ISkyDeviceAction::matchSignalData(const SignalData::Command command,
 void ISkyDeviceAction::except(const std::string& message) const
 {
     std::string msg = message + " at " + getName();
-    __SKY_EXCEPTION__(msg.c_str());
+    throw std::runtime_error(msg.c_str());
 }
 
 void ISkyDeviceAction::except(const std::string& message, const IMessage& received) const
 {
     std::string msg = message + " at " + getName() + " message: " + received.toString();
-    __SKY_EXCEPTION__(msg.c_str());
+    throw std::runtime_error(msg.c_str());
 }
 
 void ISkyDeviceAction::except(const std::string& message, const PilotEvent& event) const
 {
     std::string msg = message + " at " + getName() + " event: " + event.toString();
-    __SKY_EXCEPTION__(msg.c_str());
+    throw std::runtime_error(msg.c_str());
 }
 
 void ISkyDeviceAction::except(const std::string& message, const SignalData::Parameter parameter) const
 {
     std::string msg = message + " at " + getName() + " parameter: " + SignalData::toString(parameter);
-    __SKY_EXCEPTION__(msg.c_str());
+    throw std::runtime_error(msg.c_str());
 }

@@ -9,8 +9,6 @@
 #include "endpoint/ISkyCommInterface.hpp"
 #include "actions/ISkyDeviceAction.hpp"
 
-#include "common/SkyException.hpp"
-
 #include <string>
 
 class ISkyDeviceAction;

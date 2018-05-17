@@ -43,7 +43,7 @@ std::string RadioCheckAction::getStateName(void) const
     case RUNNING: return "RUNNING";
     case BREAKING: return "BREAKING";
     default:
-        __SKY_EXCEPTION__("RadioCheckAction::getStateName::Unexpected state");
+        throw std::runtime_error("RadioCheckAction::getStateName::Unexpected state");
     }
 }
 

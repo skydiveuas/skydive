@@ -3,8 +3,6 @@
 #include "endpoint/device/actions/AppAction.hpp"
 #include "endpoint/device/actions/FlightAction.hpp"
 
-#include "common/SkyException.hpp"
-
 FlightInitializationAction::FlightInitializationAction(Listener* const _listener):
     ISkyDeviceAction(_listener)
 {
@@ -38,7 +36,7 @@ std::string FlightInitializationAction::getStateName(void) const
     case ROUTE_COMMAND: return "ROUTE_COMMAND";
     case ROUTE_RECEPTION: return "ROUTE_RECEPTION";
     default:
-        __SKY_EXCEPTION__("FlightAction::getStateName::Unexpected state");
+        throw std::runtime_error("FlightAction::getStateName::Unexpected state");
     }
 }
 
