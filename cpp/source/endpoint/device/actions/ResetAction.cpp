@@ -32,7 +32,7 @@ std::string ResetAction::getStateName(void) const
     case IDLE: return "IDLE";
     case INITIAL_COMMAND: return "INITIAL_COMMAND";
     default:
-        __SKY_EXCEPTION__("ResetAction::get__SKY_EXCEPTION__ected state");
+        throw std::runtime_error("ResetAction::getthrow std::runtime_errorected state");
     }
 }
 

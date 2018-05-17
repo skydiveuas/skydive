@@ -9,8 +9,6 @@
 
 #include "communication/CalibrationSettings.hpp"
 
-#include "common/SkyException.hpp"
-
 #include <string>
 
 /**

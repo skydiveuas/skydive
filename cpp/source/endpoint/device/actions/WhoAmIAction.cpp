@@ -33,7 +33,7 @@ std::string WhoAmIAction::getStateName(void) const
     case IDLE: return "IDLE";
     case INITIAL_COMMAND: return "INITIAL_COMMAND";
     default:
-        __SKY_EXCEPTION__("WhoAmIAction::unexpected state");
+        throw std::runtime_error("WhoAmIAction::unexpected state");
     }
 }
 

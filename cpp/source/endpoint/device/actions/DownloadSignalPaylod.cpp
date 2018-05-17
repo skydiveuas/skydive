@@ -35,7 +35,7 @@ std::string DownloadSignalPaylod::getStateName(void) const
     case INITIAL_COMMAND: return "INITIAL_COMMAND";
     case DATA_RECEPTION: return "DATA_RECEPTION";
     default:
-        __SKY_EXCEPTION__("DownloadSignalPaylo__SKY_EXCEPTION__:Unexpected state");
+        throw std::runtime_error("DownloadSignalPaylothrow std::runtime_error:Unexpected state");
     }
 }
 
@@ -98,7 +98,7 @@ SignalData::Command DownloadSignalPaylod::getDownloadCommand(void) const
     case SignalData::CONTROL_SETTINGS: return SignalData::DOWNLOAD_SETTINGS;
     case SignalData::ROUTE_CONTAINER: return SignalData::DOWNLOAD_ROUTE;
     default:
-        __SKY_EXCEPTION__("DownloadSignalPaylod::getDownloadCommand::Unexpected type");
+        throw std::runtime_error("DownloadSignalPaylod::getDownloadCommand::Unexpected type");
     }
 }
 
@@ -109,6 +109,6 @@ DeviceEvent::Type DownloadSignalPaylod::getMonitorFailEvent(void) const
     case SignalData::CONTROL_SETTINGS: return DeviceEvent::CONTROLS_DOWNLOAD_FAIL;
     case SignalData::ROUTE_CONTAINER: return DeviceEvent::ROUTE_DOWNLOAD_FAIL;
     default:
-        __SKY_EXCEPTION__("DownloadSignalPaylod::getMonitorFailEvent::Unexpected type");
+        throw std::runtime_error("DownloadSignalPaylod::getMonitorFailEvent::Unexpected type");
     }
 }

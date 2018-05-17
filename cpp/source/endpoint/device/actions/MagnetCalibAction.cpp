@@ -38,7 +38,7 @@ std::string MagnetCalibAction::getStateName(void) const
     case CALIBRATION_SKIP_RESULT: return "CALIBRATION_SKIP_RESULT";
     case CALIBRATION_RECEPTION: return "IDLE";
     default:
-        __SKY_EXCEPTION__("MagnetCalibAction::getStateName::Unexpected state");
+        throw std::runtime_error("MagnetCalibAction::getStateName::Unexpected state");
     }
 }
 

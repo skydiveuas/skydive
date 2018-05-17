@@ -34,7 +34,7 @@ std::string UpgradeAction::getStateName(void) const
     case INITIAL_COMMAND: return "INITIAL_COMMAND";
     case BOARD_VERSION: return "BOARD_VERSION";
     default:
-        __SKY_EXCEPTION__("UpgradeAction::unexpected state");
+        throw std::runtime_error("UpgradeAction::unexpected state");
     }
 }
 

@@ -42,7 +42,7 @@ std::string SensorsLoggerAction::getStateName(void) const
     case LOGGING: return "LOGGING";
     case BREAKING: return "BREAKING";
     default:
-        __SKY_EXCEPTION__("SensorsLoggerAction::getStateName::Unexpected state");
+        throw std::runtime_error("SensorsLoggerAction::getStateName::Unexpected state");
     }
 }
 

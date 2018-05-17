@@ -1,7 +1,5 @@
 #include "endpoint/device/actions/AppAction.hpp"
 
-#include "common/SkyException.hpp"
-
 #include "endpoint/device/PilotEvent.hpp"
 
 #include "endpoint/device/actions/UpgradeAction.hpp"
@@ -19,6 +17,7 @@
 #include "endpoint/device/actions/EscCalibAction.hpp"
 
 #include <functional>
+#include <stdexcept>
 
 AppAction::AppAction(Listener* const _listener):
     ISkyDeviceAction(_listener)
@@ -56,7 +55,7 @@ std::string AppAction::getStateName(void) const
     case IDLE: return "IDLE";
     case APP_LOOP: return "APP_LOOP";
     default:
-        __SKY_EXCEPTION__("AppAction::getStateName::Unexpected state");
+        throw std::runtime_error("AppAction::getStateName::Unexpected state");
     }
 }
 

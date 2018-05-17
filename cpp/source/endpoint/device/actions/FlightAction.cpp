@@ -4,8 +4,6 @@
 
 #include "endpoint/device/PilotEvent.hpp"
 
-#include "common/SkyException.hpp"
-
 #include <functional>
 
 FlightAction::FlightAction(Listener* const _listener, const double _controlFreq):
@@ -50,7 +48,7 @@ std::string FlightAction::getStateName(void) const
     case FLING: return "FLING";
     case BREAKING: return "BREAKING";
     default:
-        __SKY_EXCEPTION__("FlightAction::getStateName::Unexpected state");
+        throw std::runtime_error("FlightAction::getStateName::Unexpected state");
     }
 }
 

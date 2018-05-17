@@ -2,8 +2,6 @@
 
 #include "endpoint/device/actions/IdleAction.hpp"
 
-#include "common/SkyException.hpp"
-
 DisconnectAction::DisconnectAction(Listener* const _listener):
     ISkyDeviceAction(_listener)
 {
@@ -34,7 +32,7 @@ std::string DisconnectAction::getStateName(void) const
     case IDLE: return "IDLE";
     case DISCONNECTING: return "DISCONNECTING";
     default:
-        __SKY_EXCEPTION__("AppAction::getStateName::Unexpected state");
+        throw std::runtime_error("AppAction::getStateName::Unexpected state");
     }
 }
 

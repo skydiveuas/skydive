@@ -36,7 +36,7 @@ std::string UploadSignalPayload::getStateName(void) const
     case INITIAL_COMMAND: return "INITIAL_COMMAND";
     case UPLOAD: return "UPLOAD";
     default:
-        __SKY_EXCEPTION__("UploadSignalPayload:__SKY_EXCEPTION__nexpected state");
+        throw std::runtime_error("UploadSignalPayload:throw std::runtime_errornexpected state");
     }
 }
 
@@ -117,6 +117,6 @@ SignalData::Command UploadSignalPayload::getUploadCommand(const IMessage::Messag
     case IMessage::ROUTE_CONTAINER: return SignalData::UPLOAD_ROUTE;
     case IMessage::WIFI_CONFIGURATION: return SignalData::WIFI_CONFIGURATION;
     default:
-        __SKY_EXCEPTION__("DownloadSignalPaylod::getDownloadCommand::Unexpected type");
+        throw std::runtime_error("DownloadSignalPaylod::getDownloadCommand::Unexpected type");
     }
 }

@@ -42,7 +42,7 @@ std::string EscCalibAction::getStateName(void) const
     case FINAL_ESC_DISCONNECT: return "FINAL_ESC_DISCONNECT";
     case FINAL_ESC_DISCONNECT_ACK: return "FINAL_ESC_DISCONNECT_ACK";
     default:
-        __SKY_EXCEPTION__("EscCalib::getStateName::Unexpected state");
+        throw std::runtime_error("EscCalib::getStateName::Unexpected state");
     }
 }
 
