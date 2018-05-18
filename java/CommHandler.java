@@ -150,7 +150,8 @@ public class CommHandler implements CommInterface.CommInterfaceListener,
 
     public void send(CommMessage message) {
         //System.out.println("CommHandler: Sending message: " + message.toString());
-        commInterface.send(message.getByteArray());
+        byte[] array = message.getByteArray();
+        commInterface.send(array, array.length);
     }
 
     public void send(final SignalPayloadData data) {

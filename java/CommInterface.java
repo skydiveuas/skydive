@@ -18,7 +18,7 @@ public abstract class CommInterface {
 
     public abstract void disconnect();
 
-    public abstract void send(final byte[] data);
+    public abstract void send(final byte[] data, final int dataSize);
 
     public interface CommInterfaceListener {
         void onConnected();

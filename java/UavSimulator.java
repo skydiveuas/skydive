@@ -472,7 +472,8 @@ public class UavSimulator implements CommInterface.CommInterfaceListener,
     }
 
     private void send(final CommMessage message) {
-        commInterface.send(message.getByteArray());
+        byte[] array = message.getByteArray();
+        commInterface.send(array, array.length);
     }
 
     private void send(final SignalPayloadData data) {
