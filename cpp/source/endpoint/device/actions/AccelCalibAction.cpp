@@ -70,7 +70,7 @@ void AccelCalibAction::handleSignalReception(const Parameter parameter)
         {
         case SignalData::ACK:
             monitor->trace("Accelerometer calibration procedure started");
-            startSignalTimeout(SignalData::CALIBRATE_ACCEL, 1500);
+            startSignalTimeout(SignalData::CALIBRATE_ACCEL, 3000);
             state = CALIBRATION;
             break;
 

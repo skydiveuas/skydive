@@ -240,11 +240,11 @@ public:
     bool isNormal(void) const; // check if data is correct
 
     // metody statyczne
-    static Vect3D <_Tp> ones(void); // wektor jedynkowy
-    static Vect3D <_Tp> zeros(void); // wektor zerowy
-    static Vect3D <_Tp> gravity(void); // wektor przyspieszenia ziemskiego
-    static Vect3D <_Tp> toDeg(const Vect3D<_Tp> &rpyRad); // przeliczenia na stopnie
-    static Vect3D <_Tp> toRad(const Vect3D<_Tp> &rpyDeg); // przeliczenie na radiany
+    static constexpr Vect3D <_Tp> ones(void); // wektor jedynkowy
+    static constexpr Vect3D <_Tp> zeros(void); // wektor zerowy
+    static constexpr Vect3D <_Tp> gravity(void); // wektor przyspieszenia ziemskiego
+    static constexpr Vect3D <_Tp> toDeg(const Vect3D<_Tp> &rpyRad); // przeliczenia na stopnie
+    static constexpr Vect3D <_Tp> toRad(const Vect3D<_Tp> &rpyDeg); // przeliczenie na radiany
 
     template <typename _Type> static Vect3D <_Tp> eulerFromDCM(const Mat3D<_Type> &R); // konstrukcja wektora katow rpy z macierzy kosinusow kierunkowych
     template <typename _Type> static Vect3D <_Tp> eulerFromQuat(const Vect4D<_Type> &q); // konstrukcja wektora katow rpy z kwaternionu
@@ -329,8 +329,8 @@ public:
 
 
     // metody statyczne
-    static Vect4D <_Tp> ones(void); // wektor jedynkowy
-    static Vect4D <_Tp> zeros(void); // wektor zerowy
+    static constexpr Vect4D <_Tp> ones(void); // wektor jedynkowy
+    static constexpr Vect4D <_Tp> zeros(void); // wektor zerowy
 
     template <typename _Type> static Vect4D <_Tp> quatFromDCM(const Mat3D<_Type> &R);
     template <typename _Type> static Vect4D <_Tp> quatFromEuler(const Vect3D<_Type> &rpy);
@@ -1195,23 +1195,23 @@ bool Vect3D <_Tp>::isNormal(void) const // check if data is correct
 }
 
 // metody statyczne
-template <class _Tp>
+template <class _Tp> constexpr
 Vect3D <_Tp> Vect3D <_Tp>::ones(void) // wektor jedynkowy
 {
     return Vect3D <_Tp>(1, 1, 1);
 }
-template <class _Tp>
+template <class _Tp> constexpr
 Vect3D <_Tp> Vect3D <_Tp>::zeros(void) // wektor zerowy
 {
     return Vect3D <_Tp>(0, 0, 0);
 }
-template <class _Tp>
+template <class _Tp> constexpr
 Vect3D <_Tp> Vect3D <_Tp>::gravity(void) // wektor przyspieszenia ziemskiego
 {
     return Vect3D <_Tp>(0, 0, _Tp(roboLib::gravity));
 }
 
-template <class _Tp>
+template <class _Tp> constexpr
 Vect3D <_Tp> Vect3D <_Tp>::toDeg(const Vect3D<_Tp> &rpyRad) // przeliczenia na stopnie
 {
     return Vect3D <_Tp>
@@ -1221,7 +1221,7 @@ Vect3D <_Tp> Vect3D <_Tp>::toDeg(const Vect3D<_Tp> &rpyRad) // przeliczenia na s
                 roboLib::toDeg(rpyRad.z)
                 );
 }
-template <class _Tp>
+template <class _Tp> constexpr
 Vect3D <_Tp> Vect3D <_Tp>::toRad(const Vect3D<_Tp> &rpyDeg) // przeliczenie na radiany
 {
     return Vect3D <_Tp>
