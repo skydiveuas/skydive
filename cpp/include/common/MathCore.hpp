@@ -17,27 +17,27 @@
 
 namespace roboLib
 {
-const double pi = 3.1415926535897932;		// liczba pi
-const double gravity = 9.8105;				// przyspieszenie ziemskie w Krakowie [m/s^2]
-const double rhoAir = 1.168;				// gestosc powietrza w warukach normalnych [kg/m^3]
-const double rEarth = 6371000;				// przyblizony promien Ziemi [m]
-const double absoluteZeroCelsius = -273.15;	// temperatura zera bezwzglednego w skali Celsiusza
-const double R = 29.2746;					// stala gazowa
-const double tau = 6.5 / 1000.0;			// gradnient temperaturowy atmosfery [K/m]
-const double normTemperature = 288.15;		// normal temperature for sea level [K]
-const double normPressure = 1013.25;		// normal preassure for sea level [hPa]
+constexpr double pi = 3.1415926535897932;		// liczba pi
+constexpr double gravity = 9.8105;				// przyspieszenie ziemskie w Krakowie [m/s^2]
+constexpr double rhoAir = 1.168;				// gestosc powietrza w warukach normalnych [kg/m^3]
+constexpr double rEarth = 6371000;				// przyblizony promien Ziemi [m]
+constexpr double absoluteZeroCelsius = -273.15;	// temperatura zera bezwzglednego w skali Celsiusza
+constexpr double R = 29.2746;					// stala gazowa
+constexpr double tau = 6.5 / 1000.0;			// gradnient temperaturowy atmosfery [K/m]
+constexpr double normTemperature = 288.15;		// normal temperature for sea level [K]
+constexpr double normPressure = 1013.25;		// normal preassure for sea level [hPa]
 
-template <typename _Tp> inline _Tp toRad(const _Tp deg); // przeksztalcenie kata ze stopni na radiany
-template <typename _Tp> inline _Tp toDeg(const _Tp rad); // przeksztalcenie kata z radianow na stopnie
+template <typename _Tp> constexpr _Tp toRad(const _Tp deg); // przeksztalcenie kata ze stopni na radiany
+template <typename _Tp> constexpr _Tp toDeg(const _Tp rad); // przeksztalcenie kata z radianow na stopnie
 
-template <typename _Tp> inline _Tp toKelvin(const _Tp celsius); // przeksztalcenie stopni Celsiusza na Kelvina
-template <typename _Tp> inline _Tp toCelcius(const _Tp kelvin); // przeksztalcenie stopni Kelvin na Celsiusza
+template <typename _Tp> constexpr _Tp toKelvin(const _Tp celsius); // przeksztalcenie stopni Celsiusza na Kelvina
+template <typename _Tp> constexpr _Tp toCelcius(const _Tp kelvin); // przeksztalcenie stopni Kelvin na Celsiusza
 
 template <typename _Tp> inline _Tp minmaxVal(const _Tp min, const _Tp max, const _Tp val); // ustalenie wartosci w przedziale [min,max]
-template <typename _Tp> inline _Tp minmaxVal(const _Tp minmaxAbs, const _Tp val);
+template <typename _Tp> constexpr _Tp minmaxVal(const _Tp minmaxAbs, const _Tp val);
 
-template <typename _Tp> unsigned short valToShort(const _Tp min, const _Tp max, const _Tp val); // konwersja z floata do unsigned shorta na zadanym zakresie [min,max]
-template <typename _Tp> _Tp shortToVal(const _Tp min, const _Tp max, const unsigned short val); // konwersja z unsigned shortaf do loata na zadanym zakresie [min,max]
+template <typename _Tp> constexpr unsigned short valToShort(const _Tp min, const _Tp max, const _Tp val); // konwersja z floata do unsigned shorta na zadanym zakresie [min,max]
+template <typename _Tp> constexpr _Tp shortToVal(const _Tp min, const _Tp max, const unsigned short val); // konwersja z unsigned shortaf do loata na zadanym zakresie [min,max]
 }
 
 
@@ -246,8 +246,8 @@ public:
     static constexpr Vect3D <_Tp> toDeg(const Vect3D<_Tp> &rpyRad); // przeliczenia na stopnie
     static constexpr Vect3D <_Tp> toRad(const Vect3D<_Tp> &rpyDeg); // przeliczenie na radiany
 
-    template <typename _Type> static Vect3D <_Tp> eulerFromDCM(const Mat3D<_Type> &R); // konstrukcja wektora katow rpy z macierzy kosinusow kierunkowych
-    template <typename _Type> static Vect3D <_Tp> eulerFromQuat(const Vect4D<_Type> &q); // konstrukcja wektora katow rpy z kwaternionu
+    template <typename _Type> static constexpr Vect3D <_Tp> eulerFromDCM(const Mat3D<_Type> &R); // konstrukcja wektora katow rpy z macierzy kosinusow kierunkowych
+    template <typename _Type> static constexpr Vect3D <_Tp> eulerFromQuat(const Vect4D<_Type> &q); // konstrukcja wektora katow rpy z kwaternionu
 
 #ifdef __SKYDIVE_USE_STL__
 
@@ -332,8 +332,8 @@ public:
     static constexpr Vect4D <_Tp> ones(void); // wektor jedynkowy
     static constexpr Vect4D <_Tp> zeros(void); // wektor zerowy
 
-    template <typename _Type> static Vect4D <_Tp> quatFromDCM(const Mat3D<_Type> &R);
-    template <typename _Type> static Vect4D <_Tp> quatFromEuler(const Vect3D<_Type> &rpy);
+    template <typename _Type> static constexpr Vect4D <_Tp> quatFromDCM(const Mat3D<_Type> &R);
+    template <typename _Type> static constexpr Vect4D <_Tp> quatFromEuler(const Vect3D<_Type> &rpy);
 
 #ifdef __SKYDIVE_USE_STL__
 
@@ -467,15 +467,15 @@ public:
     bool isNormal(void) const; // check if data is correct
 
     // metody statyczne
-    static Mat3D <_Tp> eye(void); // macierz jednostkowa
-    static Mat3D <_Tp> ones(void); // macierz jedynkowa
-    static Mat3D <_Tp> zeros(void); // macierz zerowa
-    template <typename _Type> static Mat3D <_Tp> diag(const _Type c); // macierz diagonalna ze stalej
-    template <typename _Type> static Mat3D <_Tp> diag(const Vect3D<_Type>& v); // macierz diagonalna z wekora
-    template <typename _Type> static Mat3D <_Tp> vectAsRows(const Vect3D <_Type> &v1, const Vect3D <_Type> &v2, const Vect3D <_Type> &v3); // macierz z wektorow na wierszach
-    template <typename _Type> static Mat3D <_Tp> vectAsCols(const Vect3D <_Type> &v1, const Vect3D <_Type> &v2, const Vect3D <_Type> &v3); // macierz z wektorow na kolumnach
+    static constexpr Mat3D <_Tp> eye(void); // macierz jednostkowa
+    static constexpr Mat3D <_Tp> ones(void); // macierz jedynkowa
+    static constexpr Mat3D <_Tp> zeros(void); // macierz zerowa
+    template <typename _Type> static constexpr Mat3D <_Tp> diag(const _Type c); // macierz diagonalna ze stalej
+    template <typename _Type> static constexpr Mat3D <_Tp> diag(const Vect3D<_Type>& v); // macierz diagonalna z wekora
+    template <typename _Type> static constexpr Mat3D <_Tp> vectAsRows(const Vect3D <_Type> &v1, const Vect3D <_Type> &v2, const Vect3D <_Type> &v3); // macierz z wektorow na wierszach
+    template <typename _Type> static constexpr Mat3D <_Tp> vectAsCols(const Vect3D <_Type> &v1, const Vect3D <_Type> &v2, const Vect3D <_Type> &v3); // macierz z wektorow na kolumnach
 
-    template <typename _Type> static Mat3D <_Tp> dcmFromQuat(const Mat4D<_Type> &q); // macierz kosinusow kierunkowych z kwaternionu
+    template <typename _Type> static constexpr Mat3D <_Tp> dcmFromQuat(const Mat4D<_Type> &q); // macierz kosinusow kierunkowych z kwaternionu
     template <typename _Type> static Mat3D <_Tp> dcmFromEuler(const Vect3D<_Type> &rpy); // macierz kosinusow kierunkowych z katow eulera
 };
 
@@ -539,13 +539,13 @@ public:
 
 
     // metody statyczne
-    static Mat4D <_Tp> eye(void); // macierz jednostkowa
-    static Mat4D <_Tp> ones(void); // macierz jedynkowa
-    static Mat4D <_Tp> zeros(void); // macierz zerowa
-    template <typename _Type> static Mat4D <_Tp> diag(const _Type c); // macierz diagonalna ze stalej
-    template <typename _Type> static Mat4D <_Tp> diag(const Vect4D<_Type>& v); // macierz diagonalna z wekora
-    template <typename _Type> static Mat4D <_Tp> vectAsRows(const Vect4D <_Type> &v1, const Vect4D <_Type> &v2, const Vect4D <_Type> &v3, const Vect4D <_Type> &v4); // macierz z wektorow na wierszach
-    template <typename _Type> static Mat4D <_Tp> vectAsCols(const Vect4D <_Type> &v1, const Vect4D <_Type> &v2, const Vect4D <_Type> &v3, const Vect4D <_Type> &v4); // macierz z wektorow na kolumnach
+    static Mat4D <_Tp> constexpr eye(void); // macierz jednostkowa
+    static Mat4D <_Tp> constexpr ones(void); // macierz jedynkowa
+    static Mat4D <_Tp> constexpr zeros(void); // macierz zerowa
+    template <typename _Type> static constexpr Mat4D <_Tp> diag(const _Type c); // macierz diagonalna ze stalej
+    template <typename _Type> static constexpr Mat4D <_Tp> diag(const Vect4D<_Type>& v); // macierz diagonalna z wekora
+    template <typename _Type> static constexpr Mat4D <_Tp> vectAsRows(const Vect4D <_Type> &v1, const Vect4D <_Type> &v2, const Vect4D <_Type> &v3, const Vect4D <_Type> &v4); // macierz z wektorow na wierszach
+    template <typename _Type> static constexpr Mat4D <_Tp> vectAsCols(const Vect4D <_Type> &v1, const Vect4D <_Type> &v2, const Vect4D <_Type> &v3, const Vect4D <_Type> &v4); // macierz z wektorow na kolumnach
 };
 
 
@@ -617,57 +617,53 @@ public:
     void invert();
 
     // metody statyczne
-    static Matrix <_Tp> eye(const unsigned dataSize); // macierz jednostkowa
-    static Matrix <_Tp> ones(const unsigned dataSize); // macierz jedynkowa
-    static Matrix <_Tp> zeros(const unsigned dataSize); // macierz zerowa
-    template <typename _Type> static Matrix <_Tp> diag(const _Type c, const unsigned dataSize); // macierz diagonalna ze stalej
-    template <typename _Type> static Matrix <_Tp> diag(const Vector<_Type>& v); // macierz diagonalna z wekora
+    static constexpr Matrix <_Tp> eye(const unsigned dataSize); // macierz jednostkowa
+    static constexpr Matrix <_Tp> ones(const unsigned dataSize); // macierz jedynkowa
+    static constexpr Matrix <_Tp> zeros(const unsigned dataSize); // macierz zerowa
+    template <typename _Type> static constexpr Matrix <_Tp> diag(const _Type c, const unsigned dataSize); // macierz diagonalna ze stalej
+    template <typename _Type> static constexpr Matrix <_Tp> diag(const Vector<_Type>& v); // macierz diagonalna z wekora
 };
 
-template <typename _Tp> inline _Tp roboLib::toRad(const _Tp deg)
+template <typename _Tp> constexpr _Tp roboLib::toRad(const _Tp deg)
 {
     return (_Tp)(deg*(pi / 180));
 }
-template <typename _Tp> inline _Tp roboLib::toDeg(const _Tp rad)
+template <typename _Tp> constexpr _Tp roboLib::toDeg(const _Tp rad)
 {
     return (_Tp)((rad*180) / roboLib::pi);
 }
 
-template <typename _Tp> inline _Tp roboLib::toKelvin(const _Tp celsius)
+template <typename _Tp> constexpr _Tp roboLib::toKelvin(const _Tp celsius)
 {
     return (_Tp)(celsius - roboLib::absoluteZeroCelsius);
 }
-template <typename _Tp> inline _Tp roboLib::toCelcius(const _Tp kelvin)
+template <typename _Tp> constexpr _Tp roboLib::toCelcius(const _Tp kelvin)
 {
     return (_Tp)(kelvin + roboLib::absoluteZeroCelsius);
 }
 
 template <typename _Tp> inline _Tp roboLib::minmaxVal(const _Tp min, const _Tp max, const _Tp val)
 {
-    if (val >= min && val <= max)
+    _Tp result = val;
+    if (false == (val >= min && val <= max))
     {
-        return val;
+        result = val > max ? max : min;
     }
-    else
-    {
-        return val > max ? max : min;
-    }
+    return result;
 }
 
-template <typename _Tp> inline _Tp roboLib::minmaxVal(const _Tp minmaxAbs, const _Tp val)
+template <typename _Tp> constexpr _Tp roboLib::minmaxVal(const _Tp minmaxAbs, const _Tp val)
 {
     return roboLib::minmaxVal<_Tp>(-minmaxAbs, minmaxAbs, val);
 }
 
-template <typename _Tp> unsigned short roboLib::valToShort(const _Tp min, const _Tp max, const _Tp val)
+template <typename _Tp> constexpr unsigned short roboLib::valToShort(const _Tp min, const _Tp max, const _Tp val)
 {
-    const _Tp xCuted = roboLib::minmaxVal(min, max, val) - min;
-    return (unsigned short)((USHRT_MAX * xCuted) / fabs(min - max) + 0.5f);
+    return (unsigned short)((USHRT_MAX * (roboLib::minmaxVal(min, max, val) - min)) / fabs(min - max) + 0.5f);
 }
-template <typename _Tp> _Tp roboLib::shortToVal(const _Tp min, const _Tp max, const unsigned short val)
+template <typename _Tp> constexpr _Tp roboLib::shortToVal(const _Tp min, const _Tp max, const unsigned short val)
 {
-    const _Tp xLenght = std::abs(min - max);
-    return min + (val * xLenght) / USHRT_MAX;
+    return min + (val * (std::abs(min - max))) / USHRT_MAX;
 }
 
 
@@ -1423,12 +1419,12 @@ Mat3D <_Tp> Vect4D <_Tp>::getDcm(void) const // obliczanie macierzy kosinusow ki
 }
 
 // metody statyczne
-template <class _Tp> template <typename _Type>
+template <class _Tp> template <typename _Type> constexpr
 Vect4D <_Tp> Vect4D <_Tp>::quatFromDCM(const Mat3D<_Type> &dcm)
 {
     return dcm.getQuaternion();
 }
-template <class _Tp> template <typename _Type>
+template <class _Tp> template <typename _Type> constexpr
 Vect4D <_Tp> Vect4D <_Tp>::quatFromEuler(const Vect3D<_Type> &rpy)
 {
     return Mat3D<_Type>::dcmFromEuler(rpy).getQuaternion();
@@ -1967,22 +1963,22 @@ bool Mat3D <_Tp>::isNormal(void) const // check if data is correct
 }
 
 // metody statyczne
-template <class _Tp>
+template <class _Tp> constexpr
 Mat3D <_Tp> Mat3D <_Tp>::eye(void) // macierz jednostkowa
 {
     return Mat3D <_Tp>();
 }
-template <class _Tp>
+template <class _Tp> constexpr
 Mat3D <_Tp> Mat3D <_Tp>::ones(void) // macierz jedynkowa
 {
     return Mat3D <_Tp>(1, 1, 1, 1, 1, 1, 1, 1, 1);
 }
-template <class _Tp>
+template <class _Tp> constexpr
 Mat3D <_Tp> Mat3D <_Tp>::zeros(void) // macierz zerowa
 {
     return Mat4D <_Tp>(0, 0, 0, 0, 0, 0, 0, 0, 0);
 }
-template <class _Tp> template <typename _Type>
+template <class _Tp> template <typename _Type> constexpr
 Mat3D <_Tp> Mat3D <_Tp>::diag(const _Type c) // macierz diagonalna ze stalej
 {
     return Mat3D <_Tp>
@@ -1992,7 +1988,7 @@ Mat3D <_Tp> Mat3D <_Tp>::diag(const _Type c) // macierz diagonalna ze stalej
                 0, 0, _Tp(c)
                 );
 }
-template <class _Tp> template <typename _Type>
+template <class _Tp> template <typename _Type> constexpr
 Mat3D <_Tp> Mat3D <_Tp>::diag(const Vect3D<_Type>& v) // macierz diagonalna z wekora
 {
     return Mat3D <_Tp>
@@ -2002,7 +1998,7 @@ Mat3D <_Tp> Mat3D <_Tp>::diag(const Vect3D<_Type>& v) // macierz diagonalna z we
                 0, 0, _Tp(v.z)
                 );
 }
-template <class _Tp> template <typename _Type>
+template <class _Tp> template <typename _Type> constexpr
 Mat3D <_Tp> Mat3D <_Tp>::vectAsRows(const Vect3D <_Type> &v1, const Vect3D <_Type> &v2, const Vect3D <_Type> &v3)
 {
     return Mat3D <_Tp>
@@ -2012,7 +2008,7 @@ Mat3D <_Tp> Mat3D <_Tp>::vectAsRows(const Vect3D <_Type> &v1, const Vect3D <_Typ
                 _Tp(v3.x), _Tp(v3.y), _Tp(v3.z)
                 );
 }
-template <class _Tp> template <typename _Type>
+template <class _Tp> template <typename _Type> constexpr
 Mat3D <_Tp> Mat3D <_Tp>::vectAsCols(const Vect3D <_Type> &v1, const Vect3D <_Type> &v2, const Vect3D <_Type> &v3)
 {
     return Mat3D <_Tp>
@@ -2339,17 +2335,17 @@ Mat4D <_Tp> Mat4D <_Tp>::getInv(void) const // odwracanie macierzy
 
 
 // metody statyczne
-template <class _Tp>
+template <class _Tp> constexpr
 Mat4D <_Tp> Mat4D <_Tp>::eye(void) // macierz jednostkowa
 {
     return Mat4D <_Tp>();
 }
-template <class _Tp>
+template <class _Tp> constexpr
 Mat4D <_Tp> Mat4D <_Tp>::ones(void) // macierz jedynkowa
 {
     return Mat4D <_Tp>(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
 }
-template <class _Tp>
+template <class _Tp> constexpr
 Mat4D <_Tp> Mat4D <_Tp>::zeros(void) // macierz zerowa
 {
     return Mat4D <_Tp>(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
@@ -2563,6 +2559,7 @@ template <class _Tp>
 Matrix <_Tp>::~Matrix(void)
 {
     delete[] data;
+    data = nullptr;
 }
 
 
