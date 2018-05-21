@@ -135,7 +135,7 @@ void MagnetCalibAction::handleUserEvent(const PilotEvent& event)
         {
         case PilotEvent::MAGNET_CALIB_DONE:
             state = CALIBRATION_RESULT;
-            sendSignal(SignalData::CALIBRATE_MAGNET, SignalData::DONE);
+            sendSignal(SignalData::CALIBRATE_MAGNET, SignalData::DONE, 2000);
             break;
 
         case PilotEvent::MAGNET_CALIB_ABORT:
