@@ -49,6 +49,10 @@ public class CommMessage {
         return payload.length + PREAMBLE_SIZE + CRC_SIZE;
     }
 
+    public byte[] getPayload() {
+        return payload;
+    }
+
     public byte[] getByteArray() {
         byte[] message = new byte[getMessageSize()];
         System.arraycopy(getPreambleByType(type), 0, message, 0, 4);

@@ -57,7 +57,7 @@ public class DebugData {
     }
 
     public DebugData(final CommMessage message) {
-        ByteBuffer buffer = ByteBuffer.wrap(message.getByteArray());
+        ByteBuffer buffer = ByteBuffer.wrap(message.getPayload());
         buffer.order(ByteOrder.LITTLE_ENDIAN);
         this.roll = buffer.getFloat();
         this.pitch = buffer.getFloat();

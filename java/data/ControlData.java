@@ -40,7 +40,7 @@ public class ControlData {
     }
 
     public ControlData(CommMessage message) {
-        this(message.getByteArray());
+        this(message.getPayload());
     }
 
     public ControlData(byte[] data) {

@@ -29,7 +29,7 @@ public class AutopilotData {
     }
 
     public AutopilotData(CommMessage message) {
-        ByteBuffer buffer = ByteBuffer.wrap(message.getByteArray());
+        ByteBuffer buffer = ByteBuffer.wrap(message.getPayload());
         buffer.order(ByteOrder.LITTLE_ENDIAN);
         this.latitude = buffer.getDouble();
         this.longitude = buffer.getDouble();

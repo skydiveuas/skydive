@@ -115,6 +115,7 @@ public class UavSimulator implements CommInterface.CommInterfaceListener,
 
     private void handleEventConnectingAppLoop(CommEvent event) throws Exception {
         System.out.println("Connecting app loop @ " + connectionStage.toString());
+        System.out.println("DDDD: " + event.getSignalData().toString());
         switch (connectionStage) {
             case INITIAL_COMMAND:
                 if (event.matchSignalData(new SignalData(SignalData.Command.START_CMD, SignalData.Parameter.START))) {
@@ -654,6 +655,7 @@ public class UavSimulator implements CommInterface.CommInterfaceListener,
     public void onDisconnected() {
         System.out.println("UavSimulator : onDisconnected");
         debugTask.stop();
+        baseSetupTask.stop();
     }
 
     @Override
@@ -681,7 +683,7 @@ public class UavSimulator implements CommInterface.CommInterfaceListener,
         }
     };
 
-    private CommTask baseSetupTask = new CommTask( 1.0 / 3 ) {
+    private CommTask baseSetupTask = new CommTask( 1.0 / 5 ) {
         @Override
         protected String getTaskName() {
             return "base_setup_task";

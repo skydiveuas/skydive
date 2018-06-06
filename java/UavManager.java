@@ -1,6 +1,5 @@
 package com.skydive.java;
 
-import com.addrone.communication.TcpClientSocket;
 import com.skydive.java.actions.CommHandlerAction;
 import com.skydive.java.data.*;
 import com.skydive.java.events.UserEvent;

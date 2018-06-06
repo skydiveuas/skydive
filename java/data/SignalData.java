@@ -23,7 +23,7 @@ public class SignalData {
     }
 
     public SignalData(CommMessage message) {
-        ByteBuffer buffer = ByteBuffer.wrap(message.getByteArray());
+        ByteBuffer buffer = ByteBuffer.wrap(message.getPayload());
         buffer.order(ByteOrder.LITTLE_ENDIAN);
         this.commandValue = buffer.getInt();
         this.parameterValue = buffer.getInt();
