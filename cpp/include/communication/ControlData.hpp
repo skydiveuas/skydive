@@ -54,11 +54,11 @@ public:
 
     unsigned short controllerCommand; // ControllerCommand
     unsigned char solverMode; // SolverMode
-
     unsigned char padding;
+
     unsigned short sequenceNumber;
 
-    // 39 bytes left to use
+    // 38 bytes left to use
 
     ControlData(void);
     ControlData(const unsigned char* src);
