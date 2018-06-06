@@ -66,12 +66,6 @@ public class CommMessage {
         return computeCrc16(payload);
     }
 
-    public ByteBuffer getByteBuffer() {
-        ByteBuffer buffer = ByteBuffer.wrap(this.payload);
-        buffer.order(ByteOrder.LITTLE_ENDIAN);
-        return buffer;
-    }
-
     public static byte[] getPreambleByType(MessageType type) {
         switch (type) {
             case CONTROL:
@@ -161,8 +155,13 @@ public class CommMessage {
     }
 
     static public short computeCrc16(byte[] data) {
+        return computeCrc16(data, data.length);
+    }
+
+    static public short computeCrc16(byte[] data, int dataSize) {
         int crcShort = 0;
-        for (byte b : data) {
+        for (int i = 0; i < dataSize; ++i) {
+            byte b = data[i];
             crcShort = ((crcShort >>> 8) | (crcShort << 8)) & 0xffff;
             crcShort ^= (b & 0xff);
             crcShort ^= ((crcShort & 0xff) >> 4);
@@ -174,9 +173,15 @@ public class CommMessage {
     }
 
     static public int computeCrc32(byte[] data) {
+        return computeCrc32(data, data.length);
+    }
+
+    static public int computeCrc32(byte[] data, int dataSize) {
         int crc = 0;
         crc = ~crc;
-        for (byte b : data) {
+        for (int i = 0; i < dataSize; ++i)
+        {
+            byte b = data[i];
             int bb = (b >= 0 ? b : (256 + b)); // turn 'byte' to 'unsigned char' value
             crc ^= bb;
             for (int k = 0; k < 8; k++) {

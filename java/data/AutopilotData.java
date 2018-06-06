@@ -29,7 +29,8 @@ public class AutopilotData {
     }
 
     public AutopilotData(CommMessage message) {
-        ByteBuffer buffer = message.getByteBuffer();
+        ByteBuffer buffer = ByteBuffer.wrap(message.getByteArray());
+        buffer.order(ByteOrder.LITTLE_ENDIAN);
         this.latitude = buffer.getDouble();
         this.longitude = buffer.getDouble();
         this.absoluteAltitude = buffer.getFloat();

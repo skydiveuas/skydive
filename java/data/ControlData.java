@@ -40,7 +40,17 @@ public class ControlData {
     }
 
     public ControlData(CommMessage message) {
-        ByteBuffer buffer = message.getByteBuffer();
+        this(message.getByteArray());
+    }
+
+    public ControlData(byte[] data) {
+        this(data, 0);
+    }
+
+    public ControlData(byte[] data, int offset) {
+        ByteBuffer buffer = ByteBuffer.wrap(data, offset,
+                CommMessage.getPayloadSizeByType(CommMessage.MessageType.CONTROL));
+        buffer.order(ByteOrder.LITTLE_ENDIAN);
         this.roll = buffer.getFloat();
         this.pitch = buffer.getFloat();
         this.yaw = buffer.getFloat();
@@ -116,18 +126,27 @@ public class ControlData {
                 + " ]";
     }
 
+    public byte[] serialize() {
+        byte[] out = new byte[getSize()];
+        serialize(out);
+        return out;
+    }
+
+    public void serialize(byte[] out) {
+        if (out.length >= getSize()) {
+            ByteBuffer buffer = ByteBuffer.wrap(out);
+            buffer.order(ByteOrder.LITTLE_ENDIAN);
+
+            System.arraycopy(buffer.array(), 0, out, 0, getSize());
+        }
+    }
+
     public CommMessage getMessage() {
-        byte[] payload = new byte[CommMessage.getPayloadSizeByType(CommMessage.MessageType.CONTROL)];
-        ByteBuffer buffer = ByteBuffer.allocate(payload.length);
-        buffer.order(ByteOrder.LITTLE_ENDIAN);
-        buffer.putFloat(getRoll());
-        buffer.putFloat(getPitch());
-        buffer.putFloat(getYaw());
-        buffer.putFloat(getThrottle());
-        buffer.putShort(getCommand().getValue());
-        buffer.put(getMode().getValue());
-        System.arraycopy(buffer.array(), 0, payload, 0, payload.length);
-        return new CommMessage(CommMessage.MessageType.CONTROL, payload);
+        return new CommMessage(CommMessage.MessageType.CONTROL, serialize());
+    }
+
+    public static int getSize() {
+        return CommMessage.getPayloadSizeByType(CommMessage.MessageType.CONTROL);
     }
 
     public enum ControllerCommand {
