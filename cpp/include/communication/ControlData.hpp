@@ -19,7 +19,7 @@
  * =============================================================================================
  * ControlData
  * Max data size: 58 bytes
- * Used: 19 bytes
+ * Used: 20(including 1b padding) bytes
  * =============================================================================================
  */
 class ControlData : public IMessage
@@ -55,8 +55,6 @@ public:
     unsigned short controllerCommand; // ControllerCommand
     unsigned char solverMode; // SolverMode
     unsigned char padding;
-
-    unsigned short sequenceNumber;
 
     // 38 bytes left to use
 

@@ -14,6 +14,9 @@
 /**
  * =============================================================================================
  * AutopilotData
+ * Max data size: 32 bytes
+ * Used: 32 bytes (sizeof(Location) = 24)
+ * This object is padded to 8b due to 'double' inside
  * =============================================================================================
  */
 class AutopilotData : public IMessage
