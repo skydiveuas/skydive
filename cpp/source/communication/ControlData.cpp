@@ -15,7 +15,6 @@ ControlData::ControlData(void)
     euler = Vect3Dd();
     throttle = 0.0f;
     padding = 0;
-    sequenceNumber = 0;
 }
 
 ControlData::ControlData(const unsigned char* src)
