@@ -199,7 +199,7 @@ public class ControlSettings implements SignalPayloadData {
 
     public byte[] serialize() {
         byte[] dataArray = new byte[getDataArraySize()];
-        ByteBuffer buffer = ByteBuffer.allocate(dataArray.length);
+        ByteBuffer buffer = ByteBuffer.wrap(dataArray);
         buffer.order(ByteOrder.LITTLE_ENDIAN);
 
         buffer.putInt(uavType);
@@ -246,7 +246,6 @@ public class ControlSettings implements SignalPayloadData {
         buffer.putInt(flags.getFlags());
         buffer.putInt(crcValue);
 
-        System.arraycopy(buffer.array(), 0, dataArray, 0, dataArray.length);
         return dataArray;
     }
 
@@ -360,11 +359,11 @@ public class ControlSettings implements SignalPayloadData {
     }
 
     public enum EscPwmFreq {
-        SLOW(0),
-        MEDIUM(1),
-        FAST(2),
-        VERY_FAST(3),
-        ONESHOT_125(4);
+        SLOW(100),
+        MEDIUM(200),
+        FAST(300),
+        VERY_FAST(400),
+        ONESHOT_125(3200);
 
         private final int value;
 

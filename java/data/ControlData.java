@@ -127,17 +127,21 @@ public class ControlData {
     }
 
     public byte[] serialize() {
-        byte[] out = new byte[getSize()];
+        byte[] out = new byte[CommMessage.getPayloadSizeByType(CommMessage.MessageType.CONTROL)];
         serialize(out);
         return out;
     }
 
     public void serialize(byte[] out) {
-        if (out.length >= getSize()) {
+        if (out.length >= CommMessage.getPayloadSizeByType(CommMessage.MessageType.CONTROL)) {
             ByteBuffer buffer = ByteBuffer.wrap(out);
             buffer.order(ByteOrder.LITTLE_ENDIAN);
-
-            System.arraycopy(buffer.array(), 0, out, 0, getSize());
+            buffer.putFloat(getRoll());
+            buffer.putFloat(getPitch());
+            buffer.putFloat(getYaw());
+            buffer.putFloat(getThrottle());
+            buffer.putShort(getCommand().getValue());
+            buffer.put(getMode().getValue());
         }
     }
 

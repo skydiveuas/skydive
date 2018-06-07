@@ -119,7 +119,7 @@ public class CalibrationSettings implements SignalPayloadData {
 
     public byte[] serialize() {
         byte[] dataArray = new byte[getDataArraySize()];
-        ByteBuffer buffer = ByteBuffer.allocate(dataArray.length);
+        ByteBuffer buffer = ByteBuffer.wrap(dataArray);
         buffer.order(ByteOrder.LITTLE_ENDIAN);
 
         for (float aGyroOffset : gyroOffset) {
@@ -149,7 +149,6 @@ public class CalibrationSettings implements SignalPayloadData {
         buffer.putInt(flags.getFlags());
         buffer.putInt(crcValue);
 
-        System.arraycopy(buffer.array(), 0, dataArray, 0, dataArray.length);
         return dataArray;
     }
 

@@ -94,8 +94,7 @@ public class AutopilotData {
     }
 
     public CommMessage getMessage() {
-        byte[] payload = new byte[CommMessage.getPayloadSizeByType(CommMessage.MessageType.AUTOPILOT)];
-        ByteBuffer buffer = ByteBuffer.allocate(payload.length);
+        ByteBuffer buffer = ByteBuffer.allocate(CommMessage.getPayloadSizeByType(CommMessage.MessageType.AUTOPILOT));
         buffer.order(ByteOrder.LITTLE_ENDIAN);
         buffer.putDouble(getLatitude());
         buffer.putDouble(getLongitude());
@@ -103,8 +102,7 @@ public class AutopilotData {
         buffer.putFloat(getRelativeAltitude());
         buffer.putInt(getType().getValue());
         buffer.putInt(getFlags());
-        System.arraycopy(buffer.array(), 0, payload, 0, payload.length);
-        return new CommMessage(CommMessage.MessageType.AUTOPILOT, payload);
+        return new CommMessage(CommMessage.MessageType.AUTOPILOT, buffer.array());
     }
 
     public boolean isEqual(AutopilotData autopilotData) {

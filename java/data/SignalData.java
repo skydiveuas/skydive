@@ -46,13 +46,11 @@ public class SignalData {
     }
 
     public CommMessage getMessage() {
-        byte[] payload = new byte[CommMessage.getPayloadSizeByType(CommMessage.MessageType.SIGNAL)];
-        ByteBuffer buffer = ByteBuffer.allocate(payload.length);
+        ByteBuffer buffer = ByteBuffer.allocate(CommMessage.getPayloadSizeByType(CommMessage.MessageType.SIGNAL));
         buffer.order(ByteOrder.LITTLE_ENDIAN);
         buffer.putInt(commandValue);
         buffer.putInt(parameterValue);
-        System.arraycopy(buffer.array(), 0, payload, 0, payload.length);
-        return new CommMessage(CommMessage.MessageType.SIGNAL, payload);
+        return new CommMessage(CommMessage.MessageType.SIGNAL, buffer.array());
     }
 
     public static SignalData.Command parseCommand(final byte[] src) {

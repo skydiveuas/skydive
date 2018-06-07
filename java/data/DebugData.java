@@ -233,8 +233,7 @@ public class DebugData {
     }
 
     public CommMessage getMessage() {
-        byte[] payload = new byte[CommMessage.getPayloadSizeByType(CommMessage.MessageType.CONTROL)];
-        ByteBuffer buffer = ByteBuffer.allocate(payload.length);
+        ByteBuffer buffer = ByteBuffer.allocate(CommMessage.getPayloadSizeByType(CommMessage.MessageType.CONTROL));
         buffer.order(ByteOrder.LITTLE_ENDIAN);
         buffer.putFloat(getRoll());
         buffer.putFloat(getPitch());
@@ -250,8 +249,7 @@ public class DebugData {
         buffer.putShort(getControllerState().getValue());
         buffer.put((byte) flags.getFlags());
         buffer.put(battery);
-        System.arraycopy(buffer.array(), 0, payload, 0, payload.length);
-        return new CommMessage(CommMessage.MessageType.CONTROL, payload);
+        return new CommMessage(CommMessage.MessageType.CONTROL, buffer.array());
     }
 
     public enum ControllerState {
