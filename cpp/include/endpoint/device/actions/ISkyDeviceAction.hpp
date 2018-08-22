@@ -88,7 +88,7 @@ public:
     static std::string toString(const Type type);
 
 protected:
-    static constexpr unsigned DEFAULT_SIGNAL_TIMEOUT = 1000; // [ms]
+    static constexpr unsigned DEFAULT_SIGNAL_TIMEOUT = 3000; // [ms]
     static constexpr unsigned MAX_SIGNAL_PAYLOAD_RECEPTION_ERRORS = 3; // [ms]
 
     typedef SignalData::Command Command;
