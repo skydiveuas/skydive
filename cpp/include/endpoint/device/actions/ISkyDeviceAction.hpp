@@ -36,7 +36,8 @@ public:
         RADIO_CHECK,
         RADIO_CALIB,
         ESC_CALIB,
-        RESET
+        RESET,
+        DIRECT_FLIGHT
     };
 
     class Listener

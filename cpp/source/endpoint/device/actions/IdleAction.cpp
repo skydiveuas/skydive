@@ -6,6 +6,10 @@
 #include "endpoint/device/actions/UpgradeAction.hpp"
 #include "endpoint/device/actions/WhoAmIAction.hpp"
 
+#include "endpoint/device/actions/FlightAction.hpp"
+#include "communication/ControlSettings.hpp"
+#include "communication/RouteContainer.hpp"
+
 IdleAction::IdleAction(Listener* const _listener):
     ISkyDeviceAction(_listener)
 {
@@ -56,6 +60,14 @@ void IdleAction::handleUserEvent(const PilotEvent& event)
 
         case ISkyDeviceAction::WHO_AM_I:
             listener->startAction(new WhoAmIAction(listener), false);
+            listener->connectInterface(ev.getCommInnterface());
+            break;
+
+        case ISkyDeviceAction::DIRECT_FLIGHT:
+            monitor->notifyDeviceEvent(new DeviceEventReceived(*new CalibrationSettings(CalibrationSettings::createDefault())));
+            monitor->notifyDeviceEvent(new DeviceEventReceived(*new ControlSettings(ControlSettings::createDefault())));
+            monitor->notifyDeviceEvent(new DeviceEvent(DeviceEvent::VIA_ROUTE_NOT_ALLOWED));
+            listener->startAction(new FlightAction(listener, monitor->getControlDataSendingFreq()), false);
             listener->connectInterface(ev.getCommInnterface());
             break;
 
