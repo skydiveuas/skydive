@@ -46,6 +46,11 @@ void SensorsData::setGpsAltitude(const float _altitude)
     altitudeGps = roboLib::valToShort(0.0f, MAX_GPS_ALTITUDE, _altitude);
 }
 
+void SensorsData::setGpsVerticalSpeed(const float _verticalSpeed)
+{
+    verticalSpeed = roboLib::valToShort(0.0f, MAX_GPS_V_SPEED, _verticalSpeed);
+}
+
 float SensorsData::getGpsSpeed(void) const
 {
     return roboLib::shortToVal(0.0f, MAX_GPS_SPEED, speedGps);
@@ -61,6 +66,11 @@ float SensorsData::getGpsAltitude(void) const
     return roboLib::shortToVal(0.0f, MAX_GPS_ALTITUDE, altitudeGps);
 }
 
+float SensorsData::getGpsVerticalSpeed(void) const
+{
+    return roboLib::shortToVal(0.0f, MAX_GPS_V_SPEED, verticalSpeed);
+}
+
 GpsData SensorsData::getGpsData(void) const
 {
     GpsData gpsData;
@@ -69,6 +79,7 @@ GpsData SensorsData::getGpsData(void) const
     gpsData.speed = getGpsSpeed();
     gpsData.course = getGpsCourse();
     gpsData.alt = getGpsAltitude();
+    gpsData.verticalSpeed = getGpsVerticalSpeed();
     gpsData.fix = (HDOP >= 0.0f);
     gpsData.HDOP = HDOP;
     return gpsData;
