@@ -25,6 +25,7 @@ private:
     static constexpr float MAX_GPS_COURSE = 360.0f;
     static constexpr float MAX_GPS_ALTITUDE = 5000.0f;
     static constexpr float MAX_GPS_V_SPEED = 15.0f;
+    static constexpr float MAX_GPS_HDOP = 5.0f;
 
 public:
     // IMU
@@ -35,7 +36,7 @@ public:
 
     // GPS
     float lat, lon;
-    float HDOP;
+    unsigned short hdop;
     unsigned short speedGps;
     unsigned short courseGps;
     unsigned short altitudeGps;
@@ -56,11 +57,13 @@ public:
     void setGpsCourse(const float _course);
     void setGpsAltitude(const float _altitude);
     void setGpsVerticalSpeed(const float _verticalSpeed);
+    void setGpsHdop(const float _hdop);
 
     float getGpsSpeed(void) const;
     float getGpsCourse(void) const;
     float getGpsAltitude(void) const;
     float getGpsVerticalSpeed(void) const;
+    float getGpsHdop(void) const;
 
     GpsData getGpsData(void) const;
     ImuData getImuData(void) const;
