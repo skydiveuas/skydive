@@ -36,7 +36,8 @@ void GpsData::print(void) const
         std::cout << std::setprecision(8) << lat << ", " << lon << " - ";
         std::cout << std::setprecision(1) << alt << "	|	";
         std::cout << std::setprecision(6) << speed << " @ ";
-        std::cout << std::setprecision(2) << course << " deg" << std::endl;
+        std::cout << std::setprecision(2) << course << " deg, vh ";
+        std::cout << std::setprecision(6) << verticalSpeed << std::endl;
     }
     else
     {
@@ -55,7 +56,7 @@ GpsData GpsData::parseFromString(const std::string& line)
           >> fix
           >> data.lat >> data.lon >> data.alt
           >> data.speed >> data.course
-          >> data.HDOP
+          >> data.HDOP >> data.verticalSpeed
           ))
     {
         throw std::runtime_error("Error while parsing data.");
@@ -68,7 +69,7 @@ std::ostream& operator << (std::ostream& stream, const GpsData& gD)
 {
     stream << std::setprecision(10);
     stream << (gD.fix ? 1 : 0) << "	" << gD.lat << "	" << gD.lon << "	" << gD.alt << "	";
-    stream << gD.speed << "	" << gD.course << "	" << gD.HDOP << "	";
+    stream << gD.speed << "	" << gD.course << "	" << gD.HDOP << "	" << gD.verticalSpeed << "  ";
     return stream;
 }
 
