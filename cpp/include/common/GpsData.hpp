@@ -46,6 +46,7 @@ public:
 
     Vect2Dd getSpeedVector() const;
     Vect2Dd getGeoPoint() const;
+    bool is3dFix() const;
 
 #ifdef __SKYDIVE_USE_STL__
 

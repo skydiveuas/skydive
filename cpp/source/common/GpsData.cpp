@@ -26,6 +26,19 @@ Vect2Dd GpsData::getGeoPoint() const
     return {lat, lon};
 }
 
+bool GpsData::is3dFix() const
+{
+	if(fixQuality == GpsData::FIX_3D_STAND_ALONE
+			|| fixQuality == GpsData::FIX_3D_DIFFERENTIAL)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 #ifdef __SKYDIVE_USE_STL__
 
 void GpsData::print(void) const
