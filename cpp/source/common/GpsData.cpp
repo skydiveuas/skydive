@@ -66,17 +66,19 @@ GpsData GpsData::parseFromString(const std::string& line)
     std::istringstream iss(line);
     int fix;
     float time;
+    int fixQ;
     if (!(iss
           >> time
           >> fix
           >> data.lat >> data.lon >> data.alt
           >> data.speed >> data.course >> data.verticalSpeed
-          >> data.HDOP >> data.fixQuality
+          >> data.HDOP >> fixQ
           ))
     {
         throw std::runtime_error("Error while parsing data.");
     }
     data.fix = fix == 0 ? false : true;
+    data.fixQuality = (uint8_t)fixQ;
     return data;
 }
 
