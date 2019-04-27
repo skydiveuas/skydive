@@ -38,6 +38,9 @@ template <typename _Tp> constexpr _Tp minmaxVal(const _Tp minmaxAbs, const _Tp v
 
 template <typename _Tp> constexpr unsigned short valToShort(const _Tp min, const _Tp max, const _Tp val); // konwersja z floata do unsigned shorta na zadanym zakresie [min,max]
 template <typename _Tp> constexpr _Tp shortToVal(const _Tp min, const _Tp max, const unsigned short val); // konwersja z unsigned shortaf do loata na zadanym zakresie [min,max]
+
+template <typename _Tp> constexpr unsigned char valToChar(const _Tp min, const _Tp max, const _Tp val); // konwersja z floata do unsigned shorta na zadanym zakresie [min,max]
+template <typename _Tp> constexpr _Tp charToVal(const _Tp min, const _Tp max, const unsigned char val); // konwersja z unsigned shortaf do loata na zadanym zakresie [min,max]
 }
 
 
@@ -666,6 +669,14 @@ template <typename _Tp> constexpr _Tp roboLib::shortToVal(const _Tp min, const _
     return min + (val * (std::abs(min - max))) / USHRT_MAX;
 }
 
+template <typename _Tp> constexpr unsigned char roboLib::valToChar(const _Tp min, const _Tp max, const _Tp val)
+{
+    return (unsigned char)((UCHAR_MAX * (roboLib::minmaxVal(min, max, val) - min)) / fabs(min - max) + 0.5f);
+}
+template <typename _Tp> constexpr _Tp roboLib::charToVal(const _Tp min, const _Tp max, const unsigned char val)
+{
+    return min + (val * (std::abs(min - max))) / UCHAR_MAX;
+}
 
 // ================================== Vect2D ===================================
 // konstruktory

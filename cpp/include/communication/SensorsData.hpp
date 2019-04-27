@@ -36,11 +36,12 @@ public:
 
     // GPS
     float lat, lon;
-    unsigned short hdop;
     unsigned short speedGps;
     unsigned short courseGps;
     unsigned short altitudeGps;
     unsigned short verticalSpeed;
+    unsigned char fixQuality;
+    unsigned char hdop;
 
     SensorsData(void);
     SensorsData(const unsigned char* tab);

@@ -53,7 +53,7 @@ void SensorsData::setGpsVerticalSpeed(const float _verticalSpeed)
 
 void SensorsData::setGpsHdop(const float _hdop)
 {
-    hdop = roboLib::valToShort(-MAX_GPS_HDOP, MAX_GPS_HDOP, _hdop);
+    hdop = roboLib::valToChar(0.0f, MAX_GPS_HDOP, _hdop);
 }
 
 float SensorsData::getGpsSpeed(void) const
@@ -78,29 +78,33 @@ float SensorsData::getGpsVerticalSpeed(void) const
 
 float SensorsData::getGpsHdop(void) const
 {
-	return roboLib::shortToVal(-MAX_GPS_HDOP, MAX_GPS_HDOP, hdop);
+	return roboLib::charToVal(0.0f, MAX_GPS_HDOP, hdop);
 }
 
 GpsData SensorsData::getGpsData(void) const
 {
-    GpsData gpsData;
-    gpsData.lat = lat;
-    gpsData.lon = lon;
-    gpsData.speed = getGpsSpeed();
-    gpsData.course = getGpsCourse();
-    gpsData.alt = getGpsAltitude();
-    gpsData.verticalSpeed = getGpsVerticalSpeed();
-    gpsData.fix = (hdop >= 0.0f);
-    if(gpsData.fix)
-    {
-    	gpsData.fixQuality = hdop < 2.0f ? GpsData::FIX_3D_DIFFERENTIAL : GpsData::FIX_2D_STAND_ALONE;
-    }
-    else
-    {
-    	gpsData.fixQuality = GpsData::FIX_NOT_AVAILABLE;
-    }
-    gpsData.HDOP = hdop;
-    return gpsData;
+	GpsData gpsData;
+	gpsData.lat = lat;
+	gpsData.lon = lon;
+	gpsData.speed = getGpsSpeed();
+	gpsData.course = getGpsCourse();
+	gpsData.alt = getGpsAltitude();
+	gpsData.verticalSpeed = getGpsVerticalSpeed();
+	gpsData.HDOP = getGpsHdop();
+	gpsData.fixQuality = fixQuality;
+	if(fixQuality == GpsData::FIX_3D_DIFFERENTIAL
+			|| fixQuality == GpsData::FIX_2D_DIFFERENTIAL
+			|| fixQuality == GpsData::FIX_3D_STAND_ALONE
+			|| fixQuality == GpsData::FIX_2D_STAND_ALONE)
+	{
+		gpsData.fix = true;
+	}
+	else
+	{
+		gpsData.fix = false;
+	}
+
+	return gpsData;
 }
 
 ImuData SensorsData::getImuData(void) const
