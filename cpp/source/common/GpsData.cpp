@@ -9,9 +9,21 @@
 #endif // __SKYDIVE_USE_STL__
 
 GpsData::GpsData(void)
-    : fix(false),
-      justFixed(false),
-      justFixLost(false)
+: lat(0.0),
+  lon(0.0),
+  alt(0.0),
+  speed(0.0),
+  course(0.0),
+  verticalSpeed(0.0),
+  HDOP(0.0),
+  VDOP(0.0),
+  TDOP(0.0),
+  hAcc(0.0),
+  vAcc(0.0),
+  satellitesNum(0),
+  fix(false),
+  justFixed(false),
+  justFixLost(false)
 {
 }
 
