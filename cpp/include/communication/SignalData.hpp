@@ -30,7 +30,17 @@ public:
 
         APP_LOOP,
         FLIGHT_LOOP,
+#define ACCEL_CALIB_SELECTION 0
+#if (ACCEL_CALIB_SELECTION == 0) // old version
         CALIBRATE_ACCEL,
+#endif
+#if(ACCEL_CALIB_SELECTION == 1) // old version, but calibrate accelerometer axis
+		CALIBRATE_ACCEL_AXIS,
+#endif
+#if(ACCEL_CALIB_SELECTION == 2) // final solution
+		CALIBRATE_ACCEL,
+		CALIBRATE_ACCEL_AXIS,
+#endif
         CALIBRATE_MAGNET,
         CALIBRATE_ESC,
         UPLOAD_SETTINGS,

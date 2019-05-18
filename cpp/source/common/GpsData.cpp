@@ -99,7 +99,7 @@ std::ostream& operator << (std::ostream& stream, const GpsData& gD)
     stream << std::setprecision(10);
     stream << (gD.fix ? 1 : 0) << '\t' << gD.lat << '\t' << gD.lon << '\t' << gD.alt << '\t';
     stream << gD.speed << '\t' << gD.course << '\t' << gD.verticalSpeed  << '\t';
-    stream << gD.HDOP << '\t' << (int)gD.fixQuality << '\t';
+    stream << gD.HDOP << '\t' << gD.fixQuality << '\t';
     return stream;
 }
 
