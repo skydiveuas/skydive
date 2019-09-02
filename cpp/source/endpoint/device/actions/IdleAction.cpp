@@ -64,11 +64,7 @@ void IdleAction::handleUserEvent(const PilotEvent& event)
             break;
 
         case ISkyDeviceAction::DIRECT_FLIGHT:
-            monitor->notifyDeviceEvent(new DeviceEventReceived(*new CalibrationSettings(CalibrationSettings::createDefault())));
-            monitor->notifyDeviceEvent(new DeviceEventReceived(*new ControlSettings(ControlSettings::createDefault())));
-            monitor->notifyDeviceEvent(new DeviceEvent(DeviceEvent::VIA_ROUTE_NOT_ALLOWED));
-            listener->startAction(new FlightAction(listener, monitor->getControlDataSendingFreq()), false);
-            listener->connectInterface(ev.getCommInnterface());
+            handleDirectFlightCommand(ev);
             break;
 
         default:
@@ -80,4 +76,21 @@ void IdleAction::handleUserEvent(const PilotEvent& event)
     default:
         except("Unexpected user event received");
     }
+}
+
+void IdleAction::handleDirectFlightCommand(const PilotEventConnect& ev) {
+    // Configuration data needs to be created and filled with predefined values,
+    // as it is not possible to fetch it from Device in direcct mode.
+    // It could be deliverd in operation context, but keep it simple for now.
+    CalibrationSettings calib = CalibrationSettings::createDefault();
+    ControlSettings control = ControlSettings::createDefault();
+    control.uavType = ControlSettings::QUADROCOPTER_X;
+    control.initialSolverMode = ControlData::ANGLE;
+    control.manualThrottleMode = ControlSettings::DYNAMIC;
+
+    monitor->notifyDeviceEvent(new DeviceEventReceived(*new CalibrationSettings(calib)));
+    monitor->notifyDeviceEvent(new DeviceEventReceived(*new ControlSettings(control)));
+    monitor->notifyDeviceEvent(new DeviceEvent(DeviceEvent::VIA_ROUTE_NOT_ALLOWED));
+    listener->startAction(new FlightAction(listener, monitor->getControlDataSendingFreq()), false);
+    listener->connectInterface(ev.getCommInnterface());
 }

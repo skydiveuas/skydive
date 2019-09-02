@@ -445,7 +445,7 @@ std::string ControlSettings::getStickModeString(void) const
     case ControlSettings::BASE_POINT:
         return std::string("Base point");
     default:
-        return std::string("Unexpected stick movement mode");
+        throw std::runtime_error("Unexpected stick movement mode");
     }
 }
 

@@ -6,6 +6,8 @@
 
 #include "ISkyDeviceAction.hpp"
 
+class PilotEventConnect;
+
 class IdleAction : public ISkyDeviceAction
 {
 public:
@@ -22,6 +24,8 @@ public:
 private:
     void handleReception(const IMessage& message) override;
     void handleUserEvent(const PilotEvent& event) override;
+
+    void handleDirectFlightCommand(const PilotEventConnect& ev);
 };
 
 #endif // IDLEACTION_HPP
